@@ -12,6 +12,7 @@
 		BFE391B817341BEC00749966 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391B617341BEC00749966 /* EditProfileViewController.m */; };
 		BFE391B917341BEC00749966 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE391B717341BEC00749966 /* EditProfileViewController.xib */; };
 		BFE391BB17341C7600749966 /* default.color.strip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391BA17341C7600749966 /* default.color.strip@2x.png */; };
+		BFE391BE173439AC00749966 /* SwipeyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391BD173439AC00749966 /* SwipeyLabel.m */; };
 		BFF1D29E1732BBCB00B02D46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29D1732BBCB00B02D46 /* UIKit.framework */; };
 		BFF1D2A01732BBCB00B02D46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29F1732BBCB00B02D46 /* Foundation.framework */; };
 		BFF1D2A21732BBCB00B02D46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D2A11732BBCB00B02D46 /* CoreGraphics.framework */; };
@@ -94,6 +95,8 @@
 		BFE391B617341BEC00749966 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		BFE391B717341BEC00749966 /* EditProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
 		BFE391BA17341C7600749966 /* default.color.strip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default.color.strip@2x.png"; sourceTree = "<group>"; };
+		BFE391BC173439AC00749966 /* SwipeyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeyLabel.h; sourceTree = "<group>"; };
+		BFE391BD173439AC00749966 /* SwipeyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeyLabel.m; sourceTree = "<group>"; };
 		BFF1D29A1732BBCB00B02D46 /* Abacus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Abacus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF1D29D1732BBCB00B02D46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFF1D29F1732BBCB00B02D46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -257,6 +260,8 @@
 				BFF1D2B51732BBCB00B02D46 /* RootViewController.h */,
 				BFF1D2B61732BBCB00B02D46 /* RootViewController.m */,
 				BFF1D2B81732BBCB00B02D46 /* RootViewController.xib */,
+				BFE391BC173439AC00749966 /* SwipeyLabel.h */,
+				BFE391BD173439AC00749966 /* SwipeyLabel.m */,
 				BFF1D2C01732BECA00B02D46 /* UIImage+Retina4.h */,
 				BFF1D2C11732BECA00B02D46 /* UIImage+Retina4.m */,
 				BFF1D2C31732BF1C00B02D46 /* UITextField+Customizations.h */,
@@ -464,6 +469,7 @@
 				BFF1D3411733F8FA00B02D46 /* PullDown.m in Sources */,
 				BFF1D3421733F8FA00B02D46 /* RadioButton.m in Sources */,
 				BFE391B817341BEC00749966 /* EditProfileViewController.m in Sources */,
+				BFE391BE173439AC00749966 /* SwipeyLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -76,7 +76,7 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)toggleReveal {

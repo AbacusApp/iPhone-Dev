@@ -12,7 +12,7 @@
 
 static  EditProfileViewController   *instance = nil;
 
-@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIActionSheetDelegate>
 @property   (nonatomic, retain)     IBOutlet    UITextField     *first, *last, *professions, *rate;
 
 - (IBAction)addPhoto:(id)sender;
@@ -53,21 +53,50 @@ static  EditProfileViewController   *instance = nil;
 }
 
 - (IBAction)addPhoto:(id)sender {
-    UIImagePickerController *camera = [[[UIImagePickerController alloc] init] autorelease];
-    camera.sourceType = UIImagePickerControllerSourceTypeCamera;
-    camera.delegate = self;
-    [self presentViewController:camera animated:YES completion:^{
-    }];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Profile Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use Camera", @"Pick From Library", nil];
+        [sheet showInView:self.view.window];
+    } else {
+        UIImagePickerController *camera = [[[UIImagePickerController alloc] init] autorelease];
+        camera.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        camera.delegate = self;
+        camera.allowsEditing = YES;
+        [self presentViewController:camera animated:YES completion:^{}];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 2:
+            break;
+        case 0: {
+            UIImagePickerController *camera = [[[UIImagePickerController alloc] init] autorelease];
+            camera.sourceType = UIImagePickerControllerSourceTypeCamera;
+            camera.delegate = self;
+            camera.allowsEditing = YES;
+            [self presentViewController:camera animated:YES completion:^{}];
+        }
+            break;
+        case 1: {
+            UIImagePickerController *camera = [[[UIImagePickerController alloc] init] autorelease];
+            camera.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            camera.delegate = self;
+            camera.allowsEditing = YES;
+            [self presentViewController:camera animated:YES completion:^{}];
+        }
+            break;
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *photo = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *photo = [info objectForKey:UIImagePickerControllerEditedImage];
     NSData *bytes = UIImagePNGRepresentation(photo);
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docs = [paths objectAtIndex:0];
     NSString *path = [docs stringByAppendingPathComponent:[NSString stringWithFormat:@"profile.image.1"]];
     [bytes writeToFile:path atomically:YES];
     [picker dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.PHOTO.CHANGED" object:nil];
     }];
 }
 
