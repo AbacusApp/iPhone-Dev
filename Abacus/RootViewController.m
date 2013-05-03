@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Graham Savage. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import <iAd/iAd.h>
 #import "RootViewController.h"
 #import "CalculatorViewController.h"
@@ -49,12 +50,17 @@
     UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [profile.view addGestureRecognizer:right];
-    //[calculator.view addGestureRecognizer:right];
-    
+    right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
+    right.direction = UISwipeGestureRecognizerDirectionRight;
+    [calculator.view addGestureRecognizer:right];
     UISwipeGestureRecognizer *left = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft)] autorelease];
     left.direction = UISwipeGestureRecognizerDirectionLeft;
     [profile.view addGestureRecognizer:left];
-    //[calculator.view addGestureRecognizer:left];
+    left = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft)] autorelease];
+    left.direction = UISwipeGestureRecognizerDirectionLeft;
+    [calculator.view addGestureRecognizer:left];
+    
+    self.view.layer.shadowOpacity = 0.6;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

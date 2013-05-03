@@ -7,6 +7,7 @@
 //
 
 #import "MenuViewController.h"
+#import "EditProfileViewController.h"
 
 @interface MenuViewController ()
 
@@ -20,7 +21,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -37,23 +38,44 @@
     }
     switch (indexPath.row) {
         case 0:
+            cell.textLabel.text = @"Edit Profile";
+            cell.imageView.image = [UIImage imageNamed:@"menu.icon.editProfile.png"];
+            break;
+        case 1:
             cell.textLabel.text = @"Links and Resources";
             cell.imageView.image = [UIImage imageNamed:@"menu.icon.links.png"];
             break;
-        case 1:
+        case 2:
             cell.textLabel.text = @"Share this App";
             cell.imageView.image = [UIImage imageNamed:@"menu.icon.share.png"];
             break;
-        case 2:
+        case 3:
             cell.textLabel.text = @"FAQ";
             cell.imageView.image = [UIImage imageNamed:@"menu.icon.faq.png"];
             break;
-        case 3:
+        case 4:
             cell.textLabel.text = @"About Abacus";
             cell.imageView.image = [UIImage imageNamed:@"menu.icon.about.png"];
             break;
     }
 	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0: {
+            [EditProfileViewController show];
+        }
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+    }
 }
 
 - (void)dealloc {

@@ -23,7 +23,7 @@
     [super viewDidLoad];
     self.photo.layer.cornerRadius = self.photo.frame.size.width/2;
     self.photo.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.photo.layer.borderWidth = 2;
+    self.photo.layer.borderWidth = 3;
 }
 
 - (IBAction)revealMenu:(id)sender {
