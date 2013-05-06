@@ -13,7 +13,7 @@
 @end
 
 @implementation SwipeyLabel
-@synthesize previousPosition, value, minimum, maximum, increment;
+@synthesize previousPosition, value, minimum, maximum, increment, delegate;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -50,20 +50,24 @@
     CGPoint pt = [gr translationInView:self];
     double velocity = [gr velocityInView:self].y;
     velocity = abs(velocity);
-    NSLog(@"%f", velocity);
     if (self.previousPosition.y > pt.y) {
-        self.value += velocity / 300;
+        self.value += (int)(velocity / 350);
         if (self.value > self.maximum) {
             self.value = self.maximum;
         }
     } else if (self.previousPosition.y < pt.y) {
-        self.value -= velocity / 300;
+        self.value -= (int)(velocity / 350);
         if (self.value < self.minimum) {
             self.value = self.minimum;
         }
     }
-    self.previousPosition = pt;
-    [self updateDisplay];
+    if (self.previousPosition.y != pt.y) {
+        self.previousPosition = pt;
+        [self updateDisplay];
+        if (delegate && [delegate respondsToSelector:@selector(swipeyLabel:didChange:)]) {
+            [delegate performSelector:@selector(swipeyLabel:didChange:) withObject:self withObject:[NSNumber numberWithDouble:self.value]];
+        }
+    }
 }
 
 - (void)updateDisplay {

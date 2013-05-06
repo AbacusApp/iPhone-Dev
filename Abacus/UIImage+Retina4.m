@@ -1,3 +1,11 @@
+//
+//  CalculatorViewController.m
+//  Abacus
+//
+//  Created by Graham Savage on 5/3/13.
+//  Copyright (c) 2013 Graham Savage. All rights reserved.
+//
+
 #import "UIImage+Retina4.h"
 #import <objc/runtime.h>
 
@@ -16,8 +24,7 @@ static Method origImageNamedMethod = nil;
     if (retinaAtSymbol.location != NSNotFound) {
         [imageNameMutable insertString:@"-568h" atIndex:retinaAtSymbol.location];
     } else {
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        if ([UIScreen mainScreen].scale == 2.f && screenHeight == 568.0f) {
+        if ([self isRetina4]) {
             NSRange dot = [imageName rangeOfString:@"." options:NSBackwardsSearch];
             if (dot.location != NSNotFound) {
                 [imageNameMutable insertString:@"-568h@2x" atIndex:dot.location];
@@ -35,4 +42,11 @@ static Method origImageNamedMethod = nil;
     return nil;
 }
 
++ (BOOL)isRetina4 {
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    if ([UIScreen mainScreen].scale == 2.f && screenHeight == 568.0f) {
+        return YES;
+    }
+    return NO;
+}
 @end

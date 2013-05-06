@@ -209,7 +209,7 @@
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="221013427">
+					<object class="IBUIImageView" id="80433148">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{320, 4}</string>
@@ -227,7 +227,7 @@
 					<object class="IBUILabel" id="1035409883">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 1}, {225, 200}}</string>
+						<string key="NSFrame">{{48, 1}, {197, 200}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="523135051"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -256,7 +256,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 568}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="221013427"/>
+				<reference key="NSNextKeyView" ref="80433148"/>
 				<reference key="IBUIBackgroundColor" ref="344942487"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -316,7 +316,7 @@
 							<reference ref="623400448"/>
 							<reference ref="982731754"/>
 							<reference ref="723228054"/>
-							<reference ref="221013427"/>
+							<reference ref="80433148"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -368,7 +368,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="221013427"/>
+						<reference key="object" ref="80433148"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>

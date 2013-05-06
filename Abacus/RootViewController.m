@@ -13,6 +13,7 @@
 #import "ProfileSummaryViewController.h"
 #import "RadioButton.h"
 #import "MenuViewController.h"
+#import "UIImage+Retina4.h"
 
 @interface RootViewController () <ADBannerViewDelegate>
 @property   (nonatomic, retain)     IBOutlet    UIView      *contentView;
@@ -38,7 +39,12 @@
     self.tabController.view.frame = self.contentView.bounds;
     self.tabController.tabBar.hidden = YES;
     ProfileSummaryViewController *profile = [[[ProfileSummaryViewController alloc] initWithNibName:@"ProfileSummaryViewController" bundle:nil] autorelease];
-    CalculatorViewController *calculator = [[[CalculatorViewController alloc] initWithNibName:@"CalculatorViewController" bundle:nil] autorelease];
+    CalculatorViewController *calculator = nil;
+    if ([UIImage isRetina4]) {
+        calculator = [[[CalculatorViewController alloc] initWithNibName:@"CalculatorViewController-568h@2x" bundle:nil] autorelease];
+    } else {
+        calculator = [[[CalculatorViewController alloc] initWithNibName:@"CalculatorViewController" bundle:nil] autorelease];
+    }
     [self.tabController setViewControllers:[NSArray arrayWithObjects:profile, calculator, nil]];
     [self.contentView addSubview:self.tabController.view];
     

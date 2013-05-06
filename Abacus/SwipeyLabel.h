@@ -10,4 +10,5 @@
 
 @interface SwipeyLabel : UILabel
 @property   (nonatomic, assign)     double  value, minimum, maximum, increment;
+@property   (nonatomic, assign)     id      delegate;
 @end

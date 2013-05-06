@@ -13,6 +13,8 @@
 		BFE391B917341BEC00749966 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE391B717341BEC00749966 /* EditProfileViewController.xib */; };
 		BFE391BB17341C7600749966 /* default.color.strip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391BA17341C7600749966 /* default.color.strip@2x.png */; };
 		BFE391BE173439AC00749966 /* SwipeyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391BD173439AC00749966 /* SwipeyLabel.m */; };
+		BFE391C01737DD4500749966 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE391BF1737DD4500749966 /* CalculatorViewController.xib */; };
+		BFE391C31737F50900749966 /* Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391C21737F50900749966 /* Alerts.m */; };
 		BFF1D29E1732BBCB00B02D46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29D1732BBCB00B02D46 /* UIKit.framework */; };
 		BFF1D2A01732BBCB00B02D46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29F1732BBCB00B02D46 /* Foundation.framework */; };
 		BFF1D2A21732BBCB00B02D46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D2A11732BBCB00B02D46 /* CoreGraphics.framework */; };
@@ -79,7 +81,7 @@
 		BFF1D3301733F54000B02D46 /* ProfileSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF1D32E1733F53F00B02D46 /* ProfileSummaryViewController.m */; };
 		BFF1D3311733F54000B02D46 /* ProfileSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFF1D32F1733F53F00B02D46 /* ProfileSummaryViewController.xib */; };
 		BFF1D3351733F57100B02D46 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF1D3331733F57000B02D46 /* CalculatorViewController.m */; };
-		BFF1D3361733F57100B02D46 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFF1D3341733F57100B02D46 /* CalculatorViewController.xib */; };
+		BFF1D3361733F57100B02D46 /* CalculatorViewController-568h@2x.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFF1D3341733F57100B02D46 /* CalculatorViewController-568h@2x.xib */; };
 		BFF1D33F1733F8FA00B02D46 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF1D3381733F8F900B02D46 /* CheckBox.m */; };
 		BFF1D3401733F8FA00B02D46 /* Persist.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF1D33A1733F8F900B02D46 /* Persist.m */; };
 		BFF1D3411733F8FA00B02D46 /* PullDown.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF1D33C1733F8FA00B02D46 /* PullDown.m */; };
@@ -97,6 +99,9 @@
 		BFE391BA17341C7600749966 /* default.color.strip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default.color.strip@2x.png"; sourceTree = "<group>"; };
 		BFE391BC173439AC00749966 /* SwipeyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeyLabel.h; sourceTree = "<group>"; };
 		BFE391BD173439AC00749966 /* SwipeyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeyLabel.m; sourceTree = "<group>"; };
+		BFE391BF1737DD4500749966 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
+		BFE391C11737F50900749966 /* Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alerts.h; sourceTree = "<group>"; };
+		BFE391C21737F50900749966 /* Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerts.m; sourceTree = "<group>"; };
 		BFF1D29A1732BBCB00B02D46 /* Abacus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Abacus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF1D29D1732BBCB00B02D46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFF1D29F1732BBCB00B02D46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -173,7 +178,7 @@
 		BFF1D32F1733F53F00B02D46 /* ProfileSummaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileSummaryViewController.xib; sourceTree = "<group>"; };
 		BFF1D3321733F57000B02D46 /* CalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		BFF1D3331733F57000B02D46 /* CalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
-		BFF1D3341733F57100B02D46 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
+		BFF1D3341733F57100B02D46 /* CalculatorViewController-568h@2x.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CalculatorViewController-568h@2x.xib"; sourceTree = "<group>"; };
 		BFF1D3371733F8F900B02D46 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
 		BFF1D3381733F8F900B02D46 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
 		BFF1D3391733F8F900B02D46 /* Persist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Persist.h; sourceTree = "<group>"; };
@@ -234,11 +239,14 @@
 		BFF1D2A31732BBCB00B02D46 /* Abacus */ = {
 			isa = PBXGroup;
 			children = (
+				BFE391C11737F50900749966 /* Alerts.h */,
+				BFE391C21737F50900749966 /* Alerts.m */,
 				BFF1D2AC1732BBCB00B02D46 /* AppDelegate.h */,
 				BFF1D2AD1732BBCB00B02D46 /* AppDelegate.m */,
 				BFF1D3321733F57000B02D46 /* CalculatorViewController.h */,
 				BFF1D3331733F57000B02D46 /* CalculatorViewController.m */,
-				BFF1D3341733F57100B02D46 /* CalculatorViewController.xib */,
+				BFE391BF1737DD4500749966 /* CalculatorViewController.xib */,
+				BFF1D3341733F57100B02D46 /* CalculatorViewController-568h@2x.xib */,
 				BFF1D3371733F8F900B02D46 /* CheckBox.h */,
 				BFF1D3381733F8F900B02D46 /* CheckBox.m */,
 				BFE391B517341BEB00749966 /* EditProfileViewController.h */,
@@ -274,7 +282,6 @@
 		BFF1D2A41732BBCB00B02D46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BFE391BA17341C7600749966 /* default.color.strip@2x.png */,
 				BFF1D2A51732BBCB00B02D46 /* Abacus-Info.plist */,
 				BFF1D2AB1732BBCB00B02D46 /* Abacus-Prefix.pch */,
 				BFF1D2F01733DBD600B02D46 /* ao.logo@2x.png */,
@@ -291,6 +298,7 @@
 				BFF1D2D21732CEDC00B02D46 /* default.background-568h@2x.png */,
 				BFF1D2D31732CEDC00B02D46 /* default.background.png */,
 				BFF1D2D41732CEDC00B02D46 /* default.background@2x.png */,
+				BFE391BA17341C7600749966 /* default.color.strip@2x.png */,
 				BFF1D2AF1732BBCB00B02D46 /* Default.png */,
 				BFF1D2B11732BBCB00B02D46 /* Default@2x.png */,
 				BFF1D2D51732CEDC00B02D46 /* forward.reveal.arrow@2x.png */,
@@ -440,12 +448,13 @@
 				BFF1D3231733DBDC00B02D46 /* red.button.photo@2x.png in Resources */,
 				BFF1D32C1733E06300B02D46 /* MenuViewController.xib in Resources */,
 				BFF1D3311733F54000B02D46 /* ProfileSummaryViewController.xib in Resources */,
-				BFF1D3361733F57100B02D46 /* CalculatorViewController.xib in Resources */,
+				BFF1D3361733F57100B02D46 /* CalculatorViewController-568h@2x.xib in Resources */,
 				BFF1D346173406CB00B02D46 /* calculator.background@2x.png in Resources */,
 				BFE391B2173414B500749966 /* MenuCell.xib in Resources */,
 				BFE391B41734183E00749966 /* gs.head.png in Resources */,
 				BFE391B917341BEC00749966 /* EditProfileViewController.xib in Resources */,
 				BFE391BB17341C7600749966 /* default.color.strip@2x.png in Resources */,
+				BFE391C01737DD4500749966 /* CalculatorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +479,7 @@
 				BFF1D3421733F8FA00B02D46 /* RadioButton.m in Sources */,
 				BFE391B817341BEC00749966 /* EditProfileViewController.m in Sources */,
 				BFE391BE173439AC00749966 /* SwipeyLabel.m in Sources */,
+				BFE391C31737F50900749966 /* Alerts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

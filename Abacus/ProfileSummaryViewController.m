@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileSummaryViewController.h"
 #import "SwipeyLabel.h"
+#import "Persist.h"
 
 @interface ProfileSummaryViewController ()
 @property   (nonatomic, retain)     IBOutlet    UIImageView     *photo;
@@ -27,7 +28,14 @@
     self.photo.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.photo.layer.borderWidth = 3;
     
-    self.rate.value = 50;
+    double savedRate = [[Persist valueFor:@"HOURLY.RATE" secure:NO] doubleValue];
+    if (savedRate) {
+        self.rate.value = savedRate;
+    } else {
+        self.rate.value = 50;
+        [Persist setValue:[NSString stringWithFormat:@"%0.0f", self.rate.value] forKey:@"HOURLY.RATE" secure:NO];
+    }
+    self.rate.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,6 +57,10 @@
 
 - (IBAction)revealMenu:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REVEAL.MENU" object:nil];
+}
+
+- (void)swipeyLabel:(SwipeyLabel *)swipeyLabel didChange:(NSNumber *)value {
+    [Persist setValue:[NSString stringWithFormat:@"%0.0f", [value doubleValue]] forKey:@"HOURLY.RATE" secure:NO];
 }
 
 - (void)dealloc {
