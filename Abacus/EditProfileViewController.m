@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Graham Savage. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "EditProfileViewController.h"
 #import "UITextField+Customizations.h"
 #import "AppDelegate.h"
@@ -14,13 +15,16 @@ static  EditProfileViewController   *instance = nil;
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIActionSheetDelegate>
 @property   (nonatomic, retain)     IBOutlet    UITextField     *first, *last, *professions, *rate;
+@property   (nonatomic, retain)     IBOutlet    UIImageView     *photo;
+@property   (nonatomic, retain)     IBOutlet    UIButton        *photoButton;
 
 - (IBAction)addPhoto:(id)sender;
 - (IBAction)hide:(id)sender;
+- (IBAction)close:(id)sender;
 @end
 
 @implementation EditProfileViewController
-@synthesize first, last, professions, rate;
+@synthesize first, last, professions, rate, photo, photoButton;
 
 + (void)show {
     instance = [[EditProfileViewController alloc] initWithNibName:@"EditProfileViewController" bundle:nil];
@@ -50,6 +54,24 @@ static  EditProfileViewController   *instance = nil;
     [self.last customize];
     [self.professions customize];
     [self.rate customize];
+    self.photo.layer.cornerRadius = self.photo.frame.size.width/2;
+    self.photo.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.photo.layer.borderWidth = 3;
+    [self setProfilePhoto];
+}
+
+- (void)setProfilePhoto {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docs = [paths objectAtIndex:0];
+    NSString *path = [docs stringByAppendingPathComponent:[NSString stringWithFormat:@"profile.image.1"]];
+    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    if (image) {
+        self.photo.image = image;
+        self.photo.hidden = NO;
+        self.photo.image = image;
+        self.photoButton.frame = CGRectMake(64, self.photoButton.frame.origin.y, 219, self.photoButton.frame.size.height);
+        [self.photoButton setTitle:@"  CHANGE PHOTO" forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)addPhoto:(id)sender {
@@ -89,15 +111,20 @@ static  EditProfileViewController   *instance = nil;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *photo = [info objectForKey:UIImagePickerControllerEditedImage];
-    NSData *bytes = UIImagePNGRepresentation(photo);
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    NSData *bytes = UIImagePNGRepresentation(image);
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docs = [paths objectAtIndex:0];
     NSString *path = [docs stringByAppendingPathComponent:[NSString stringWithFormat:@"profile.image.1"]];
     [bytes writeToFile:path atomically:YES];
+    [self setProfilePhoto];
     [picker dismissViewControllerAnimated:YES completion:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.PHOTO.CHANGED" object:nil];
     }];
+}
+
+- (IBAction)close:(id)sender {
+    [EditProfileViewController hide];
 }
 
 - (IBAction)hide:(id)sender {
@@ -114,6 +141,8 @@ static  EditProfileViewController   *instance = nil;
     [last release];
     [professions release];
     [rate release];
+    [photo release];
+    [photoButton release];
     [super dealloc];
 }
 @end

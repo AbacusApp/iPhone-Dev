@@ -27,6 +27,21 @@
 		BFE391DA1738192A00749966 /* web.view.forward.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D31738192A00749966 /* web.view.forward.button@2x.png */; };
 		BFE391DB1738192A00749966 /* web.view.refresh.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D41738192A00749966 /* web.view.refresh.button@2x.png */; };
 		BFE391DC1738192A00749966 /* web.view.toolBar.background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D51738192A00749966 /* web.view.toolBar.background@2x.png */; };
+		BFE391EC173827F700749966 /* edit.profile.change.photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391DD173827F700749966 /* edit.profile.change.photo@2x.png */; };
+		BFE391ED173827F700749966 /* edit.profile.help.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391DE173827F700749966 /* edit.profile.help.button.png */; };
+		BFE391EE173827F700749966 /* edit.profile.photo.background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391DF173827F700749966 /* edit.profile.photo.background@2x.png */; };
+		BFE391EF173827F700749966 /* edit.profile.plus.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E0173827F700749966 /* edit.profile.plus.button.png */; };
+		BFE391F0173827F700749966 /* edit.profile.plus.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E1173827F700749966 /* edit.profile.plus.button@2x.png */; };
+		BFE391F1173827F700749966 /* modal.dismiss.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E2173827F700749966 /* modal.dismiss.button.png */; };
+		BFE391F2173827F700749966 /* profile.help.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E3173827F700749966 /* profile.help.button.png */; };
+		BFE391F3173827F700749966 /* tabStrip.calculator.active.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E4173827F700749966 /* tabStrip.calculator.active.png */; };
+		BFE391F4173827F700749966 /* tabStrip.calculator.inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E5173827F700749966 /* tabStrip.calculator.inactive.png */; };
+		BFE391F5173827F700749966 /* tabStrip.profile.active.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E6173827F700749966 /* tabStrip.profile.active.png */; };
+		BFE391F6173827F700749966 /* tabStrip.profile.inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E7173827F700749966 /* tabStrip.profile.inactive.png */; };
+		BFE391F7173827F700749966 /* web.view.back.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E8173827F700749966 /* web.view.back.button.png */; };
+		BFE391F8173827F700749966 /* web.view.close.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E9173827F700749966 /* web.view.close.button.png */; };
+		BFE391F9173827F700749966 /* web.view.forward.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391EA173827F700749966 /* web.view.forward.button.png */; };
+		BFE391FA173827F700749966 /* web.view.refresh.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391EB173827F700749966 /* web.view.refresh.button.png */; };
 		BFF1D29E1732BBCB00B02D46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29D1732BBCB00B02D46 /* UIKit.framework */; };
 		BFF1D2A01732BBCB00B02D46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29F1732BBCB00B02D46 /* Foundation.framework */; };
 		BFF1D2A21732BBCB00B02D46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D2A11732BBCB00B02D46 /* CoreGraphics.framework */; };
@@ -127,6 +142,21 @@
 		BFE391D31738192A00749966 /* web.view.forward.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.forward.button@2x.png"; sourceTree = "<group>"; };
 		BFE391D41738192A00749966 /* web.view.refresh.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.refresh.button@2x.png"; sourceTree = "<group>"; };
 		BFE391D51738192A00749966 /* web.view.toolBar.background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.toolBar.background@2x.png"; sourceTree = "<group>"; };
+		BFE391DD173827F700749966 /* edit.profile.change.photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit.profile.change.photo@2x.png"; sourceTree = "<group>"; };
+		BFE391DE173827F700749966 /* edit.profile.help.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.profile.help.button.png; sourceTree = "<group>"; };
+		BFE391DF173827F700749966 /* edit.profile.photo.background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit.profile.photo.background@2x.png"; sourceTree = "<group>"; };
+		BFE391E0173827F700749966 /* edit.profile.plus.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.profile.plus.button.png; sourceTree = "<group>"; };
+		BFE391E1173827F700749966 /* edit.profile.plus.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit.profile.plus.button@2x.png"; sourceTree = "<group>"; };
+		BFE391E2173827F700749966 /* modal.dismiss.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modal.dismiss.button.png; sourceTree = "<group>"; };
+		BFE391E3173827F700749966 /* profile.help.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.help.button.png; sourceTree = "<group>"; };
+		BFE391E4173827F700749966 /* tabStrip.calculator.active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabStrip.calculator.active.png; sourceTree = "<group>"; };
+		BFE391E5173827F700749966 /* tabStrip.calculator.inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabStrip.calculator.inactive.png; sourceTree = "<group>"; };
+		BFE391E6173827F700749966 /* tabStrip.profile.active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabStrip.profile.active.png; sourceTree = "<group>"; };
+		BFE391E7173827F700749966 /* tabStrip.profile.inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabStrip.profile.inactive.png; sourceTree = "<group>"; };
+		BFE391E8173827F700749966 /* web.view.back.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.view.back.button.png; sourceTree = "<group>"; };
+		BFE391E9173827F700749966 /* web.view.close.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.view.close.button.png; sourceTree = "<group>"; };
+		BFE391EA173827F700749966 /* web.view.forward.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.view.forward.button.png; sourceTree = "<group>"; };
+		BFE391EB173827F700749966 /* web.view.refresh.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.view.refresh.button.png; sourceTree = "<group>"; };
 		BFF1D29A1732BBCB00B02D46 /* Abacus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Abacus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF1D29D1732BBCB00B02D46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFF1D29F1732BBCB00B02D46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -310,6 +340,21 @@
 		BFF1D2A41732BBCB00B02D46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BFE391DD173827F700749966 /* edit.profile.change.photo@2x.png */,
+				BFE391DE173827F700749966 /* edit.profile.help.button.png */,
+				BFE391DF173827F700749966 /* edit.profile.photo.background@2x.png */,
+				BFE391E0173827F700749966 /* edit.profile.plus.button.png */,
+				BFE391E1173827F700749966 /* edit.profile.plus.button@2x.png */,
+				BFE391E2173827F700749966 /* modal.dismiss.button.png */,
+				BFE391E3173827F700749966 /* profile.help.button.png */,
+				BFE391E4173827F700749966 /* tabStrip.calculator.active.png */,
+				BFE391E5173827F700749966 /* tabStrip.calculator.inactive.png */,
+				BFE391E6173827F700749966 /* tabStrip.profile.active.png */,
+				BFE391E7173827F700749966 /* tabStrip.profile.inactive.png */,
+				BFE391E8173827F700749966 /* web.view.back.button.png */,
+				BFE391E9173827F700749966 /* web.view.close.button.png */,
+				BFE391EA173827F700749966 /* web.view.forward.button.png */,
+				BFE391EB173827F700749966 /* web.view.refresh.button.png */,
 				BFE391CF1738192A00749966 /* menu.icon.support@2x.png */,
 				BFE391D01738192A00749966 /* web.view.back.button@2x.png */,
 				BFE391D11738192A00749966 /* web.view.close.button@2x.png */,
@@ -504,6 +549,21 @@
 				BFE391DA1738192A00749966 /* web.view.forward.button@2x.png in Resources */,
 				BFE391DB1738192A00749966 /* web.view.refresh.button@2x.png in Resources */,
 				BFE391DC1738192A00749966 /* web.view.toolBar.background@2x.png in Resources */,
+				BFE391EC173827F700749966 /* edit.profile.change.photo@2x.png in Resources */,
+				BFE391ED173827F700749966 /* edit.profile.help.button.png in Resources */,
+				BFE391EE173827F700749966 /* edit.profile.photo.background@2x.png in Resources */,
+				BFE391EF173827F700749966 /* edit.profile.plus.button.png in Resources */,
+				BFE391F0173827F700749966 /* edit.profile.plus.button@2x.png in Resources */,
+				BFE391F1173827F700749966 /* modal.dismiss.button.png in Resources */,
+				BFE391F2173827F700749966 /* profile.help.button.png in Resources */,
+				BFE391F3173827F700749966 /* tabStrip.calculator.active.png in Resources */,
+				BFE391F4173827F700749966 /* tabStrip.calculator.inactive.png in Resources */,
+				BFE391F5173827F700749966 /* tabStrip.profile.active.png in Resources */,
+				BFE391F6173827F700749966 /* tabStrip.profile.inactive.png in Resources */,
+				BFE391F7173827F700749966 /* web.view.back.button.png in Resources */,
+				BFE391F8173827F700749966 /* web.view.close.button.png in Resources */,
+				BFE391F9173827F700749966 /* web.view.forward.button.png in Resources */,
+				BFE391FA173827F700749966 /* web.view.refresh.button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
