@@ -15,6 +15,18 @@
 		BFE391BE173439AC00749966 /* SwipeyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391BD173439AC00749966 /* SwipeyLabel.m */; };
 		BFE391C01737DD4500749966 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE391BF1737DD4500749966 /* CalculatorViewController.xib */; };
 		BFE391C31737F50900749966 /* Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391C21737F50900749966 /* Alerts.m */; };
+		BFE391C71738118200749966 /* edit.profile.help.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391C41738118200749966 /* edit.profile.help.button@2x.png */; };
+		BFE391C81738118200749966 /* modal.dismiss.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391C51738118200749966 /* modal.dismiss.button@2x.png */; };
+		BFE391C91738118200749966 /* profile.help.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391C61738118200749966 /* profile.help.button@2x.png */; };
+		BFE391CD173811A000749966 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391CB1738119F00749966 /* WebViewController.m */; };
+		BFE391CE173811A000749966 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE391CC1738119F00749966 /* WebViewController.xib */; };
+		BFE391D61738192A00749966 /* menu.icon.support@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391CF1738192A00749966 /* menu.icon.support@2x.png */; };
+		BFE391D71738192A00749966 /* web.view.back.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D01738192A00749966 /* web.view.back.button@2x.png */; };
+		BFE391D81738192A00749966 /* web.view.close.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D11738192A00749966 /* web.view.close.button@2x.png */; };
+		BFE391D91738192A00749966 /* web.view.elipsis.dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D21738192A00749966 /* web.view.elipsis.dot@2x.png */; };
+		BFE391DA1738192A00749966 /* web.view.forward.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D31738192A00749966 /* web.view.forward.button@2x.png */; };
+		BFE391DB1738192A00749966 /* web.view.refresh.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D41738192A00749966 /* web.view.refresh.button@2x.png */; };
+		BFE391DC1738192A00749966 /* web.view.toolBar.background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391D51738192A00749966 /* web.view.toolBar.background@2x.png */; };
 		BFF1D29E1732BBCB00B02D46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29D1732BBCB00B02D46 /* UIKit.framework */; };
 		BFF1D2A01732BBCB00B02D46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29F1732BBCB00B02D46 /* Foundation.framework */; };
 		BFF1D2A21732BBCB00B02D46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D2A11732BBCB00B02D46 /* CoreGraphics.framework */; };
@@ -102,6 +114,19 @@
 		BFE391BF1737DD4500749966 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
 		BFE391C11737F50900749966 /* Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alerts.h; sourceTree = "<group>"; };
 		BFE391C21737F50900749966 /* Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerts.m; sourceTree = "<group>"; };
+		BFE391C41738118200749966 /* edit.profile.help.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit.profile.help.button@2x.png"; sourceTree = "<group>"; };
+		BFE391C51738118200749966 /* modal.dismiss.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modal.dismiss.button@2x.png"; sourceTree = "<group>"; };
+		BFE391C61738118200749966 /* profile.help.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile.help.button@2x.png"; sourceTree = "<group>"; };
+		BFE391CA1738119F00749966 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BFE391CB1738119F00749966 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		BFE391CC1738119F00749966 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
+		BFE391CF1738192A00749966 /* menu.icon.support@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu.icon.support@2x.png"; sourceTree = "<group>"; };
+		BFE391D01738192A00749966 /* web.view.back.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.back.button@2x.png"; sourceTree = "<group>"; };
+		BFE391D11738192A00749966 /* web.view.close.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.close.button@2x.png"; sourceTree = "<group>"; };
+		BFE391D21738192A00749966 /* web.view.elipsis.dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.elipsis.dot@2x.png"; sourceTree = "<group>"; };
+		BFE391D31738192A00749966 /* web.view.forward.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.forward.button@2x.png"; sourceTree = "<group>"; };
+		BFE391D41738192A00749966 /* web.view.refresh.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.refresh.button@2x.png"; sourceTree = "<group>"; };
+		BFE391D51738192A00749966 /* web.view.toolBar.background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web.view.toolBar.background@2x.png"; sourceTree = "<group>"; };
 		BFF1D29A1732BBCB00B02D46 /* Abacus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Abacus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF1D29D1732BBCB00B02D46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFF1D29F1732BBCB00B02D46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -274,6 +299,9 @@
 				BFF1D2C11732BECA00B02D46 /* UIImage+Retina4.m */,
 				BFF1D2C31732BF1C00B02D46 /* UITextField+Customizations.h */,
 				BFF1D2C41732BF1C00B02D46 /* UITextField+Customizations.m */,
+				BFE391CA1738119F00749966 /* WebViewController.h */,
+				BFE391CB1738119F00749966 /* WebViewController.m */,
+				BFE391CC1738119F00749966 /* WebViewController.xib */,
 				BFF1D2A41732BBCB00B02D46 /* Supporting Files */,
 			);
 			path = Abacus;
@@ -282,6 +310,16 @@
 		BFF1D2A41732BBCB00B02D46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BFE391CF1738192A00749966 /* menu.icon.support@2x.png */,
+				BFE391D01738192A00749966 /* web.view.back.button@2x.png */,
+				BFE391D11738192A00749966 /* web.view.close.button@2x.png */,
+				BFE391D21738192A00749966 /* web.view.elipsis.dot@2x.png */,
+				BFE391D31738192A00749966 /* web.view.forward.button@2x.png */,
+				BFE391D41738192A00749966 /* web.view.refresh.button@2x.png */,
+				BFE391D51738192A00749966 /* web.view.toolBar.background@2x.png */,
+				BFE391C41738118200749966 /* edit.profile.help.button@2x.png */,
+				BFE391C51738118200749966 /* modal.dismiss.button@2x.png */,
+				BFE391C61738118200749966 /* profile.help.button@2x.png */,
 				BFF1D2A51732BBCB00B02D46 /* Abacus-Info.plist */,
 				BFF1D2AB1732BBCB00B02D46 /* Abacus-Prefix.pch */,
 				BFF1D2F01733DBD600B02D46 /* ao.logo@2x.png */,
@@ -455,6 +493,17 @@
 				BFE391B917341BEC00749966 /* EditProfileViewController.xib in Resources */,
 				BFE391BB17341C7600749966 /* default.color.strip@2x.png in Resources */,
 				BFE391C01737DD4500749966 /* CalculatorViewController.xib in Resources */,
+				BFE391C71738118200749966 /* edit.profile.help.button@2x.png in Resources */,
+				BFE391C81738118200749966 /* modal.dismiss.button@2x.png in Resources */,
+				BFE391C91738118200749966 /* profile.help.button@2x.png in Resources */,
+				BFE391CE173811A000749966 /* WebViewController.xib in Resources */,
+				BFE391D61738192A00749966 /* menu.icon.support@2x.png in Resources */,
+				BFE391D71738192A00749966 /* web.view.back.button@2x.png in Resources */,
+				BFE391D81738192A00749966 /* web.view.close.button@2x.png in Resources */,
+				BFE391D91738192A00749966 /* web.view.elipsis.dot@2x.png in Resources */,
+				BFE391DA1738192A00749966 /* web.view.forward.button@2x.png in Resources */,
+				BFE391DB1738192A00749966 /* web.view.refresh.button@2x.png in Resources */,
+				BFE391DC1738192A00749966 /* web.view.toolBar.background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +529,7 @@
 				BFE391B817341BEC00749966 /* EditProfileViewController.m in Sources */,
 				BFE391BE173439AC00749966 /* SwipeyLabel.m in Sources */,
 				BFE391C31737F50900749966 /* Alerts.m in Sources */,
+				BFE391CD173811A000749966 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

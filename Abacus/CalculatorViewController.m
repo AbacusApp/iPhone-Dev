@@ -29,6 +29,15 @@
     [self.hours customize];
     [self.budget customize];
     self.scroller.contentSize = CGSizeMake(self.scroller.frame.size.width*2, self.scroller.frame.size.height);
+    /*
+    UILabel *hrs = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 44, 44)] autorelease];
+    hrs.text = @"hrs";
+    hrs.backgroundColor = [UIColor clearColor];
+    hrs.textColor = self.hours.textColor;
+    hrs.font = self.hours.font;
+    self.hours.rightView = hrs;
+    self.hours.rightViewMode = UITextFieldViewModeAlways;
+     */
 }
 
 - (IBAction)tabTapped:(UIButton *)sender {

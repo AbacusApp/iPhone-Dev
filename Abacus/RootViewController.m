@@ -52,20 +52,15 @@
     [self.contentView bringSubviewToFront:self.profileRadio];
     [self.contentView bringSubviewToFront:self.calculatorRadio];
     
-    // Add swipe gesture recognizers to both views on the tab bar controller - used to reveal the menu
+    // Add swipe gesture recognizer to both views on the tab bar controller - used to reveal the menu
     UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [profile.view addGestureRecognizer:right];
     right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [calculator.view addGestureRecognizer:right];
-    UISwipeGestureRecognizer *left = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft)] autorelease];
-    left.direction = UISwipeGestureRecognizerDirectionLeft;
-    [profile.view addGestureRecognizer:left];
-    left = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft)] autorelease];
-    left.direction = UISwipeGestureRecognizerDirectionLeft;
-    [calculator.view addGestureRecognizer:left];
     
+    // Enable the drop-shadow that will be visible on left side
     self.view.layer.shadowOpacity = 0.6;
 }
 
@@ -76,9 +71,9 @@
         self.menuController = [[[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil] autorelease];
         [self.view.superview insertSubview:self.menuController.view atIndex:0];
         self.menuController.view.frame = self.view.bounds;
+        [self layoutAnimated:NO];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleReveal) name:@"REVEAL.MENU" object:nil];
     }
-    [self layoutAnimated:NO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleReveal) name:@"REVEAL.MENU" object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -92,10 +87,12 @@
 }
 
 - (BOOL)moveLeft {
-    UIView *slider = self.view;
-    if (slider.frame.origin.x != 0) {
+    if (self.view.frame.origin.x != 0) {
         [UIView animateWithDuration:.25 animations:^{
-            slider.frame = CGRectMake(0, slider.frame.origin.y, slider.frame.size.width, slider.frame.size.height);
+            self.view.frame = CGRectMake(0, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+        } completion:^(BOOL finished) {
+            UIView *closeButton = [self.view viewWithTag:123];
+            [closeButton removeFromSuperview];
         }];
         return YES;
     }
@@ -103,10 +100,14 @@
 }
 
 - (BOOL)moveRight {
-    UIView *slider = self.view;
-    if (slider.frame.origin.x == 0) {
+    if (self.view.frame.origin.x == 0) {
         [UIView animateWithDuration:.25 animations:^{
-            slider.frame = CGRectMake(self.view.frame.size.width - 44, slider.frame.origin.y, slider.frame.size.width, slider.frame.size.height);
+            self.view.frame = CGRectMake(self.view.frame.size.width - 44, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+        } completion:^(BOOL finished) {
+            UIButton *closeButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)] autorelease];
+            [closeButton addTarget:self action:@selector(moveLeft) forControlEvents:UIControlEventTouchUpInside];
+            closeButton.tag = 123;
+            [self.view addSubview:closeButton];
         }];
         return YES;
     }
