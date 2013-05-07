@@ -25,7 +25,7 @@ static  EditProfileViewController   *instance = nil;
 @property   (nonatomic, retain)     IBOutlet    UITextField     *first, *last, *rate;
 @property   (nonatomic, retain)     IBOutlet    PullDown        *professions;
 @property   (nonatomic, retain)     IBOutlet    UIImageView     *photo;
-@property   (nonatomic, retain)     IBOutlet    UIButton        *photoButton;
+@property   (nonatomic, retain)     IBOutlet    UIButton        *photoButton, *closeButton, *createButton;
 @property   (nonatomic, retain)     IBOutlet    UIScrollView    *scroller;
 @property   (nonatomic, retain)                 UIView			*lastTextWidget;
 
@@ -36,7 +36,7 @@ static  EditProfileViewController   *instance = nil;
 @end
 
 @implementation EditProfileViewController
-@synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget;
+@synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget, closeButton, createButton;
 
 + (void)show {
     instance = [[EditProfileViewController alloc] initWithNibName:@"EditProfileViewController" bundle:nil];
@@ -86,6 +86,9 @@ static  EditProfileViewController   *instance = nil;
         self.last.text = user.lastName;
         self.professions.text = [Database nameForProfession:user.professionID];
         self.rate.text = [NSString stringWithFormat:@"%.02f", user.hourlyRate];
+        [self.createButton setTitle:@"UPDATE PROFILE" forState:UIControlStateNormal];
+    } else {
+        closeButton.hidden = YES;       // There is no profile yet so don't allow view to be closed
     }
 }
 
@@ -148,7 +151,6 @@ static  EditProfileViewController   *instance = nil;
     [bytes writeToFile:path atomically:YES];
     [self setProfilePhoto];
     [picker dismissViewControllerAnimated:YES completion:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.PHOTO.CHANGED" object:nil];
     }];
 }
 
@@ -157,6 +159,22 @@ static  EditProfileViewController   *instance = nil;
 }
 
 - (IBAction)createProfile:(id)sender {
+    if ([first.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        [Alerts showWarningWithTitle:@"Profile Details" message:@"Please enter your First name" delegate:self tag:1];
+        return;
+    }
+    if ([last.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        [Alerts showWarningWithTitle:@"Profile Details" message:@"Please enter your Last name" delegate:self tag:2];
+        return;
+    }
+    if ([professions.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        [Alerts showWarningWithTitle:@"Profile Details" message:@"Please select your profession" delegate:self tag:3];
+        return;
+    }
+    if ([rate.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        [Alerts showWarningWithTitle:@"Profile Details" message:@"Please enter your Hourly rate" delegate:self tag:4];
+        return;
+    }
     User *user = [[[User alloc] init] autorelease];
     user.firstName = first.text;
     user.lastName = last.text;
@@ -168,6 +186,21 @@ static  EditProfileViewController   *instance = nil;
         [Database setUser:user];
     }
     [EditProfileViewController hide];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.CHANGED" object:nil];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (alertView.tag) {
+        case 1:
+            [first becomeFirstResponder];
+            break;
+        case 2:
+            [last becomeFirstResponder];
+            break;
+        case 4:
+            [rate becomeFirstResponder];
+            break;
+    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -269,6 +302,8 @@ CGRect myFrame;
     [photoButton release];
     [scroller release];
     [lastTextWidget release];
+    [closeButton release];
+    [createButton release];
     [super dealloc];
 }
 @end
