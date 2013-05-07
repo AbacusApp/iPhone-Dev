@@ -10,16 +10,18 @@
 #import "ProfileSummaryViewController.h"
 #import "SwipeyLabel.h"
 #import "Persist.h"
+#import "Database.h"
 
 @interface ProfileSummaryViewController ()
 @property   (nonatomic, retain)     IBOutlet    UIImageView     *photo;
 @property   (nonatomic, retain)     IBOutlet    SwipeyLabel     *rate;
+@property   (nonatomic, retain)     IBOutlet    UILabel         *name, *profession;
 
 - (IBAction)revealMenu:(id)sender;
 @end
 
 @implementation ProfileSummaryViewController
-@synthesize photo, rate;
+@synthesize photo, rate, name, profession;
 
 
 - (void)viewDidLoad {
@@ -36,6 +38,9 @@
         [Persist setValue:[NSString stringWithFormat:@"%0.0f", self.rate.value] forKey:@"HOURLY.RATE" secure:NO];
     }
     self.rate.delegate = self;
+    User *user = [Database user];
+    self.name.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+    self.profession.text = [Database nameForProfession:user.professionID];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,6 +71,8 @@
 - (void)dealloc {
     [photo release];
     [rate release];
+    [name release];
+    [profession release];
     [super dealloc];
 }
 @end

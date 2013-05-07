@@ -80,6 +80,13 @@ static  EditProfileViewController   *instance = nil;
     self.rate.rightViewMode = UITextFieldViewModeAlways;
     self.rate.rightView = help;
     [help addTarget:self action:@selector(rateHelp) forControlEvents:UIControlEventTouchUpInside];
+    User *user = [Database user];
+    if (user) {
+        self.first.text = user.firstName;
+        self.last.text = user.lastName;
+        self.professions.text = [Database nameForProfession:user.professionID];
+        self.rate.text = [NSString stringWithFormat:@"%.02f", user.hourlyRate];
+    }
 }
 
 - (void)setProfilePhoto {
@@ -150,7 +157,17 @@ static  EditProfileViewController   *instance = nil;
 }
 
 - (IBAction)createProfile:(id)sender {
-    
+    User *user = [[[User alloc] init] autorelease];
+    user.firstName = first.text;
+    user.lastName = last.text;
+    user.professionID = [Database idForProfessionName:professions.text];
+    user.hourlyRate = [rate.text doubleValue];
+    if ([Database user]) {
+        [Database updateUser:user];
+    } else {
+        [Database setUser:user];
+    }
+    [EditProfileViewController hide];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -238,13 +255,9 @@ CGRect myFrame;
 }
 
 - (void)rateHelp {
-    WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
-    webview.title = @"Abacus - FAQ";
-    webview.urlString = @"http://faq.freelanceabacus.com#pricing";
-    webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self.view.window.rootViewController presentModalViewController:webview animated:YES];
 
 }
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];

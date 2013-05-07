@@ -8,12 +8,9 @@
 
 #import "Database.h"
 
-Profession Professions[] = {
-    {@"Undefined", -1},
-    {@"Photographer", 1}
-};
-
-static Database *handler = nil;
+static  Database        *handler = nil;
+static  NSDictionary    *professions = nil;
+static  NSDictionary    *states = nil;
 
 @implementation Database
 @synthesize database;
@@ -26,6 +23,15 @@ static Database *handler = nil;
     if (![self dbExists]) {
         [self makeDB];
     }
+    professions = [[NSDictionary dictionaryWithObjectsAndKeys:
+                    @"Photographer", [NSNumber numberWithInt:ProfessionIDPhotographer],
+                    @"Waiter", [NSNumber numberWithInt:ProfessionIDWaiter],
+                   nil] retain];
+    
+    states = [[NSDictionary dictionaryWithObjectsAndKeys:
+              @"Alabama", [NSNumber numberWithInt:StateIDAlabama],
+              @"Alaska", [NSNumber numberWithInt:StateIDAlaska],
+              nil] retain];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -71,10 +77,10 @@ static Database *handler = nil;
                            \"Address1\" INTEGER DEFAULT NULL,\
                            \"Address2\" INTEGER DEFAULT NULL,\
                            \"City\" TEXT DEFAULT NULL,\
-                           \"State\" REAL DEFAULT 0,\
+                           \"State\" INTEGER DEFAULT -1,\
                            \"Country\" TEXT DEFAULT NULL,\
                            \"Zip\" TEXT DEFAULT NULL,\
-                           \"HourlyRate\" REAL DEFAULT 0\
+                           \"HourlyRate\" REAL DEFAULT -1\
                            )"];
 	const char *sql = [sqlString UTF8String];
 	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -111,11 +117,62 @@ static Database *handler = nil;
 }
 
 + (NSArray *)professions {
-    NSMutableArray *list = [NSMutableArray array];
-    for (int i=0; i<sizeof(Professions)/sizeof(Professions[0]); i++) {
-        [list addObject:Professions[i].name];
+    return [professions allValues];
+}
+
++ (NSString *)nameForProfession:(ProfessionID)professionID {
+    return [professions objectForKey:[NSNumber numberWithInt:professionID]];
+}
+
++ (ProfessionID)idForProfessionName:(NSString *)name {
+    return [[[professions allKeysForObject:name] objectAtIndex:0] intValue];
+}
+
++ (void)setUser:(User *)user {
+    if (!handler.database) {
+        [self open];
     }
-    return list;
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"User\" (FirstName,LastName,Profession,HourlyRate) VALUES(\"%@\",\"%@\",\"%d\",\"%.02f\")", user.firstName, user.lastName, user.professionID, user.hourlyRate];
+	const char *sql = [sqlString UTF8String];
+	sqlite3_stmt *statement;
+	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) != SQLITE_DONE) {}
+	}
+	sqlite3_finalize(statement);
+}
+
++ (void)updateUser:(User *)user {
+    if (!handler.database) {
+        [self open];
+    }
+    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"User\" SET FirstName='%@',LastName='%@',Profession='%d',HourlyRate='%.02f'", user.firstName, user.lastName, user.professionID, user.hourlyRate];
+	const char *sql = [sqlString UTF8String];
+	sqlite3_stmt *statement;
+	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) != SQLITE_DONE) {}
+	}
+	sqlite3_finalize(statement);
+}
+
++ (User *)user {
+    if (!handler.database) {
+        [self open];
+    }
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT FirstName,LastName,Profession,HourlyRate FROM user"];
+    const char *sql = [sqlString UTF8String];
+    sqlite3_stmt *statement;
+    User *user = nil;
+    if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_step(statement) == SQLITE_ROW) {
+            user = [[[User alloc] init] autorelease];
+            user.firstName = [self stringForColumn:0 inStatement:statement];
+            user.lastName = [self stringForColumn:1 inStatement:statement];
+            user.professionID = sqlite3_column_int(statement, 2);
+            user.hourlyRate = sqlite3_column_double(statement, 3);
+        }
+    }
+    sqlite3_finalize(statement);
+    return user;
 }
 
 - (id)init {
@@ -129,6 +186,33 @@ static Database *handler = nil;
 - (void)dealloc {
     [Database close];
     [handler release];
+    [super dealloc];
+}
+
+@end
+
+
+@implementation User
+@synthesize address1, address2, cell, city, country, firstName, hourlyRate, lastName, professionID, stateID, zip;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.professionID = ProfessionIDUndefined;
+        self.stateID = StateIDUndefined;
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [firstName release];
+    [lastName release];
+    [cell release];
+    [city release];
+    [country release];
+    [address2 release];
+    [address1 release];
+    [zip release];
     [super dealloc];
 }
 
