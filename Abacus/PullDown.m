@@ -157,7 +157,7 @@
 
         table = [[UITableView alloc] initWithFrame:startFrame style:UITableViewStylePlain];
         table.rowHeight = self.frame.size.height;
-        table.separatorColor = [UIColor colorWithCGColor:self.layer.borderColor];
+        table.separatorColor = [UIColor colorWithWhite:208.0/255.0 alpha:1];
         table.delegate = self;
         table.dataSource = self;
         table.backgroundColor = self.backgroundColor;
@@ -180,6 +180,9 @@
         }
         [window addSubview:maskingButton];
         [window addSubview:table];
+        if (delegate && [delegate respondsToSelector:@selector(pullDownWillDropDown:)]) {
+            [delegate performSelector:@selector(pullDownWillDropDown:) withObject:self];
+        }
         [UIView animateWithDuration:0.1 animations:^{
             table.frame = tableFrame;
         } completion:^(BOOL finished) {

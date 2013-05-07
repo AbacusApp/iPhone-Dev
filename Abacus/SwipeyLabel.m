@@ -10,10 +10,11 @@
 
 @interface SwipeyLabel ()
 @property   (nonatomic, assign)     CGPoint     previousPosition;
+@property   (nonatomic, assign)     double      snapshot;
 @end
 
 @implementation SwipeyLabel
-@synthesize previousPosition, value, minimum, maximum, increment, delegate;
+@synthesize previousPosition, value, minimum, maximum, increment, delegate, snapshot;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -46,17 +47,25 @@
     [self updateDisplay];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    snapshot = self.value;
+}
+
 - (void)pan:(UIPanGestureRecognizer *)gr {
     CGPoint pt = [gr translationInView:self];
-    double velocity = [gr velocityInView:self].y;
-    velocity = abs(velocity);
     if (self.previousPosition.y > pt.y) {
-        self.value += (int)(velocity / 350);
+        self.value = snapshot - 5*((int)pt.y/15);
         if (self.value > self.maximum) {
             self.value = self.maximum;
         }
+        if (self.value < self.minimum) {
+            self.value = self.minimum;
+        }
     } else if (self.previousPosition.y < pt.y) {
-        self.value -= (int)(velocity / 350);
+        self.value = snapshot - 5*((int)pt.y/15);
+        if (self.value > self.maximum) {
+            self.value = self.maximum;
+        }
         if (self.value < self.minimum) {
             self.value = self.minimum;
         }

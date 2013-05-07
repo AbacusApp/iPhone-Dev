@@ -13,6 +13,11 @@
 #import "Alerts.h"
 #import "Database.h"
 #import "PullDown.h"
+#import "WebViewController.h"
+
+#define MAX_FIRSTNAME_LENGTH        50
+#define MAX_LASTNAME_LENGTH         50
+#define MAX_HOURLY_RATE_LENGTH      4
 
 static  EditProfileViewController   *instance = nil;
 
@@ -68,6 +73,13 @@ static  EditProfileViewController   *instance = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
     self.scroller.contentSize = self.scroller.bounds.size;
     [self.professions setValues:[Database professions]];
+    professions.delegate = self;
+    
+    UIButton *help = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)] autorelease];
+    [help setImage:[UIImage imageNamed:@"edit.profile.help.button.png"] forState:UIControlStateNormal];
+    self.rate.rightViewMode = UITextFieldViewModeAlways;
+    self.rate.rightView = help;
+    [help addTarget:self action:@selector(rateHelp) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setProfilePhoto {
@@ -147,6 +159,44 @@ static  EditProfileViewController   *instance = nil;
     [self.scroller setContentOffset:CGPointMake(0, offset>0?offset:0) animated:YES];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.first) {
+        if ([string rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]].location == NSNotFound && !range.length) {
+            return NO;
+        }
+        if ([textField.text length] == MAX_FIRSTNAME_LENGTH-1 && !range.length) {
+            textField.text = [textField.text stringByAppendingString:string];
+            return NO;
+        }
+        if ([textField.text length] > MAX_FIRSTNAME_LENGTH-1 && !range.length) {
+            return NO;
+        }
+    } else if (textField == self.last) {
+        if ([string rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]].location == NSNotFound && !range.length) {
+            return NO;
+        }
+        if ([textField.text length] == MAX_LASTNAME_LENGTH-1 && !range.length) {
+            textField.text = [textField.text stringByAppendingString:string];
+            return NO;
+        }
+        if ([textField.text length] > MAX_LASTNAME_LENGTH-1 && !range.length) {
+            return NO;
+        }
+    } else if (textField == self.rate) {
+        if ([string rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location == NSNotFound && !range.length) {
+            return NO;
+        }
+        if ([textField.text length] == MAX_HOURLY_RATE_LENGTH-1 && !range.length) {
+            textField.text = [textField.text stringByAppendingString:string];
+            return NO;
+        }
+        if ([textField.text length] > MAX_HOURLY_RATE_LENGTH-1 && !range.length) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.first) {
         [last becomeFirstResponder];
@@ -181,6 +231,20 @@ CGRect myFrame;
     }
 }
 
+- (void)pullDownWillDropDown:(PullDown *)pulldon {
+    [first resignFirstResponder];
+    [last resignFirstResponder];
+    [rate resignFirstResponder];
+}
+
+- (void)rateHelp {
+    WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
+    webview.title = @"Abacus - FAQ";
+    webview.urlString = @"http://faq.freelanceabacus.com#pricing";
+    webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+
+}
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];

@@ -11,6 +11,9 @@
 #import "Persist.h"
 #import "Alerts.h"
 
+#define MAX_HOURS_LENGTH        4
+#define MAX_BUDGET_LENGTH       6
+
 @interface CalculatorViewController ()
 @property   (nonatomic, retain)     IBOutlet    UITextField     *hours, *budget;
 @property   (nonatomic, retain)     IBOutlet    UIScrollView    *scroller;
@@ -74,6 +77,33 @@
     }
     [self.hours resignFirstResponder];
     [self.budget resignFirstResponder];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.hours) {
+        if ([string rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]].location == NSNotFound && !range.length) {
+            return NO;
+        }
+        if ([textField.text length] == MAX_HOURS_LENGTH-1 && !range.length) {
+            textField.text = [textField.text stringByAppendingString:string];
+            return NO;
+        }
+        if ([textField.text length] > MAX_HOURS_LENGTH-1 && !range.length) {
+            return NO;
+        }
+    } else if (textField == self.budget) {
+        if ([string rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]].location == NSNotFound && !range.length) {
+            return NO;
+        }
+        if ([textField.text length] == MAX_BUDGET_LENGTH-1 && !range.length) {
+            textField.text = [textField.text stringByAppendingString:string];
+            return NO;
+        }
+        if ([textField.text length] > MAX_BUDGET_LENGTH-1 && !range.length) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 - (void)dealloc {
