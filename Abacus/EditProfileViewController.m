@@ -10,21 +10,28 @@
 #import "EditProfileViewController.h"
 #import "UITextField+Customizations.h"
 #import "AppDelegate.h"
+#import "Alerts.h"
+#import "Database.h"
+#import "PullDown.h"
 
 static  EditProfileViewController   *instance = nil;
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIActionSheetDelegate>
-@property   (nonatomic, retain)     IBOutlet    UITextField     *first, *last, *professions, *rate;
+@property   (nonatomic, retain)     IBOutlet    UITextField     *first, *last, *rate;
+@property   (nonatomic, retain)     IBOutlet    PullDown        *professions;
 @property   (nonatomic, retain)     IBOutlet    UIImageView     *photo;
 @property   (nonatomic, retain)     IBOutlet    UIButton        *photoButton;
+@property   (nonatomic, retain)     IBOutlet    UIScrollView    *scroller;
+@property   (nonatomic, retain)                 UIView			*lastTextWidget;
+
 
 - (IBAction)addPhoto:(id)sender;
-- (IBAction)hide:(id)sender;
 - (IBAction)close:(id)sender;
+- (IBAction)createProfile:(id)sender;
 @end
 
 @implementation EditProfileViewController
-@synthesize first, last, professions, rate, photo, photoButton;
+@synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget;
 
 + (void)show {
     instance = [[EditProfileViewController alloc] initWithNibName:@"EditProfileViewController" bundle:nil];
@@ -52,12 +59,15 @@ static  EditProfileViewController   *instance = nil;
     [super viewDidLoad];
     [self.first customize];
     [self.last customize];
-    [self.professions customize];
     [self.rate customize];
     self.photo.layer.cornerRadius = self.photo.frame.size.width/2;
     self.photo.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.photo.layer.borderWidth = 3;
     [self setProfilePhoto];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+    self.scroller.contentSize = self.scroller.bounds.size;
+    [self.professions setValues:[Database professions]];
 }
 
 - (void)setProfilePhoto {
@@ -127,22 +137,61 @@ static  EditProfileViewController   *instance = nil;
     [EditProfileViewController hide];
 }
 
-- (IBAction)hide:(id)sender {
-    [EditProfileViewController hide];
+- (IBAction)createProfile:(id)sender {
+    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+	lastTextWidget = textField;
+    CGFloat offset = lastTextWidget.frame.origin.y - lastTextWidget.frame.size.height;
+    [self.scroller setContentOffset:CGPointMake(0, offset>0?offset:0) animated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
+    if (textField == self.first) {
+        [last becomeFirstResponder];
+    } else if (textField == last) {
+        [rate becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
     return YES;
 }
 
+CGRect myFrame;
+- (void)keyboardDidShow:(NSNotification *)note {
+    myFrame = self.scroller.frame;
+    // Resize the scroller view to sit against the top of the keyboard accessory ivew
+    CGRect keyboardFrame  = [[note.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect myFrameInWindowCoordinates = [self.view convertRect:self.scroller.frame toView:self.view.window];
+    myFrameInWindowCoordinates = CGRectOffset(myFrameInWindowCoordinates, 0, self.scroller.contentOffset.y);
+    CGFloat diff = CGRectGetMaxY(myFrameInWindowCoordinates) - keyboardFrame.origin.y;
+    if (diff > 0) {
+        self.scroller.contentSize = CGSizeMake(self.scroller.contentSize.width, self.scroller.contentSize.height + diff);
+    }
+}
+
+- (void)keyboardDidHide:(NSNotification *)note {
+    if (lastTextWidget) {
+        [UIView animateWithDuration:.25 animations:^{
+            self.scroller.contentSize = CGSizeMake(myFrame.size.width, myFrame.size.height);
+        } completion:^(BOOL finished) {
+            myFrame = CGRectZero;
+        }];
+    }
+}
+
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [first release];
     [last release];
     [professions release];
     [rate release];
     [photo release];
     [photoButton release];
+    [scroller release];
+    [lastTextWidget release];
     [super dealloc];
 }
 @end

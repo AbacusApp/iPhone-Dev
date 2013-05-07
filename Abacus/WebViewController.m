@@ -25,9 +25,7 @@
 }
 
 - (IBAction)close:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self dismissModalViewControllerAnimated:YES];
 }
 - (void)dealloc {
     [webView release];

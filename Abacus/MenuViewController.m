@@ -83,20 +83,42 @@
         }
             break;
         case 1: {
+            [self closeMenu];
             WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
             webview.title = @"Abacus - Links & Resources";
-            webview.urlString = @"http://www.google.com";
-            [self.view.window.rootViewController presentViewController:webview animated:YES completion:^{
-            }];
+            webview.urlString = @"http://resources.freelanceabacus.com";
+            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
             break;
         case 2:
             break;
-        case 3:
+        case 3: {
+            [self closeMenu];
+            WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
+            webview.title = @"Abacus - FAQ";
+            webview.urlString = @"http://faq.freelanceabacus.com";
+            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+        }
             break;
-        case 4:
+        case 4: {
+            [self closeMenu];
+            WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
+            webview.title = @"Abacus - Links & Resources";
+            webview.urlString = @"http://www.google.com";
+            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+        }
             break;
-        case 5:
+        case 5: {
+            [self closeMenu];
+            WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
+            webview.title = @"Abacus - Support";
+            webview.urlString = @"http://support.freelanceabacus.com";
+            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+        }
             break;
     }
 }

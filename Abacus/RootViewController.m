@@ -62,6 +62,8 @@
     
     // Enable the drop-shadow that will be visible on left side
     self.view.layer.shadowOpacity = 0.6;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleReveal) name:@"REVEAL.MENU" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -72,12 +74,7 @@
         [self.view.superview insertSubview:self.menuController.view atIndex:0];
         self.menuController.view.frame = self.view.bounds;
         [self layoutAnimated:NO];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleReveal) name:@"REVEAL.MENU" object:nil];
     }
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)toggleReveal {
@@ -88,11 +85,11 @@
 
 - (BOOL)moveLeft {
     if (self.view.frame.origin.x != 0) {
+        UIView *closeButton = [self.view viewWithTag:123];
+        [closeButton removeFromSuperview];
         [UIView animateWithDuration:.25 animations:^{
             self.view.frame = CGRectMake(0, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         } completion:^(BOOL finished) {
-            UIView *closeButton = [self.view viewWithTag:123];
-            [closeButton removeFromSuperview];
         }];
         return YES;
     }
@@ -119,6 +116,7 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [contentView release];
     [tabController release];
     [profileRadio release];

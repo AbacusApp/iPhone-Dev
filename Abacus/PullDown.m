@@ -71,7 +71,7 @@
     field.leftViewMode = UITextFieldViewModeAlways;
     UIView *padding = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, field.frame.size.height)] autorelease];
     field.leftView = padding;
-    self.numberOfRows = 6;
+    self.numberOfRows = 4;
 }
 
 - (void)setFont:(UIFont *)font {

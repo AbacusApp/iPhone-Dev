@@ -42,6 +42,8 @@
 		BFE391F8173827F700749966 /* web.view.close.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391E9173827F700749966 /* web.view.close.button.png */; };
 		BFE391F9173827F700749966 /* web.view.forward.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391EA173827F700749966 /* web.view.forward.button.png */; };
 		BFE391FA173827F700749966 /* web.view.refresh.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391EB173827F700749966 /* web.view.refresh.button.png */; };
+		BFE391FD1739351500749966 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391FC1739351400749966 /* Database.m */; };
+		BFE391FF1739356900749966 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE391FE1739356800749966 /* libsqlite3.0.dylib */; };
 		BFF1D29E1732BBCB00B02D46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29D1732BBCB00B02D46 /* UIKit.framework */; };
 		BFF1D2A01732BBCB00B02D46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D29F1732BBCB00B02D46 /* Foundation.framework */; };
 		BFF1D2A21732BBCB00B02D46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D2A11732BBCB00B02D46 /* CoreGraphics.framework */; };
@@ -157,6 +159,9 @@
 		BFE391E9173827F700749966 /* web.view.close.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.view.close.button.png; sourceTree = "<group>"; };
 		BFE391EA173827F700749966 /* web.view.forward.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.view.forward.button.png; sourceTree = "<group>"; };
 		BFE391EB173827F700749966 /* web.view.refresh.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.view.refresh.button.png; sourceTree = "<group>"; };
+		BFE391FB1739351300749966 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		BFE391FC1739351400749966 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		BFE391FE1739356800749966 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		BFF1D29A1732BBCB00B02D46 /* Abacus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Abacus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF1D29D1732BBCB00B02D46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BFF1D29F1732BBCB00B02D46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -251,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFE391FF1739356900749966 /* libsqlite3.0.dylib in Frameworks */,
 				BFF1D3441733FBCC00B02D46 /* Security.framework in Frameworks */,
 				BFF1D3271733DD6700B02D46 /* iAd.framework in Frameworks */,
 				BFF1D29E1732BBCB00B02D46 /* UIKit.framework in Frameworks */,
@@ -282,6 +288,7 @@
 		BFF1D29C1732BBCB00B02D46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFE391FE1739356800749966 /* libsqlite3.0.dylib */,
 				BFF1D3431733FBCC00B02D46 /* Security.framework */,
 				BFF1D3261733DD6700B02D46 /* iAd.framework */,
 				BFF1D29D1732BBCB00B02D46 /* UIKit.framework */,
@@ -304,6 +311,8 @@
 				BFF1D3341733F57100B02D46 /* CalculatorViewController-568h@2x.xib */,
 				BFF1D3371733F8F900B02D46 /* CheckBox.h */,
 				BFF1D3381733F8F900B02D46 /* CheckBox.m */,
+				BFE391FB1739351300749966 /* Database.h */,
+				BFE391FC1739351400749966 /* Database.m */,
 				BFE391B517341BEB00749966 /* EditProfileViewController.h */,
 				BFE391B617341BEC00749966 /* EditProfileViewController.m */,
 				BFE391B717341BEC00749966 /* EditProfileViewController.xib */,
@@ -590,6 +599,7 @@
 				BFE391BE173439AC00749966 /* SwipeyLabel.m in Sources */,
 				BFE391C31737F50900749966 /* Alerts.m in Sources */,
 				BFE391CD173811A000749966 /* WebViewController.m in Sources */,
+				BFE391FD1739351500749966 /* Database.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
