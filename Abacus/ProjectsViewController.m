@@ -9,7 +9,7 @@
 #import "ProjectsViewController.h"
 
 @interface ProjectsViewController ()
-
+- (IBAction)revealMenu:(id)sender;
 @end
 
 @implementation ProjectsViewController
@@ -32,10 +32,12 @@
 		cell = (UITableViewCell *)[array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.font = [UIFont fontWithName:@"Avenir-Light" size:15];
-        cell.detailTextLabel.textColor = [UIColor colorWithWhite:.596 alpha:1];
     }
     return cell;
+}
+
+- (IBAction)revealMenu:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REVEAL.MENU" object:nil];
 }
 
 - (void)dealloc {

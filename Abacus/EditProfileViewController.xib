@@ -168,7 +168,7 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{20, 359}, {270, 46}}</string>
 										<reference key="NSSuperview" ref="670758790"/>
-										<reference key="NSNextKeyView" ref="1030739303"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -412,7 +412,7 @@
 								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{20, 22}, {280, 243}}</string>
 								<reference key="NSSuperview" ref="1030739303"/>
-								<reference key="NSNextKeyView" ref="847926580"/>
+								<reference key="NSNextKeyView" ref="955045224"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -428,6 +428,7 @@
 								<int key="NSvFlags">293</int>
 								<string key="NSFrame">{{137, 271}, {46, 32}}</string>
 								<reference key="NSSuperview" ref="1030739303"/>
+								<reference key="NSNextKeyView" ref="840644106"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -442,6 +443,7 @@
 								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{20, 22}, {280, 250}}</string>
 								<reference key="NSSuperview" ref="1030739303"/>
+								<reference key="NSNextKeyView" ref="847926580"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -462,7 +464,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 498}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="840644106"/>
+				<reference key="NSNextKeyView" ref="1030739303"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAgMC43AA</bytes>

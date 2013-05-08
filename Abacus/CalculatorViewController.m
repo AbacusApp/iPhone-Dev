@@ -23,6 +23,7 @@
 @property   (nonatomic, retain)     IBOutlet    UIButton        *calculateButtonHours, *calculateButtonBudget;
 
 - (IBAction)tabTapped:(UIButton *)sender;
+- (IBAction)revealMenu:(id)sender;
 - (IBAction)calculate:(UIButton *)sender;
 @end
 
@@ -142,6 +143,10 @@
         [Persist setValue:budget.text forKey:@"calculator.budget" secure:NO];
         [self formatBudgetField];
     }
+}
+
+- (IBAction)revealMenu:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REVEAL.MENU" object:nil];
 }
 
 - (void)dealloc {

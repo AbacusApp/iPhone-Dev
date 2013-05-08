@@ -62,6 +62,9 @@
     right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [calculator.view addGestureRecognizer:right];
+    right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
+    right.direction = UISwipeGestureRecognizerDirectionRight;
+    [projects.view addGestureRecognizer:right];
     
     // Enable the drop-shadow that will be visible on left side
     self.view.layer.shadowOpacity = 0.6;
