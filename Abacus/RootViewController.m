@@ -93,7 +93,7 @@
     if (self.view.frame.origin.x != 0) {
         UIView *closeButton = [self.view viewWithTag:123];
         [closeButton removeFromSuperview];
-        [UIView animateWithDuration:.25 animations:^{
+        [UIView animateWithDuration:.2 animations:^{
             self.view.frame = CGRectMake(0, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         } completion:^(BOOL finished) {
         }];
@@ -104,7 +104,7 @@
 
 - (BOOL)moveRight {
     if (self.view.frame.origin.x == 0) {
-        [UIView animateWithDuration:.25 animations:^{
+        [UIView animateWithDuration:.2 animations:^{
             self.view.frame = CGRectMake(self.view.frame.size.width - 44, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         } completion:^(BOOL finished) {
             UIButton *closeButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, self.view.bounds.size.height)] autorelease];

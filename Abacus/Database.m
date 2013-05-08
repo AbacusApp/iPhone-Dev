@@ -24,8 +24,38 @@ static  NSDictionary    *states = nil;
         [self makeDB];
     }
     professions = [[NSDictionary dictionaryWithObjectsAndKeys:
+                    @"Actor / Actress", [NSNumber numberWithInt:ProfessionIDActorActress],
+                    @"Animator", [NSNumber numberWithInt:ProfessionIDAnimator],
+                    @"Concept Artist", [NSNumber numberWithInt:ProfessionIDConceptArtist],
+                    @"Copywriter - Advertising", [NSNumber numberWithInt:ProfessionIDCopywriterAdvertising],
+                    @"Copywriter - Creative", [NSNumber numberWithInt:ProfessionIDCopywriterCreative],
+                    @"Creative Instructor", [NSNumber numberWithInt:ProfessionIDCreativeInstructor],
+                    @"Developer - Android", [NSNumber numberWithInt:ProfessionIDDeveloperAndroid],
+                    @"Developer - Blackberry", [NSNumber numberWithInt:ProfessionIDDeveloperBlackberry],
+                    @"Developer - iOS", [NSNumber numberWithInt:ProfessionIDDeveloperiOS],
+                    @"Developer - Mac / PC", [NSNumber numberWithInt:ProfessionIDDeveloperMacPC],
+                    @"Developer - Web", [NSNumber numberWithInt:ProfessionIDDeveloperWeb],
+                    @"Developer - Windows Phone", [NSNumber numberWithInt:ProfessionIDDeveloperWindowsPhone],
+                    @"Event Planner", [NSNumber numberWithInt:ProfessionIDEventPlanner],
+                    @"Fashion Designer", [NSNumber numberWithInt:ProfessionIDFashionDesigner],
+                    @"Film Director", [NSNumber numberWithInt:ProfessionIDFilmDirector],
+                    @"Filmmaker", [NSNumber numberWithInt:ProfessionIDFilmaker],
+                    @"Graphic Designer", [NSNumber numberWithInt:ProfessionIDGraphicDesigner],
+                    @"Illustrator - Digital", [NSNumber numberWithInt:ProfessionIDIllustratorDigital],
+                    @"Illustrator - Traditional", [NSNumber numberWithInt: ProfessionIDIllustratorTraditional],
+                    @"Merchandiser", [NSNumber numberWithInt:ProfessionIDMerchandiser],
+                    @"Model - Photography", [NSNumber numberWithInt:ProfessionIDModelPhotography],
+                    @"Model - Video", [NSNumber numberWithInt:ProfessionIDModelVideo],
+                    @"Motion Graphics Artist", [NSNumber numberWithInt:ProfessionIDMotionGraphicsArtist],
+                    @"Musician", [NSNumber numberWithInt:ProfessionIDMusician],
                     @"Photographer", [NSNumber numberWithInt:ProfessionIDPhotographer],
-                    @"Waiter", [NSNumber numberWithInt:ProfessionIDWaiter],
+                    @"Producer", [NSNumber numberWithInt:ProfessionIDProducer],
+                    @"UI / UX Designer", [NSNumber numberWithInt:ProfessionIDUIUXDesigner],
+                    @"Video Game Designer", [NSNumber numberWithInt:ProfessionIDVideoGameDesigner],
+                    @"Video Production Artist", [NSNumber numberWithInt:ProfessionIDVideoProductionArtist],
+                    @"Virtual Assistant", [NSNumber numberWithInt:ProfessionIDVirtualAssistant],
+                    @"Web Designer", [NSNumber numberWithInt:ProfessionIDWebDesigner],
+                    @"Other", [NSNumber numberWithInt:ProfessionIDOther],
                    nil] retain];
     
     states = [[NSDictionary dictionaryWithObjectsAndKeys:
@@ -160,7 +190,7 @@ static  NSDictionary    *states = nil;
 // │ return an array of professions
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (NSArray *)professions {
-    return [professions allValues];
+    return [[professions allValues] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
