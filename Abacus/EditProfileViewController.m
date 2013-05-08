@@ -189,6 +189,7 @@ static  EditProfileViewController   *instance = nil;
 // │ Validate the user's entries and save them to the db
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (IBAction)createProfile:(id)sender {
+    [lastTextWidget resignFirstResponder];
     if ([first.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
         [Alerts showWarningWithTitle:@"Profile Details" message:@"Please enter your First name" delegate:self tag:1];
         return;

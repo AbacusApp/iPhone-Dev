@@ -44,7 +44,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 518}, {107, 50}}</string>
 								<reference key="NSSuperview" ref="473333428"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="950772951"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -70,7 +69,7 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">tabStrip.profile.active.png</string>
 								</object>
-								<object class="NSCustomResource" key="IBUISelectedImage" id="240101817">
+								<object class="NSCustomResource" key="IBUISelectedImage" id="242459513">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">tabStrip.profile.active@2x.png</string>
 								</object>
@@ -93,7 +92,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{213, 518}, {107, 50}}</string>
 								<reference key="NSSuperview" ref="473333428"/>
-								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">2</int>
@@ -108,7 +106,7 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="576146822"/>
-								<reference key="IBUIHighlightedImage" ref="240101817"/>
+								<reference key="IBUIHighlightedImage" ref="242459513"/>
 								<object class="NSCustomResource" key="IBUISelectedImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">tabStrip.project.active@2x.png</string>
@@ -125,7 +123,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{107, 518}, {106, 50}}</string>
 								<reference key="NSSuperview" ref="473333428"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="932986786"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -156,7 +153,6 @@
 						</array>
 						<string key="NSFrameSize">{320, 568}</string>
 						<reference key="NSSuperview" ref="774585933"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="33586284"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -171,7 +167,6 @@
 				</array>
 				<string key="NSFrameSize">{320, 568}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="473333428"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -346,61 +341,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">65</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">RadioButton</string>
-					<string key="superclassName">UIButton</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/RadioButton.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">RootViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">tabTapped:</string>
-						<string key="NS.object.0">UIButton</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">tabTapped:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">tabTapped:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="calculatorRadio">RadioButton</string>
-						<string key="contentView">UIView</string>
-						<string key="profileRadio">RadioButton</string>
-						<string key="projectsRadio">RadioButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="calculatorRadio">
-							<string key="name">calculatorRadio</string>
-							<string key="candidateClassName">RadioButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="contentView">
-							<string key="name">contentView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="profileRadio">
-							<string key="name">profileRadio</string>
-							<string key="candidateClassName">RadioButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="projectsRadio">
-							<string key="name">projectsRadio</string>
-							<string key="candidateClassName">RadioButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/RootViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
