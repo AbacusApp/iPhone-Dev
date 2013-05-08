@@ -129,6 +129,34 @@ static  NSDictionary    *states = nil;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Create a random guid-format string
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
++ (NSString *)GUID {
+    NSString *result = @"";
+    result = [result stringByAppendingString:[self uuidSectionOfLength:8]];
+    result = [result stringByAppendingString:@"-"];
+    result = [result stringByAppendingString:[self uuidSectionOfLength:4]];
+    result = [result stringByAppendingString:@"-"];
+    result = [result stringByAppendingString:[self uuidSectionOfLength:4]];
+    result = [result stringByAppendingString:@"-"];
+    result = [result stringByAppendingString:[self uuidSectionOfLength:4]];
+    result = [result stringByAppendingString:@"-"];
+    result = [result stringByAppendingString:[self uuidSectionOfLength:12]];
+    return result;
+}
+
++ (NSString *)uuidSectionOfLength:(int)length {
+    NSString *validCharacters = @"0123456789abcdef";
+    
+    NSString *result = @"";
+    for(int i=0; i<length; i++) {
+        int rnd = arc4random() % 16;
+        result = [result stringByAppendingFormat:@"%c", [validCharacters characterAtIndex:rnd]];
+    }
+    return result;
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ return an array of professions
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (NSArray *)professions {

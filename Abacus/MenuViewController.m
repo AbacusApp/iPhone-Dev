@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Graham Savage. All rights reserved.
 //
 
+#import <Twitter/Twitter.h>
 #import "MenuViewController.h"
 #import "EditProfileViewController.h"
 #import "WebViewController.h"
 
-@interface MenuViewController ()
+@interface MenuViewController () <UIActionSheetDelegate>
 @property   (nonatomic, retain)     IBOutlet    UILabel     *version;
 @end
 
@@ -91,7 +92,9 @@
             [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
             break;
-        case 2:
+        case 2: {
+            [self shareApp];
+        }
             break;
         case 3: {
             [self closeMenu];
@@ -120,6 +123,64 @@
             [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
             break;
+    }
+}
+
+- (void)shareApp {
+    Class composeViewClass = NSClassFromString(@"SLComposeViewController");
+    if(composeViewClass) {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"Twitter", nil];
+        [sheet showInView:self.view.window];
+    } else {
+        [self doTwitter];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self doFacebook];
+            break;
+        case 1:
+            [self doTwitter];
+            break;
+        case 2:
+            break;
+    }
+}
+
+- (void)doTwitter {
+    Class composeViewClass = NSClassFromString(@"SLComposeViewController");
+    if(composeViewClass) {
+        SLComposeViewController *vc = [composeViewClass composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [vc addImage:[UIImage imageNamed:@"Icon.png"]];
+        [vc addURL:[NSURL URLWithString:@"http://freelanceabacus.com"]];
+        [vc setInitialText:@"Check out this great app.\n"];
+        [self presentViewController:vc animated:YES completion:^{}];
+    } else {
+        TWTweetComposeViewController *vc = [[[TWTweetComposeViewController alloc] init] autorelease];
+        [vc addImage:[UIImage imageNamed:@"Icon.png"]];
+        [vc addURL:[NSURL URLWithString:@"http://freelanceabacus.com"]];
+        [vc setInitialText:@"Check out this great app.\n"];
+        [self presentViewController:vc animated:YES completion:^{}];
+    }
+}
+
+- (void)doFacebook {
+    Class composeViewClass = NSClassFromString(@"SLComposeViewController");
+    if(composeViewClass) {
+        SLComposeViewController *vc = [composeViewClass composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [vc addImage:[UIImage imageNamed:@"Icon.png"]];
+        [vc addURL:[NSURL URLWithString:@"http://freelanceabacus.com"]];
+        [vc setInitialText:@"Check out this great app.\n"];
+        [self presentViewController:vc animated:YES completion:^{}];
+    } else {
+        // Just show a lame webview
+        WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
+        webview.urlString = @"http://facebook.com";
+        webview.title = @"Facebook";
+        webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self.view.window.rootViewController presentModalViewController:webview animated:YES];
     }
 }
 

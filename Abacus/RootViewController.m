@@ -14,10 +14,11 @@
 #import "RadioButton.h"
 #import "MenuViewController.h"
 #import "UIImage+Retina4.h"
+#import "ProjectsViewController.h"
 
 @interface RootViewController () <ADBannerViewDelegate>
 @property   (nonatomic, retain)     IBOutlet    UIView      *contentView;
-@property   (nonatomic, retain)     IBOutlet    RadioButton *profileRadio, *calculatorRadio;
+@property   (nonatomic, retain)     IBOutlet    RadioButton *profileRadio, *calculatorRadio, *projectsRadio;
 @property   (nonatomic, retain)     UITabBarController      *tabController;
 @property   (nonatomic, retain)     MenuViewController      *menuController;
 
@@ -28,7 +29,7 @@
     ADBannerView *_bannerView;
 }
 
-@synthesize contentView, tabController, profileRadio, calculatorRadio, menuController;
+@synthesize contentView, tabController, profileRadio, calculatorRadio, menuController, projectsRadio;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,12 +46,14 @@
     } else {
         calculator = [[[CalculatorViewController alloc] initWithNibName:@"CalculatorViewController" bundle:nil] autorelease];
     }
-    [self.tabController setViewControllers:[NSArray arrayWithObjects:profile, calculator, nil]];
+    ProjectsViewController *projects = [[[ProjectsViewController alloc] initWithNibName:@"ProjectsViewController" bundle:nil] autorelease];
+    [self.tabController setViewControllers:[NSArray arrayWithObjects:profile, calculator, projects, nil]];
     [self.contentView addSubview:self.tabController.view];
     
     // Need to bring the custom tab bar buttons on top of the tab bar controller
     [self.contentView bringSubviewToFront:self.profileRadio];
     [self.contentView bringSubviewToFront:self.calculatorRadio];
+    [self.contentView bringSubviewToFront:self.projectsRadio];
     
     // Add swipe gesture recognizer to both views on the tab bar controller - used to reveal the menu
     UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
@@ -121,6 +124,7 @@
     [tabController release];
     [profileRadio release];
     [calculatorRadio release];
+    [projectsRadio release];
     [menuController release];
     [super dealloc];
 }

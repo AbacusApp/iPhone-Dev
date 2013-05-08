@@ -26,6 +26,8 @@ static  EditProfileViewController   *instance = nil;
 @property   (nonatomic, retain)     IBOutlet    PullDown        *professions;
 @property   (nonatomic, retain)     IBOutlet    UIImageView     *photo;
 @property   (nonatomic, retain)     IBOutlet    UIButton        *photoButton, *closeButton, *createButton;
+@property   (nonatomic, retain)     IBOutlet    UIView          *helpCallout;
+@property   (nonatomic, retain)     IBOutlet    UIWebView       *helpCalloutWebview;
 @property   (nonatomic, retain)     IBOutlet    UIScrollView    *scroller;
 @property   (nonatomic, retain)                 UIView			*lastTextWidget;
 
@@ -36,7 +38,7 @@ static  EditProfileViewController   *instance = nil;
 @end
 
 @implementation EditProfileViewController
-@synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget, closeButton, createButton;
+@synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget, closeButton, createButton, helpCallout, helpCalloutWebview;
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ Custom view display method
@@ -97,8 +99,13 @@ static  EditProfileViewController   *instance = nil;
     } else {
         closeButton.hidden = YES;       // There is no profile yet so don't allow view to be closed
     }
+    
+    self.helpCallout.layer.shadowOpacity = 0.5;
+    self.helpCallout.layer.shadowOffset = CGSizeMake(0, 1);
+    UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCallout)] autorelease];
+    [self.helpCallout addGestureRecognizer:tap];
+    [self.helpCalloutWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://faq.freelanceabacus.com/pricing-callout.html"]]];
 }
-
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ Read profile photo from saved file and alter the photo button if needed
@@ -333,7 +340,20 @@ CGRect myFrame;
 }
 
 - (void)rateHelp {
+    self.helpCallout.alpha = 0;
+    self.helpCallout.hidden = NO;
+    [UIView animateWithDuration:.25 animations:^{
+        self.helpCallout.alpha = 1;
+    } completion:^(BOOL finished) {
+    }];
+}
 
+- (void)hideCallout {
+    [UIView animateWithDuration:.25 animations:^{
+        self.helpCallout.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.helpCallout.hidden = YES;
+    }];
 }
 
 - (void)dealloc {
@@ -349,6 +369,8 @@ CGRect myFrame;
     [lastTextWidget release];
     [closeButton release];
     [createButton release];
+    [helpCallout release];
+    [helpCalloutWebview release];
     [super dealloc];
 }
 @end
