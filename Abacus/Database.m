@@ -90,23 +90,35 @@ static  NSDictionary    *states = nil;
     sqlite3_close(db);
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Open the db - get handle
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)open {
     sqlite3 *temp;
     sqlite3_open([[self databasePath] UTF8String], &temp);
     handler.database = temp;
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ close the db
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)close {
     sqlite3_close(handler.database);
 	handler.database = nil;
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ delete the db file
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)remove {
 	[self close];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	[fileManager removeItemAtPath:[self databasePath] error:nil];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return a string from a result
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (NSString *)stringForColumn:(int)column inStatement:(sqlite3_stmt *)statement {
     const char *value = (const char *)sqlite3_column_text(statement, column);
     if (value) {
@@ -116,18 +128,30 @@ static  NSDictionary    *states = nil;
     }
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return an array of professions
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (NSArray *)professions {
     return [professions allValues];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return the text name of a profession given the ID
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (NSString *)nameForProfession:(ProfessionID)professionID {
     return [professions objectForKey:[NSNumber numberWithInt:professionID]];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return the ID of a profession given its text name
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (ProfessionID)idForProfessionName:(NSString *)name {
     return [[[professions allKeysForObject:name] objectAtIndex:0] intValue];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Write the user values into the db
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)setUser:(User *)user {
     if (!handler.database) {
         [self open];
@@ -141,6 +165,9 @@ static  NSDictionary    *states = nil;
 	sqlite3_finalize(statement);
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Update the user's values (profile) using the supplied values
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)updateUser:(User *)user {
     if (!handler.database) {
         [self open];
@@ -154,6 +181,9 @@ static  NSDictionary    *states = nil;
 	sqlite3_finalize(statement);
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return the user values (profile) from the db
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (User *)user {
     if (!handler.database) {
         [self open];
@@ -175,6 +205,9 @@ static  NSDictionary    *states = nil;
     return user;
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (id)init {
     self = [super init];
     if (self) {
@@ -183,6 +216,9 @@ static  NSDictionary    *states = nil;
     return self;
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)dealloc {
     [Database close];
     [handler release];

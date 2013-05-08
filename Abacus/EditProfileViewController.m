@@ -38,6 +38,9 @@ static  EditProfileViewController   *instance = nil;
 @implementation EditProfileViewController
 @synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget, closeButton, createButton;
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Custom view display method
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)show {
     instance = [[EditProfileViewController alloc] initWithNibName:@"EditProfileViewController" bundle:nil];
     UIWindow *window = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).window;
@@ -50,6 +53,9 @@ static  EditProfileViewController   *instance = nil;
     }];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Custom view hide method
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)hide {
     [UIView animateWithDuration:.25 animations:^{
         instance.view.alpha = 0;
@@ -85,13 +91,18 @@ static  EditProfileViewController   *instance = nil;
         self.first.text = user.firstName;
         self.last.text = user.lastName;
         self.professions.text = [Database nameForProfession:user.professionID];
-        self.rate.text = [NSString stringWithFormat:@"%.02f", user.hourlyRate];
+        self.rate.text = [NSString stringWithFormat:@"%.0f", user.hourlyRate];
+        [self formatRateField];
         [self.createButton setTitle:@"UPDATE PROFILE" forState:UIControlStateNormal];
     } else {
         closeButton.hidden = YES;       // There is no profile yet so don't allow view to be closed
     }
 }
 
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Read profile photo from saved file and alter the photo button if needed
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)setProfilePhoto {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docs = [paths objectAtIndex:0];
@@ -106,6 +117,9 @@ static  EditProfileViewController   *instance = nil;
     }
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Display photo picker or actions sheet
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (IBAction)addPhoto:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Profile Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use Camera", @"Pick From Library", nil];
@@ -119,6 +133,9 @@ static  EditProfileViewController   *instance = nil;
     }
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Response to action sheet - decide what kind of photo picker to display
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 2:
@@ -142,6 +159,9 @@ static  EditProfileViewController   *instance = nil;
     }
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ When user selects/takes a photo, save it to a file
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     NSData *bytes = UIImagePNGRepresentation(image);
@@ -158,6 +178,9 @@ static  EditProfileViewController   *instance = nil;
     [EditProfileViewController hide];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Validate the user's entries and save them to the db
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (IBAction)createProfile:(id)sender {
     if ([first.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
         [Alerts showWarningWithTitle:@"Profile Details" message:@"Please enter your First name" delegate:self tag:1];
@@ -179,7 +202,7 @@ static  EditProfileViewController   *instance = nil;
     user.firstName = first.text;
     user.lastName = last.text;
     user.professionID = [Database idForProfessionName:professions.text];
-    user.hourlyRate = [rate.text doubleValue];
+    user.hourlyRate = [[rate.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", rate.text.length-4])] doubleValue];
     if ([Database user]) {
         [Database updateUser:user];
     } else {
@@ -189,6 +212,9 @@ static  EditProfileViewController   *instance = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.CHANGED" object:nil];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ When user dismisses alert for errors, set focus to appropropriate text field
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
         case 1:
@@ -203,10 +229,29 @@ static  EditProfileViewController   *instance = nil;
     }
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Scroll textfield into view and if hourly rate then remove the $ and /hrs
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 	lastTextWidget = textField;
     CGFloat offset = lastTextWidget.frame.origin.y - lastTextWidget.frame.size.height;
     [self.scroller setContentOffset:CGPointMake(0, offset>0?offset:0) animated:YES];
+    if (textField == self.rate && textField.text.length) {
+        textField.text = [textField.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", textField.text.length-4])];
+    }
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ if hourly rate then add $ and /hrs
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == self.rate) {
+        [self formatRateField];
+    }
+}
+
+- (void)formatRateField {
+    self.rate.text = [NSString stringWithFormat:@"$%.0f/hr", [rate.text doubleValue]];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
