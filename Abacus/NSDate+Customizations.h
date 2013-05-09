@@ -11,5 +11,6 @@
 @interface NSDate (Customizations)
 - (NSString *)asDatabaseString;
 - (NSString *)asDisplayString;
-+ (NSDate *)dateForString:(NSString *)text;
++ (NSDate *)dateForDisplayString:(NSString *)text;
++ (NSDate *)dateForDatabaseString:(NSString *)text;
 @end

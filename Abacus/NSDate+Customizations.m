@@ -8,6 +8,8 @@
 
 #import "NSDate+Customizations.h"
 
+#define DISPLAY_FORMAT  @"MMM d yyyy"
+
 @implementation NSDate (Customizations)
 NSDateFormatter *dateFormatter;
 
@@ -23,13 +25,19 @@ NSDateFormatter *dateFormatter;
 	return [dateFormatter stringFromDate:self];
 }
 
-- (NSString *)asDisplayString {
-	[dateFormatter setDateFormat:@"M/d/yyyy"];
-	return [dateFormatter stringFromDate:self];
-}
-
-+ (NSDate *)dateForString:(NSString *)text {
++ (NSDate *)dateForDatabaseString:(NSString *)text {
 	[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 	return [dateFormatter dateFromString:text];
 }
+
+- (NSString *)asDisplayString {
+	[dateFormatter setDateFormat:DISPLAY_FORMAT];
+	return [dateFormatter stringFromDate:self];
+}
+
++ (NSDate *)dateForDisplayString:(NSString *)text {
+	[dateFormatter setDateFormat:DISPLAY_FORMAT];
+	return [dateFormatter dateFromString:text];
+}
+
 @end

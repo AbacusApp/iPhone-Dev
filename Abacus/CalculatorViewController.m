@@ -50,12 +50,12 @@
         [self formatBudgetField];
         [self calculate:self.calculateButtonBudget];
     }
-    UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(createProject)] autorelease];
+    UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:right];
 }
 
-- (void)createProject {
+- (void)swipe {
     [EditProjectViewController showModally];
 }
 

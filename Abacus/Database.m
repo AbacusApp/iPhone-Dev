@@ -335,7 +335,7 @@ static  NSDictionary    *states = nil;
             project.guid = [self stringForColumn:0 inStatement:statement];
             project.name = [self stringForColumn:1 inStatement:statement];
             project.description = [self stringForColumn:2 inStatement:statement];
-            project.startingDate = [NSDate dateForString:[self stringForColumn:3 inStatement:statement]];
+            project.startingDate = [NSDate dateForDatabaseString:[self stringForColumn:3 inStatement:statement]];
         }
     }
 	sqlite3_finalize(statement);
