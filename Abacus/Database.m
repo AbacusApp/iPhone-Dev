@@ -96,12 +96,14 @@ static  NSDictionary    *states = nil;
     sqlite3 *db;
     NSString *file = [self databasePath];
     sqlite3_open_v2([file cStringUsingEncoding:NSUTF8StringEncoding], &db, SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE, NULL);
+    
+    // User TABLE
 	sqlite3_stmt *statement;
     NSString *sqlString = [NSString stringWithFormat:
                            @"CREATE TABLE \"User\" (\
                            \"FirstName\" TEXT DEFAULT NULL,\
                            \"LastName\" TEXT DEFAULT NULL,\
-                           \"Profession\" INTEGER DEFAULT -1,\
+                           \"Profession\" INTEGER DEFAULT 0,\
                            \"Email\" TEXT DEFAULT NULL,\
                            \"Cell\" TEXT DEFAULT NULL,\
                            \"Address1\" INTEGER DEFAULT NULL,\
@@ -110,13 +112,34 @@ static  NSDictionary    *states = nil;
                            \"State\" INTEGER DEFAULT -1,\
                            \"Country\" TEXT DEFAULT NULL,\
                            \"Zip\" TEXT DEFAULT NULL,\
-                           \"HourlyRate\" REAL DEFAULT -1\
+                           \"HourlyRate\" REAL DEFAULT 0\
                            )"];
 	const char *sql = [sqlString UTF8String];
 	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
 		while (sqlite3_step(statement) != SQLITE_DONE) {}
 	}
 	sqlite3_finalize(statement);
+    
+    // Projects TABLE
+    sqlString = [NSString stringWithFormat:
+                           @"CREATE TABLE \"Projects\" (\
+                           \"GUID\" TEXT DEFAULT NULL,\
+                           \"Name\" TEXT DEFAULT NULL,\
+                           \"Description\" TEXT DEFAULT NULL,\
+                           \"StartingDate\" TEXT DEFAULT NULL,\
+                           \"EndingDate\" TEXT DEFAULT NULL,\
+                           \"InitialQuote\" REAL DEFAULT 0,\
+                           \"Status\" INTEGER DEFAULT 0,\
+                           \"HoursTaken\" REAL DEFAULT 0,\
+                           \"AdditionalExpenses\" REAL DEFAULT 0\
+                           )"];
+	sql = [sqlString UTF8String];
+	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) != SQLITE_DONE) {}
+	}
+	sqlite3_finalize(statement);
+    
+    
     sqlite3_close(db);
 }
 

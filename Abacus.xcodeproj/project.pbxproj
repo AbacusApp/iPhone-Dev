@@ -34,6 +34,7 @@
 		BFBA8F27173AEE2200563117 /* EditProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBA8F25173AEE2200563117 /* EditProjectViewController.m */; };
 		BFBA8F28173AEE2200563117 /* EditProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8F26173AEE2200563117 /* EditProjectViewController.xib */; };
 		BFBA8F2B173BC70000563117 /* UIViewController+Customizations.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBA8F2A173BC70000563117 /* UIViewController+Customizations.m */; };
+		BFBA8F2E173BCDA100563117 /* UITextView+Customizations.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBA8F2D173BCDA100563117 /* UITextView+Customizations.m */; };
 		BFE391B2173414B500749966 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE391B1173414B500749966 /* MenuCell.xib */; };
 		BFE391B41734183E00749966 /* gs.head.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391B31734183E00749966 /* gs.head.png */; };
 		BFE391B817341BEC00749966 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391B617341BEC00749966 /* EditProfileViewController.m */; };
@@ -183,6 +184,8 @@
 		BFBA8F26173AEE2200563117 /* EditProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProjectViewController.xib; sourceTree = "<group>"; };
 		BFBA8F29173BC6FF00563117 /* UIViewController+Customizations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Customizations.h"; sourceTree = "<group>"; };
 		BFBA8F2A173BC70000563117 /* UIViewController+Customizations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Customizations.m"; sourceTree = "<group>"; };
+		BFBA8F2C173BCDA000563117 /* UITextView+Customizations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Customizations.h"; sourceTree = "<group>"; };
+		BFBA8F2D173BCDA100563117 /* UITextView+Customizations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Customizations.m"; sourceTree = "<group>"; };
 		BFE391B1173414B500749966 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
 		BFE391B31734183E00749966 /* gs.head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gs.head.png; sourceTree = "<group>"; };
 		BFE391B517341BEB00749966 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 				BFF1D2C11732BECA00B02D46 /* UIImage+Retina4.m */,
 				BFF1D2C31732BF1C00B02D46 /* UITextField+Customizations.h */,
 				BFF1D2C41732BF1C00B02D46 /* UITextField+Customizations.m */,
+				BFBA8F2C173BCDA000563117 /* UITextView+Customizations.h */,
+				BFBA8F2D173BCDA100563117 /* UITextView+Customizations.m */,
 				BFBA8F29173BC6FF00563117 /* UIViewController+Customizations.h */,
 				BFBA8F2A173BC70000563117 /* UIViewController+Customizations.m */,
 				BFE391CA1738119F00749966 /* WebViewController.h */,
@@ -738,6 +743,7 @@
 				BFBA8EF6173AACF300563117 /* ProjectsViewController.m in Sources */,
 				BFBA8F27173AEE2200563117 /* EditProjectViewController.m in Sources */,
 				BFBA8F2B173BC70000563117 /* UIViewController+Customizations.m in Sources */,
+				BFBA8F2E173BCDA100563117 /* UITextView+Customizations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

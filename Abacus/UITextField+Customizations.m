@@ -14,7 +14,7 @@
 @implementation UITextField (Customizations)
 
 - (void)customize {
-    UIView *padding = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, self.frame.size.height)] autorelease];
+    UIView *padding = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 6, self.frame.size.height)] autorelease];
     self.leftViewMode = UITextFieldViewModeAlways;
     self.leftView = padding;
     self.background = [UIImage imageNamed:@"text.field.background.png"];
