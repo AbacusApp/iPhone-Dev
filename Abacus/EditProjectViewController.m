@@ -11,6 +11,8 @@
 #import "UITextField+Customizations.h"
 #import "UIViewController+Customizations.h"
 #import "UITextView+Customizations.h"
+#import "Alerts.h"
+#import "Database.h"
 
 @interface EditProjectViewController ()
 @property   (nonatomic, retain)     IBOutlet    UITextField     *name, *startDate;
@@ -20,6 +22,7 @@
 @property   (nonatomic, retain)     IBOutlet    UIButton        *closeButton, *createButton;
 
 - (IBAction)close:(id)sender;
+- (IBAction)createProject:(id)sender;
 @end
 
 @implementation EditProjectViewController
@@ -88,6 +91,52 @@ CGRect myFrame;
         return NO;
     }
     return YES;
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Validate the user's entries and save them to the db
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
+- (IBAction)createProject:(id)sender {
+    [lastTextWidget resignFirstResponder];
+    if ([name.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        [Alerts showWarningWithTitle:@"Project Details" message:@"Please enter a name for this project" delegate:self tag:1];
+        return;
+    }
+    if ([startDate.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        [Alerts showWarningWithTitle:@"Project Details" message:@"Please enter the starting date for this project" delegate:self tag:3];
+        return;
+    }
+    Project *project = [[[Project alloc] init] autorelease];
+    project.name = name.text;
+    project.description = description.text;
+//    project.startingDate = [NSDate dateWithString:startDate.text];
+    [Database addProject:project];
+    /*
+    if ([Database user]) {
+        [Database updateUser:user];
+    } else {
+        [Database setUser:user];
+    }
+     */
+    [EditProjectViewController hideModally];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.CHANGED" object:nil];
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ When user dismisses alert for errors, set focus to appropropriate text field
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (alertView.tag) {
+        case 1:
+            [name becomeFirstResponder];
+            break;
+        case 2:
+            [description becomeFirstResponder];
+            break;
+        case 4:
+            [startDate becomeFirstResponder];
+            break;
+    }
 }
 
 - (void)dealloc {

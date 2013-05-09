@@ -7,12 +7,14 @@
 //
 
 #import "Database.h"
+#import "NSDate+Customizations.h"
 
 static  Database        *handler = nil;
 static  NSDictionary    *professions = nil;
 static  NSDictionary    *states = nil;
 
 @implementation Database
+
 @synthesize database;
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -61,7 +63,7 @@ static  NSDictionary    *states = nil;
     states = [[NSDictionary dictionaryWithObjectsAndKeys:
               @"Alabama", [NSNumber numberWithInt:StateIDAlabama],
               @"Alaska", [NSNumber numberWithInt:StateIDAlaska],
-              nil] retain];
+              nil] retain];    
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -289,6 +291,60 @@ static  NSDictionary    *states = nil;
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
++ (void)addProject:(Project *)project {
+    if (!handler.database) {
+        [self open];
+    }
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Projects\" (GUID,Name,Description,StartingDate) VALUES(\"%@\",\"%@\",\"%@\",\"%@\")", project.guid, project.name, project.description, [project.startingDate asDatabaseString]];
+	const char *sql = [sqlString UTF8String];
+	sqlite3_stmt *statement;
+	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) != SQLITE_DONE) {}
+	}
+	sqlite3_finalize(statement);
+}
+
++ (NSArray *)projects {
+    if (!handler.database) {
+        [self open];
+    }
+    NSString *sqlString = @"SELECT GUID FROM Projects";
+	const char *sql = [sqlString UTF8String];
+	sqlite3_stmt *statement;
+    NSMutableArray *list = [NSMutableArray array];
+	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) == SQLITE_ROW) {
+            [list addObject:[self stringForColumn:0 inStatement:statement]];
+        }
+    }
+	sqlite3_finalize(statement);
+    return list;
+}
+
++ (Project *)projectForGUID:(NSString *)guid {
+    if (!handler.database) {
+        [self open];
+    }
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID,Name,Description,StartingDate FROM Projects WHERE GUID='%@'", guid];
+	const char *sql = [sqlString UTF8String];
+	sqlite3_stmt *statement;
+    Project *project = nil;
+	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+		if (sqlite3_step(statement) == SQLITE_ROW) {
+            project = [[[Project alloc] init] autorelease];
+            project.guid = [self stringForColumn:0 inStatement:statement];
+            project.name = [self stringForColumn:1 inStatement:statement];
+            project.description = [self stringForColumn:2 inStatement:statement];
+            project.startingDate = [NSDate dateForString:[self stringForColumn:3 inStatement:statement]];
+        }
+    }
+	sqlite3_finalize(statement);
+    return project;
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (id)init {
     self = [super init];
     if (self) {
@@ -330,6 +386,31 @@ static  NSDictionary    *states = nil;
     [address2 release];
     [address1 release];
     [zip release];
+    [super dealloc];
+}
+
+@end
+
+
+@implementation Project
+@synthesize name, description, guid, startingDate, endingDate, status, hoursTaken, additionalExpenses, initialQuote;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.startingDate = [NSDate date];  // Today
+        self.status = ProjectStatusOngoing;
+        self.guid = [Database GUID];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [name release];
+    [description release];
+    [guid release];
+    [startingDate release];
+    [endingDate release];
     [super dealloc];
 }
 

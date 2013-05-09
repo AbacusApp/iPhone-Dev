@@ -7,20 +7,24 @@
 //
 
 #import "ProjectsViewController.h"
+#import "Database.h"
+#import "NSDate+Customizations.h"
 
 @interface ProjectsViewController ()
+@property   (nonatomic, retain)     NSArray     *projects;
 - (IBAction)revealMenu:(id)sender;
 @end
 
 @implementation ProjectsViewController
+@synthesize projects;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.projects = [Database projects];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return projects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -33,6 +37,11 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    Project *project = [Database projectForGUID:[projects objectAtIndex:indexPath.row]];
+    UILabel *name = (UILabel *)[cell viewWithTag:1];
+    name.text = project.name;
+    UILabel *dates = (UILabel *)[cell viewWithTag:3];
+    dates.text = [project.startingDate asDisplayString];
     return cell;
 }
 
@@ -41,7 +50,7 @@
 }
 
 - (void)dealloc {
-    
+    [projects release];
     [super dealloc];
 }
 @end

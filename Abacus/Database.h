@@ -51,12 +51,28 @@ typedef enum {
     StateIDAlaska = 2,
 } StateID;
 
+typedef enum {
+    ProjectStatusUndefined = 0,
+    ProjectStatusOngoing = 1,
+    ProjectStatusCompleted = 2,
+    ProjectStatusCancelled = 3,
+} ProjectStatus;
+
 @interface User : NSObject
 @property   (nonatomic, retain)     NSString        *firstName, *lastName, *address1, *address2, *city, *zip, *cell, *country;
 @property   (nonatomic, assign)     double          hourlyRate;
 @property   (nonatomic, assign)     ProfessionID    professionID;
 @property   (nonatomic, assign)     StateID         stateID;
 @end
+
+
+@interface Project : NSObject
+@property   (nonatomic, retain)     NSString        *guid, *name, *description;
+@property   (nonatomic, assign)     double          initialQuote, hoursTaken, additionalExpenses;
+@property   (nonatomic, assign)     ProjectStatus   status;
+@property   (nonatomic, retain)     NSDate          *startingDate, *endingDate;
+@end
+
 
 @interface Database : NSObject
 @property (nonatomic, assign)	sqlite3		*database;
@@ -68,5 +84,8 @@ typedef enum {
 + (ProfessionID)idForProfessionName:(NSString *)name;
 + (void)setUser:(User *)user;
 + (void)updateUser:(User *)user;
++ (void)addProject:(Project *)project;
++ (NSArray *)projects;
++ (Project *)projectForGUID:(NSString *)guid;
 + (User *)user;
 @end

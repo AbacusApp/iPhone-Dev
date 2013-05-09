@@ -151,6 +151,7 @@
 		BFF1D3421733F8FA00B02D46 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF1D33E1733F8FA00B02D46 /* RadioButton.m */; };
 		BFF1D3441733FBCC00B02D46 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF1D3431733FBCC00B02D46 /* Security.framework */; };
 		BFF1D346173406CB00B02D46 /* calculator.background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF1D345173406CB00B02D46 /* calculator.background@2x.png */; };
+		BFF5C813173BEB6200D558C5 /* NSDate+Customizations.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF5C812173BEB6200D558C5 /* NSDate+Customizations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -321,6 +322,8 @@
 		BFF1D33E1733F8FA00B02D46 /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		BFF1D3431733FBCC00B02D46 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BFF1D345173406CB00B02D46 /* calculator.background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calculator.background@2x.png"; sourceTree = "<group>"; };
+		BFF5C811173BEB6200D558C5 /* NSDate+Customizations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Customizations.h"; sourceTree = "<group>"; };
+		BFF5C812173BEB6200D558C5 /* NSDate+Customizations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Customizations.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +402,8 @@
 				BFF1D3281733E06300B02D46 /* MenuViewController.h */,
 				BFF1D3291733E06300B02D46 /* MenuViewController.m */,
 				BFF1D32A1733E06300B02D46 /* MenuViewController.xib */,
+				BFF5C811173BEB6200D558C5 /* NSDate+Customizations.h */,
+				BFF5C812173BEB6200D558C5 /* NSDate+Customizations.m */,
 				BFF1D3391733F8F900B02D46 /* Persist.h */,
 				BFF1D33A1733F8F900B02D46 /* Persist.m */,
 				BFF1D32D1733F53F00B02D46 /* ProfileSummaryViewController.h */,
@@ -744,6 +749,7 @@
 				BFBA8F27173AEE2200563117 /* EditProjectViewController.m in Sources */,
 				BFBA8F2B173BC70000563117 /* UIViewController+Customizations.m in Sources */,
 				BFBA8F2E173BCDA100563117 /* UITextView+Customizations.m in Sources */,
+				BFF5C813173BEB6200D558C5 /* NSDate+Customizations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
