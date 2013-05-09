@@ -11,6 +11,8 @@
 #import "Alerts.h"
 #import "Database.h"
 #import "Persist.h"
+#import "EditProjectViewController.h"
+#import "UIViewController+Customizations.h"
 
 #define MAX_HOURS_LENGTH        4
 #define MAX_BUDGET_LENGTH       6
@@ -48,6 +50,13 @@
         [self formatBudgetField];
         [self calculate:self.calculateButtonBudget];
     }
+    UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(createProject)] autorelease];
+    right.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:right];
+}
+
+- (void)createProject {
+    [EditProjectViewController showModally];
 }
 
 - (void)formatHoursField {

@@ -31,6 +31,9 @@
 		BFBA8F20173AD27C00563117 /* project.add.button.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8F1E173AD27C00563117 /* project.add.button.png */; };
 		BFBA8F21173AD27C00563117 /* project.add.button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8F1F173AD27C00563117 /* project.add.button@2x.png */; };
 		BFBA8F23173AD8C700563117 /* default.navBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8F22173AD8C700563117 /* default.navBar@2x.png */; };
+		BFBA8F27173AEE2200563117 /* EditProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBA8F25173AEE2200563117 /* EditProjectViewController.m */; };
+		BFBA8F28173AEE2200563117 /* EditProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8F26173AEE2200563117 /* EditProjectViewController.xib */; };
+		BFBA8F2B173BC70000563117 /* UIViewController+Customizations.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBA8F2A173BC70000563117 /* UIViewController+Customizations.m */; };
 		BFE391B2173414B500749966 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE391B1173414B500749966 /* MenuCell.xib */; };
 		BFE391B41734183E00749966 /* gs.head.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE391B31734183E00749966 /* gs.head.png */; };
 		BFE391B817341BEC00749966 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE391B617341BEC00749966 /* EditProfileViewController.m */; };
@@ -175,6 +178,11 @@
 		BFBA8F1E173AD27C00563117 /* project.add.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = project.add.button.png; sourceTree = "<group>"; };
 		BFBA8F1F173AD27C00563117 /* project.add.button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "project.add.button@2x.png"; sourceTree = "<group>"; };
 		BFBA8F22173AD8C700563117 /* default.navBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default.navBar@2x.png"; sourceTree = "<group>"; };
+		BFBA8F24173AEE2200563117 /* EditProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjectViewController.h; sourceTree = "<group>"; };
+		BFBA8F25173AEE2200563117 /* EditProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjectViewController.m; sourceTree = "<group>"; };
+		BFBA8F26173AEE2200563117 /* EditProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProjectViewController.xib; sourceTree = "<group>"; };
+		BFBA8F29173BC6FF00563117 /* UIViewController+Customizations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Customizations.h"; sourceTree = "<group>"; };
+		BFBA8F2A173BC70000563117 /* UIViewController+Customizations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Customizations.m"; sourceTree = "<group>"; };
 		BFE391B1173414B500749966 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
 		BFE391B31734183E00749966 /* gs.head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gs.head.png; sourceTree = "<group>"; };
 		BFE391B517341BEB00749966 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -381,6 +389,9 @@
 				BFE391B517341BEB00749966 /* EditProfileViewController.h */,
 				BFE391B617341BEC00749966 /* EditProfileViewController.m */,
 				BFE391B717341BEC00749966 /* EditProfileViewController.xib */,
+				BFBA8F24173AEE2200563117 /* EditProjectViewController.h */,
+				BFBA8F25173AEE2200563117 /* EditProjectViewController.m */,
+				BFBA8F26173AEE2200563117 /* EditProjectViewController.xib */,
 				BFE391B1173414B500749966 /* MenuCell.xib */,
 				BFF1D3281733E06300B02D46 /* MenuViewController.h */,
 				BFF1D3291733E06300B02D46 /* MenuViewController.m */,
@@ -407,6 +418,8 @@
 				BFF1D2C11732BECA00B02D46 /* UIImage+Retina4.m */,
 				BFF1D2C31732BF1C00B02D46 /* UITextField+Customizations.h */,
 				BFF1D2C41732BF1C00B02D46 /* UITextField+Customizations.m */,
+				BFBA8F29173BC6FF00563117 /* UIViewController+Customizations.h */,
+				BFBA8F2A173BC70000563117 /* UIViewController+Customizations.m */,
 				BFE391CA1738119F00749966 /* WebViewController.h */,
 				BFE391CB1738119F00749966 /* WebViewController.m */,
 				BFE391CC1738119F00749966 /* WebViewController.xib */,
@@ -694,6 +707,7 @@
 				BFBA8F20173AD27C00563117 /* project.add.button.png in Resources */,
 				BFBA8F21173AD27C00563117 /* project.add.button@2x.png in Resources */,
 				BFBA8F23173AD8C700563117 /* default.navBar@2x.png in Resources */,
+				BFBA8F28173AEE2200563117 /* EditProjectViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,6 +736,8 @@
 				BFE391CD173811A000749966 /* WebViewController.m in Sources */,
 				BFE391FD1739351500749966 /* Database.m in Sources */,
 				BFBA8EF6173AACF300563117 /* ProjectsViewController.m in Sources */,
+				BFBA8F27173AEE2200563117 /* EditProjectViewController.m in Sources */,
+				BFBA8F2B173BC70000563117 /* UIViewController+Customizations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

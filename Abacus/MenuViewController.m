@@ -10,6 +10,7 @@
 #import "MenuViewController.h"
 #import "EditProfileViewController.h"
 #import "WebViewController.h"
+#import "UIViewController+Customizations.h"
 
 @interface MenuViewController () <UIActionSheetDelegate>
 @property   (nonatomic, retain)     IBOutlet    UILabel     *version;
@@ -80,7 +81,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0: {
-            [EditProfileViewController show];
+            [EditProfileViewController showModally];
         }
             break;
         case 1: {

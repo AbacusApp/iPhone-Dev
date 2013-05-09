@@ -9,6 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface EditProfileViewController : UIViewController
-+ (void)show;
-+ (void)hide;
 @end

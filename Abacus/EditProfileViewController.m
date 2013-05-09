@@ -14,12 +14,11 @@
 #import "Database.h"
 #import "PullDown.h"
 #import "WebViewController.h"
+#import "UIViewController+Customizations.h"
 
 #define MAX_FIRSTNAME_LENGTH        50
 #define MAX_LASTNAME_LENGTH         50
 #define MAX_HOURLY_RATE_LENGTH      4
-
-static  EditProfileViewController   *instance = nil;
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIActionSheetDelegate>
 @property   (nonatomic, retain)     IBOutlet    UITextField     *first, *last, *rate;
@@ -39,34 +38,6 @@ static  EditProfileViewController   *instance = nil;
 
 @implementation EditProfileViewController
 @synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget, closeButton, createButton, helpCallout, helpCalloutWebview;
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
-// │ Custom view display method
-// └────────────────────────────────────────────────────────────────────────────────────────────────────
-+ (void)show {
-    instance = [[EditProfileViewController alloc] initWithNibName:@"EditProfileViewController" bundle:nil];
-    UIWindow *window = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).window;
-    [window addSubview:instance.view];
-    instance.view.frame = window.bounds;
-    instance.view.alpha = 0;
-    [UIView animateWithDuration:.25 animations:^{
-        instance.view.alpha = 1;
-    } completion:^(BOOL finished) {
-    }];
-}
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
-// │ Custom view hide method
-// └────────────────────────────────────────────────────────────────────────────────────────────────────
-+ (void)hide {
-    [UIView animateWithDuration:.25 animations:^{
-        instance.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        [instance.view removeFromSuperview];
-        [instance release];
-        instance = nil;
-    }];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -182,7 +153,7 @@ static  EditProfileViewController   *instance = nil;
 }
 
 - (IBAction)close:(id)sender {
-    [EditProfileViewController hide];
+    [EditProfileViewController hideModally];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -216,7 +187,7 @@ static  EditProfileViewController   *instance = nil;
     } else {
         [Database setUser:user];
     }
-    [EditProfileViewController hide];
+    [EditProfileViewController hideModally];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.CHANGED" object:nil];
 }
 
