@@ -9,6 +9,8 @@
 #import "Database.h"
 #import "NSDate+Customizations.h"
 
+#define DB_VERSION      @"1.0.0"
+
 static  Database        *handler = nil;
 static  NSDictionary    *professions = nil;
 static  NSDictionary    *states = nil;
@@ -98,10 +100,22 @@ static  NSDictionary    *states = nil;
     sqlite3 *db;
     NSString *file = [self databasePath];
     sqlite3_open_v2([file cStringUsingEncoding:NSUTF8StringEncoding], &db, SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE, NULL);
-    
-    // User TABLE
+
+    // Meta TABLE
 	sqlite3_stmt *statement;
     NSString *sqlString = [NSString stringWithFormat:
+                           @"CREATE TABLE \"Meta\" (\
+                           \"DBVersion\" TEXT DEFAULT NULL,\
+                           \"AppVersion\" TEXT DEFAULT NULL\
+                           )"];
+	const char *sql = [sqlString UTF8String];
+	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) != SQLITE_DONE) {}
+	}
+	sqlite3_finalize(statement);
+
+    // User TABLE
+    sqlString = [NSString stringWithFormat:
                            @"CREATE TABLE \"User\" (\
                            \"FirstName\" TEXT DEFAULT NULL,\
                            \"LastName\" TEXT DEFAULT NULL,\
@@ -116,7 +130,7 @@ static  NSDictionary    *states = nil;
                            \"Zip\" TEXT DEFAULT NULL,\
                            \"HourlyRate\" REAL DEFAULT 0\
                            )"];
-	const char *sql = [sqlString UTF8String];
+	sql = [sqlString UTF8String];
 	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
 		while (sqlite3_step(statement) != SQLITE_DONE) {}
 	}
@@ -141,9 +155,16 @@ static  NSDictionary    *states = nil;
 		while (sqlite3_step(statement) != SQLITE_DONE) {}
 	}
 	sqlite3_finalize(statement);
-    
-    
     sqlite3_close(db);
+    [self open];
+    // Set the version strings into the Meta table
+    sqlString = [NSString stringWithFormat:@"INSERT INTO \"Meta\" (DBVersion,AppVersion) VALUES(\"%@\",\"%@\")", DB_VERSION, [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]];
+	sql = [sqlString UTF8String];
+	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) != SQLITE_DONE) {}
+	}
+	sqlite3_finalize(statement);
+
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -424,7 +445,7 @@ static  NSDictionary    *states = nil;
         self.startingDate = [NSDate date];  // Today
         self.status = ProjectStatusOngoing;
         self.guid = [Database GUID];
-        self.profitability = ProjectProfitabilityProfitable;
+        self.profitability = ProjectProfitabilityUndefined;
     }
     return self;
 }
@@ -439,3 +460,10 @@ static  NSDictionary    *states = nil;
 }
 
 @end
+
+@implementation Calculation
+@synthesize budgetIn, hoursIn, hoursOut, quoteOut, type;
+
+@end
+
+

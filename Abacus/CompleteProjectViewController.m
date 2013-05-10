@@ -11,6 +11,9 @@
 #import "UIViewController+Customizations.h"
 #import "NSDate+Customizations.h"
 
+#define MAX_HOURS_LENGTH        4
+#define MAX_EXPENSES_LENGTH     6
+
 @interface CompleteProjectViewController ()
 @property   (nonatomic, retain)     IBOutlet    UITextField     *hoursWorked, *additionalExpenses;
 @property   (nonatomic, retain)     IBOutlet    UIScrollView    *scroller;
@@ -22,7 +25,7 @@
 @end
 
 @implementation CompleteProjectViewController
-@synthesize hoursWorked, additionalExpenses, scroller, lastTextWidget, project, name, priceQuoted, dates;
+@synthesize hoursWorked, additionalExpenses, scroller, lastTextWidget, project, name, priceQuoted, dates, calculation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,6 +34,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
     self.scroller.contentSize = self.scroller.bounds.size;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    //self.hoursWorked.text = [NSString stringWithFormat:@"%f.0f", self.project.hoursTaken];
+    [self formatBudgetField];
+    [self formatHoursField];
 }
 
 - (void)setProject:(Project *)p {
@@ -90,9 +99,60 @@ CGRect myFrame;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == self.hoursWorked && textField.text.length) {
+        textField.text = [textField.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"0 %d", textField.text.length-4])];
+    }
+    if (textField == self.additionalExpenses && textField.text.length) {
+        textField.text = [textField.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", textField.text.length-1])];
+    }
 	lastTextWidget = textField;
     CGFloat offset = lastTextWidget.frame.origin.y - lastTextWidget.frame.size.height;
     [self.scroller setContentOffset:CGPointMake(0, offset>0?offset:0) animated:YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == self.hoursWorked) {
+        [self formatHoursField];
+    }
+    if (textField == self.additionalExpenses) {
+        [self formatBudgetField];
+    }
+}
+
+- (void)formatHoursField {
+    self.hoursWorked.text = [NSString stringWithFormat:@"%.0f hrs", [hoursWorked.text doubleValue]];
+}
+
+- (void)formatBudgetField {
+    self.additionalExpenses.text = [NSString stringWithFormat:@"$%.0f", [additionalExpenses.text doubleValue]];
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.hoursWorked) {
+        if ([string rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]].location == NSNotFound && !range.length) {
+            return NO;
+        }
+        if ([textField.text length] == MAX_HOURS_LENGTH-1 && !range.length) {
+            textField.text = [textField.text stringByAppendingString:string];
+            return NO;
+        }
+        if ([textField.text length] > MAX_HOURS_LENGTH-1 && !range.length) {
+            return NO;
+        }
+    } else if (textField == self.additionalExpenses) {
+        if ([string rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]].location == NSNotFound && !range.length) {
+            return NO;
+        }
+        if ([textField.text length] == MAX_EXPENSES_LENGTH-1 && !range.length) {
+            textField.text = [textField.text stringByAppendingString:string];
+            return NO;
+        }
+        if ([textField.text length] > MAX_EXPENSES_LENGTH-1 && !range.length) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 - (void)dealloc {
@@ -106,6 +166,7 @@ CGRect myFrame;
     [name release];
     [priceQuoted release];
     [dates release];
+    [calculation release];
     [super dealloc];
 }
 @end

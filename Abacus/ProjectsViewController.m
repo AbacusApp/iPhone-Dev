@@ -85,7 +85,7 @@
         }
         return cell;
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
     Project *project = [Database projectForGUID:[projects objectAtIndex:indexPath.row]];
     UILabel *name = (UILabel *)[cell viewWithTag:1];
     name.text = project.name;

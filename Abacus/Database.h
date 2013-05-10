@@ -64,6 +64,12 @@ typedef enum {
     ProjectProfitabilityUnProfitable = 2,
 } ProjectProfitability;
 
+typedef enum {
+    CalculationTypeUndefined = 0,
+    CalculationTypeByHours = 1,
+    CalculationTypeByBudget = 2,
+} CalculationType;
+
 @interface User : NSObject
 @property   (nonatomic, retain)     NSString        *firstName, *lastName, *address1, *address2, *city, *zip, *cell, *country;
 @property   (nonatomic, assign)     double          hourlyRate;
@@ -80,6 +86,10 @@ typedef enum {
 @property   (nonatomic, assign)     ProjectProfitability    profitability;
 @end
 
+@interface Calculation : NSObject
+@property   (nonatomic, assign)     CalculationType         type;
+@property   (nonatomic, assign)     double                  hoursIn, quoteOut, budgetIn, hoursOut;
+@end
 
 @interface Database : NSObject
 @property (nonatomic, assign)	sqlite3		*database;

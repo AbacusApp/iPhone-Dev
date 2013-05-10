@@ -59,14 +59,22 @@
 }
 
 - (void)swipe {
+    double qte = [[resultQuote.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+    double hrs = [[resultWork.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" hrs"]] doubleValue];
+    if (hoursRadio.selected) {
+        if (qte == 0) {
+            return;     // If the user has not yet done a calculation then do nothing
+        }
+    } else if (hrs == 0){
+        return;         // If the user has not yet done a calculation then do nothing
+    }
     EditProjectViewController *ep = [EditProjectViewController showModally];
     ep.project = [[[Project alloc] init] autorelease];
     if (hoursRadio.selected) {
-        ep.project.initialQuote = [[resultQuote.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        ep.project.initialQuote = qte;
     } else {
         ep.project.initialQuote = [[budget.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
     }
-    
 }
 
 - (void)formatHoursField {
@@ -78,7 +86,7 @@
 }
 
 - (IBAction)tabTapped:(UIButton *)sender {
-    [self.scroller setContentOffset:CGPointMake(sender.tag * self.scroller.frame.size.width, 0) animated:YES];
+    [self.scroller setContentOffset:CGPointMake((sender.tag-1) * self.scroller.frame.size.width, 0) animated:YES];
     [self.hours resignFirstResponder];
     [self.budget resignFirstResponder];
 }
