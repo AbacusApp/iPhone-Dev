@@ -290,13 +290,13 @@ static  NSDictionary    *states = nil;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
-// │
+// │ Add a new project into the DB
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)addProject:(Project *)project {
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Projects\" (GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses) VALUES(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%f\",\"%d\",\"%f\",\"%f\")", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses];
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Projects\" (GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses,Profitability) VALUES(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%f\",\"%d\",\"%f\",\"%f\",\"%d\")", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses, project.profitability];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -305,11 +305,27 @@ static  NSDictionary    *states = nil;
 	sqlite3_finalize(statement);
 }
 
-+ (NSArray *)projects {
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Update the user's values (profile) using the supplied values
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
++ (void)updateProject:(Project *)project {
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = @"SELECT GUID FROM Projects";
+    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"Projects\" SET GUID='%@',Name='%@',Description='%@',StartingDate='%@',EndingDate='%@',InitialQuote='%f',Status='%d',HoursTaken='%f',AdditionalExpenses='%f',Profitability='%d' WHERE GUID='%@'", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses, project.profitability, project.guid];
+	const char *sql = [sqlString UTF8String];
+	sqlite3_stmt *statement;
+	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(statement) != SQLITE_DONE) {}
+	}
+	sqlite3_finalize(statement);
+}
+
++ (NSArray *)projectsWithStatus:(ProjectStatus)status profitability:(ProjectProfitability)profitability {
+    if (!handler.database) {
+        [self open];
+    }
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID FROM Projects WHERE Status='%d' AND Profitability='%d'", status, profitability];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
     NSMutableArray *list = [NSMutableArray array];
@@ -326,7 +342,7 @@ static  NSDictionary    *states = nil;
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses FROM Projects WHERE GUID='%@'", guid];
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses,Profitability FROM Projects WHERE GUID='%@'", guid];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
     Project *project = nil;
@@ -342,6 +358,7 @@ static  NSDictionary    *states = nil;
             project.status = sqlite3_column_int(statement, 6);
             project.hoursTaken = sqlite3_column_double(statement, 7);
             project.additionalExpenses = sqlite3_column_double(statement, 8);
+            project.profitability = sqlite3_column_int(statement, 9);
         }
     }
 	sqlite3_finalize(statement);
@@ -407,6 +424,7 @@ static  NSDictionary    *states = nil;
         self.startingDate = [NSDate date];  // Today
         self.status = ProjectStatusOngoing;
         self.guid = [Database GUID];
+        self.profitability = ProjectProfitabilityProfitable;
     }
     return self;
 }

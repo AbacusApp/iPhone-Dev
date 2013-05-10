@@ -92,7 +92,8 @@ typedef enum {
 + (void)setUser:(User *)user;
 + (void)updateUser:(User *)user;
 + (void)addProject:(Project *)project;
-+ (NSArray *)projects;
++ (void)updateProject:(Project *)project;
++ (NSArray *)projectsWithStatus:(ProjectStatus)status profitability:(ProjectProfitability)profitability;
 + (Project *)projectForGUID:(NSString *)guid;
 + (User *)user;
 @end

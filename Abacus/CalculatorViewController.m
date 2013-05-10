@@ -13,6 +13,7 @@
 #import "Persist.h"
 #import "EditProjectViewController.h"
 #import "UIViewController+Customizations.h"
+#import "RadioButton.h"
 
 #define MAX_HOURS_LENGTH        4
 #define MAX_BUDGET_LENGTH       6
@@ -24,6 +25,7 @@
 @property   (nonatomic, retain)     IBOutlet    UILabel         *resultCompany2, *resultOperations2, *resultSalary2, *resultWork;
 @property   (nonatomic, retain)     IBOutlet    UIButton        *calculateButtonHours, *calculateButtonBudget;
 @property   (nonatomic, retain)     IBOutlet    UIView          *resultsContainer;
+@property   (nonatomic, retain)     IBOutlet    RadioButton     *hoursRadio, *budgetRadio;
 
 - (IBAction)tabTapped:(UIButton *)sender;
 - (IBAction)revealMenu:(id)sender;
@@ -32,7 +34,7 @@
 
 @implementation CalculatorViewController
 @synthesize hours, budget, scroller, resultCompany1, resultOperations1, resultSalary1, resultCompany2, resultOperations2, resultSalary2, resultWork, resultQuote;
-@synthesize calculateButtonBudget, calculateButtonHours, resultsContainer;
+@synthesize calculateButtonBudget, calculateButtonHours, resultsContainer, hoursRadio, budgetRadio;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,7 +61,11 @@
 - (void)swipe {
     EditProjectViewController *ep = [EditProjectViewController showModally];
     ep.project = [[[Project alloc] init] autorelease];
-    ep.project.initialQuote = [[resultQuote.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+    if (hoursRadio.selected) {
+        ep.project.initialQuote = [[resultQuote.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+    } else {
+        ep.project.initialQuote = [[budget.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+    }
     
 }
 
@@ -177,6 +183,8 @@
     [calculateButtonHours release];
     [calculateButtonBudget release];
     [resultsContainer release];
+    [hoursRadio release];
+    [budgetRadio release];
     [super dealloc];
 }
 @end

@@ -11,29 +11,50 @@
 #import "Database.h"
 #import "NSDate+Customizations.h"
 #import "Alerts.h"
+#import "RadioButton.h"
+#import "CompleteProjectViewController.h"
+#import "UIViewController+Customizations.h"
 
 @interface ProjectsViewController ()
 @property   (nonatomic, retain)     IBOutlet    UITableView     *table;
+@property   (nonatomic, retain)     IBOutlet    RadioButton     *allRadio, *profitableRadio, *unprofitableRadio;
 @property   (nonatomic, retain)     NSArray     *projects;
+@property   (nonatomic, retain)     Project     *selectedProject;
+
 - (IBAction)revealMenu:(id)sender;
+- (IBAction)changeList:(id)sender;
 @end
 
 @implementation ProjectsViewController
-@synthesize projects, table;
+@synthesize projects, table, selectedProject, allRadio, profitableRadio, unprofitableRadio;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.projects = [Database projects];
+    [self refreshList];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(projectCreated) name:@"PROJECT.CREATED" object:nil];
 }
 
 - (void)projectCreated {
-    self.projects = [Database projects];
+    [self refreshList];
+}
+
+- (void)refreshList {
+    if (allRadio.selected) {
+        self.projects = [Database projectsWithStatus:ProjectStatusOngoing profitability:ProjectProfitabilityUndefined];
+    } else if (profitableRadio.selected) {
+        self.projects = [Database projectsWithStatus:ProjectStatusCompleted profitability:ProjectProfitabilityProfitable];
+    } else if (unprofitableRadio.selected) {
+        self.projects = [Database projectsWithStatus:ProjectStatusCompleted profitability:ProjectProfitabilityUnProfitable];
+    }
     [table reloadData];
 }
 
+- (IBAction)changeList:(id)sender {
+    [self refreshList];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return projects.count;
+    return projects.count ? projects.count : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -44,11 +65,27 @@
 		NSArray *array = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
 		cell = (UITableViewCell *)[array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)] autorelease];
         right.direction = UISwipeGestureRecognizerDirectionRight;
         [cell addGestureRecognizer:right];
     }
+    if (projects.count == 0) {
+        UILabel *name = (UILabel *)[cell viewWithTag:1];
+        name.text = nil;
+        name = (UILabel *)[cell viewWithTag:3];
+        name.text = nil;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        name = (UILabel *)[cell viewWithTag:2];
+        if (allRadio.selected) {
+            name.text = @"You have no projects in progress";
+        } else if (profitableRadio.selected) {
+            name.text = @"You have no profitable projects";
+        } else if (unprofitableRadio.selected) {
+            name.text = @"You have no unprofitable projects";
+        }
+        return cell;
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     Project *project = [Database projectForGUID:[projects objectAtIndex:indexPath.row]];
     UILabel *name = (UILabel *)[cell viewWithTag:1];
     name.text = project.name;
@@ -60,16 +97,22 @@
 }
 
 - (void)swipe:(UISwipeGestureRecognizer *)gestureRecognizer {
+    if (projects.count == 0) {
+        return;
+    }
+    if (!allRadio.selected) {
+        return;
+    }
     UITableViewCell *cell = (UITableViewCell *)gestureRecognizer.view;
     NSIndexPath *indexPath = [table indexPathForCell:cell];
     NSString *projectID = [projects objectAtIndex:indexPath.row];
-    Project *project = [Database projectForGUID:projectID];
+    self.selectedProject = [Database projectForGUID:projectID];
     [UIView animateWithDuration:.20 animations:^{
-        [cell viewWithTag:10].layer.transform = CATransform3DMakeTranslation(cell.bounds.size.width, 0, 0);
+        [cell viewWithTag:10].frame = CGRectMake(cell.bounds.size.width, 0, cell.bounds.size.width, cell.bounds.size.height);
     } completion:^(BOOL finished) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selected = YES;
-        [Alerts showQuestionWithTitle:@"Complete Project" message:[NSString stringWithFormat:@"Are you sure you want to mark\n%@\nas completed?", project.name] cancel:@"Cancel" ok:@"Yes" delegate:self tag:1];
+        [table selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [Alerts showQuestionWithTitle:@"Complete Project" message:[NSString stringWithFormat:@"Are you sure you want to mark\n\"%@\"\nas completed?", self.selectedProject.name] cancel:@"Cancel" ok:@"Yes" delegate:self tag:1];
     }];
 }
 
@@ -80,9 +123,12 @@
             UITableViewCell *cell = [table cellForRowAtIndexPath:index];
             if (buttonIndex == 0) {
                 [UIView animateWithDuration:.20 animations:^{
-                    [cell viewWithTag:10].layer.transform = CATransform3DMakeTranslation(0, 0, 0);
+                    [cell viewWithTag:10].frame = CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height);
                 } completion:^(BOOL finished) {
                 }];
+            } else if (buttonIndex == 1) {
+                CompleteProjectViewController *cp = [CompleteProjectViewController showModally];
+                cp.project = selectedProject;
             }
             break;
         }
@@ -97,6 +143,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [table release];
     [projects release];
+    [selectedProject release];
+    [allRadio release];
+    [profitableRadio release];
+    [unprofitableRadio release];
     [super dealloc];
 }
 @end
