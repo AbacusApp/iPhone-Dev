@@ -133,7 +133,8 @@ static  NSDictionary    *states = nil;
                            \"InitialQuote\" REAL DEFAULT 0,\
                            \"Status\" INTEGER DEFAULT 0,\
                            \"HoursTaken\" REAL DEFAULT 0,\
-                           \"AdditionalExpenses\" REAL DEFAULT 0\
+                           \"AdditionalExpenses\" REAL DEFAULT 0,\
+                           \"Profitability\" INTEGER DEFAULT 0\
                            )"];
 	sql = [sqlString UTF8String];
 	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -295,7 +296,7 @@ static  NSDictionary    *states = nil;
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Projects\" (GUID,Name,Description,StartingDate) VALUES(\"%@\",\"%@\",\"%@\",\"%@\")", project.guid, project.name, project.description, [project.startingDate asDatabaseString]];
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Projects\" (GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses) VALUES(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%f\",\"%d\",\"%f\",\"%f\")", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -325,7 +326,7 @@ static  NSDictionary    *states = nil;
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID,Name,Description,StartingDate FROM Projects WHERE GUID='%@'", guid];
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses FROM Projects WHERE GUID='%@'", guid];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
     Project *project = nil;
@@ -336,6 +337,11 @@ static  NSDictionary    *states = nil;
             project.name = [self stringForColumn:1 inStatement:statement];
             project.description = [self stringForColumn:2 inStatement:statement];
             project.startingDate = [NSDate dateForDatabaseString:[self stringForColumn:3 inStatement:statement]];
+            project.endingDate = [NSDate dateForDatabaseString:[self stringForColumn:4 inStatement:statement]];
+            project.initialQuote = sqlite3_column_double(statement, 5);
+            project.status = sqlite3_column_int(statement, 6);
+            project.hoursTaken = sqlite3_column_double(statement, 7);
+            project.additionalExpenses = sqlite3_column_double(statement, 8);
         }
     }
 	sqlite3_finalize(statement);
@@ -393,7 +399,7 @@ static  NSDictionary    *states = nil;
 
 
 @implementation Project
-@synthesize name, description, guid, startingDate, endingDate, status, hoursTaken, additionalExpenses, initialQuote;
+@synthesize name, description, guid, startingDate, endingDate, status, hoursTaken, additionalExpenses, initialQuote, profitability;
 
 - (id)init {
     self = [super init];

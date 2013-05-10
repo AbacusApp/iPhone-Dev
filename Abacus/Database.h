@@ -58,6 +58,12 @@ typedef enum {
     ProjectStatusCancelled = 3,
 } ProjectStatus;
 
+typedef enum {
+    ProjectProfitabilityUndefined = 0,
+    ProjectProfitabilityProfitable = 1,
+    ProjectProfitabilityUnProfitable = 2,
+} ProjectProfitability;
+
 @interface User : NSObject
 @property   (nonatomic, retain)     NSString        *firstName, *lastName, *address1, *address2, *city, *zip, *cell, *country;
 @property   (nonatomic, assign)     double          hourlyRate;
@@ -67,10 +73,11 @@ typedef enum {
 
 
 @interface Project : NSObject
-@property   (nonatomic, retain)     NSString        *guid, *name, *description;
-@property   (nonatomic, assign)     double          initialQuote, hoursTaken, additionalExpenses;
-@property   (nonatomic, assign)     ProjectStatus   status;
-@property   (nonatomic, retain)     NSDate          *startingDate, *endingDate;
+@property   (nonatomic, retain)     NSString                *guid, *name, *description;
+@property   (nonatomic, assign)     double                  initialQuote, hoursTaken, additionalExpenses;
+@property   (nonatomic, assign)     ProjectStatus           status;
+@property   (nonatomic, retain)     NSDate                  *startingDate, *endingDate;
+@property   (nonatomic, assign)     ProjectProfitability    profitability;
 @end
 
 

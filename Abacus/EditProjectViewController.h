@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Database.h"
 
 @interface EditProjectViewController : UIViewController
+@property   (nonatomic, retain)     Project     *project;
 @end

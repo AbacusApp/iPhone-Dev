@@ -16,7 +16,7 @@ static  UIViewController   *instance = nil;
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ Custom view display method
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
-+ (void)showModally {
++ (id)showModally {
     NSString *className = NSStringFromClass(self.class);
     instance = [[self.class alloc] initWithNibName:className bundle:nil];
     UIWindow *window = ((AppDelegate *)[[UIApplication sharedApplication] delegate]).window;
@@ -27,6 +27,7 @@ static  UIViewController   *instance = nil;
         instance.view.alpha = 1;
     } completion:^(BOOL finished) {
     }];
+    return instance;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────

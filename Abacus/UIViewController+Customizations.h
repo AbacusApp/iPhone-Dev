@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (Customizations)
-+ (void)showModally;
++ (id)showModally;
 + (void)hideModally;
 @end

@@ -28,7 +28,7 @@
 @end
 
 @implementation EditProjectViewController
-@synthesize name, startDate, description, scroller, lastTextWidget, closeButton, createButton, datePicker;
+@synthesize name, startDate, description, scroller, lastTextWidget, closeButton, createButton, datePicker, project;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -127,20 +127,15 @@ CGRect myFrame;
         [Alerts showWarningWithTitle:@"Project Details" message:@"Please enter the starting date for this project" delegate:self tag:3];
         return;
     }
-    Project *project = [[[Project alloc] init] autorelease];
+    if (!self.project) {
+        self.project = [[[Project alloc] init] autorelease];
+    }
     project.name = name.text;
     project.description = description.text;
     project.startingDate = [NSDate dateForDisplayString:startDate.text];
     [Database addProject:project];
-    /*
-    if ([Database user]) {
-        [Database updateUser:user];
-    } else {
-        [Database setUser:user];
-    }
-     */
     [EditProjectViewController hideModally];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.CHANGED" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.CREATED" object:nil];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -171,6 +166,7 @@ CGRect myFrame;
     [closeButton release];
     [createButton release];
     [datePicker release];
+    [project release];
     [super dealloc];
 }
 @end

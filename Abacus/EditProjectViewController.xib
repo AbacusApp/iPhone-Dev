@@ -125,9 +125,10 @@
 									<object class="IBUIButton" id="428236626">
 										<reference key="NSNextResponder" ref="1001409516"/>
 										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{20, 345}, {270, 46}}</string>
+										<string key="NSFrame">{{20, 333}, {270, 46}}</string>
 										<reference key="NSSuperview" ref="1001409516"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -139,7 +140,7 @@
 										<reference key="IBUINormalTitleShadowColor" ref="1005308552"/>
 										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">purple.button.doubleWide@2x.png</string>
+											<string key="NSResourceName">purple.button.doubleWide.png</string>
 										</object>
 										<reference key="IBUIFontDescription" ref="81498781"/>
 										<reference key="IBUIFont" ref="699689381"/>
@@ -241,7 +242,7 @@
 										<reference key="IBUIFont" ref="631026868"/>
 									</object>
 								</array>
-								<string key="NSFrame">{{-7, 68}, {310, 419}}</string>
+								<string key="NSFrame">{{-7, 80}, {310, 407}}</string>
 								<reference key="NSSuperview" ref="894831640"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="970281875"/>
@@ -253,7 +254,7 @@
 							<object class="IBUILabel" id="1005892078">
 								<reference key="NSNextResponder" ref="894831640"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{13, 34}, {270, 26}}</string>
+								<string key="NSFrame">{{13, 34}, {270, 38}}</string>
 								<reference key="NSSuperview" ref="894831640"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="216421363"/>
@@ -264,7 +265,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Add some details about the project</string>
+								<string key="IBUIText">You can make this calculation into a project in order to track it.</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC41OTYwNzg0MzE0IDAuNTk2MDc4NDMxNCAwLjU5NjA3ODQzMTQAA</bytes>
@@ -584,7 +585,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="modal.dismiss.button.png">{20, 20}</string>
-			<string key="purple.button.doubleWide@2x.png">{540, 92}</string>
+			<string key="purple.button.doubleWide.png">{270, 46}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

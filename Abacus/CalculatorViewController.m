@@ -23,6 +23,7 @@
 @property   (nonatomic, retain)     IBOutlet    UILabel         *resultCompany1, *resultOperations1, *resultSalary1, *resultQuote;
 @property   (nonatomic, retain)     IBOutlet    UILabel         *resultCompany2, *resultOperations2, *resultSalary2, *resultWork;
 @property   (nonatomic, retain)     IBOutlet    UIButton        *calculateButtonHours, *calculateButtonBudget;
+@property   (nonatomic, retain)     IBOutlet    UIView          *resultsContainer;
 
 - (IBAction)tabTapped:(UIButton *)sender;
 - (IBAction)revealMenu:(id)sender;
@@ -31,7 +32,7 @@
 
 @implementation CalculatorViewController
 @synthesize hours, budget, scroller, resultCompany1, resultOperations1, resultSalary1, resultCompany2, resultOperations2, resultSalary2, resultWork, resultQuote;
-@synthesize calculateButtonBudget, calculateButtonHours;
+@synthesize calculateButtonBudget, calculateButtonHours, resultsContainer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,11 +53,14 @@
     }
     UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:right];
+    [self.resultsContainer addGestureRecognizer:right];
 }
 
 - (void)swipe {
-    [EditProjectViewController showModally];
+    EditProjectViewController *ep = [EditProjectViewController showModally];
+    ep.project = [[[Project alloc] init] autorelease];
+    ep.project.initialQuote = [[resultQuote.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+    
 }
 
 - (void)formatHoursField {
@@ -172,6 +176,7 @@
     [resultQuote release];
     [calculateButtonHours release];
     [calculateButtonBudget release];
+    [resultsContainer release];
     [super dealloc];
 }
 @end

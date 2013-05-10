@@ -56,7 +56,6 @@
     [self.contentView bringSubviewToFront:self.projectsRadio];
     
     // Add swipe gesture recognizer to both views on the tab bar controller - used to reveal the menu
-    /*
     UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [profile.view addGestureRecognizer:right];
@@ -66,11 +65,12 @@
     right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [projects.view addGestureRecognizer:right];
-    */
+
     // Enable the drop-shadow that will be visible on left side
     self.view.layer.shadowOpacity = 0.6;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleReveal) name:@"REVEAL.MENU" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToProjectsTab) name:@"PROJECT.CREATED" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -120,6 +120,11 @@
 
 - (IBAction)tabTapped:(UIButton *)sender {
     [self.tabController setSelectedIndex:sender.tag];
+}
+
+- (void)goToProjectsTab {
+    [self.tabController setSelectedIndex:2];
+    projectsRadio.selected = YES;
 }
 
 - (void)dealloc {

@@ -219,7 +219,8 @@
         UITextField *field = (UITextField *)[self viewWithTag:1];
         cell.textLabel.font = field.font;
         cell.backgroundColor = [UIColor clearColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.selectedBackgroundView = [[[UIView alloc] initWithFrame:cell.bounds] autorelease];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:88.0/255.0 blue:88.0/255.0 alpha:1];
         cell.textLabel.textColor = field.textColor;
     }
     cell.textLabel.text = [self.values objectAtIndex:indexPath.row];
