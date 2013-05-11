@@ -29,6 +29,7 @@
 @property   (nonatomic, retain)     IBOutlet    UIWebView       *helpCalloutWebview;
 @property   (nonatomic, retain)     IBOutlet    UIScrollView    *scroller;
 @property   (nonatomic, retain)                 UIView			*lastTextWidget;
+@property   (nonatomic, retain)                 Profile         *user;
 
 
 - (IBAction)addPhoto:(id)sender;
@@ -37,7 +38,7 @@
 @end
 
 @implementation EditProfileViewController
-@synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget, closeButton, createButton, helpCallout, helpCalloutWebview;
+@synthesize first, last, professions, rate, photo, photoButton, scroller, lastTextWidget, closeButton, createButton, helpCallout, helpCalloutWebview, user;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,8 +60,8 @@
     self.rate.rightViewMode = UITextFieldViewModeAlways;
     self.rate.rightView = help;
     [help addTarget:self action:@selector(rateHelp) forControlEvents:UIControlEventTouchUpInside];
-    User *user = [Database user];
-    if (user) {
+    self.user = [Database profile];
+    if (self.user) {
         self.first.text = user.firstName;
         self.last.text = user.lastName;
         self.professions.text = [Database nameForProfession:user.professionID];
@@ -177,15 +178,19 @@
         [Alerts showWarningWithTitle:@"Profile Details" message:@"Please enter your Hourly rate" delegate:self tag:4];
         return;
     }
-    User *user = [[[User alloc] init] autorelease];
-    user.firstName = first.text;
-    user.lastName = last.text;
-    user.professionID = [Database idForProfessionName:professions.text];
-    user.hourlyRate = [[rate.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", rate.text.length-4])] doubleValue];
-    if ([Database user]) {
-        [Database updateUser:user];
+    if (self.user) {
+        user.firstName = first.text;
+        user.lastName = last.text;
+        user.professionID = [Database idForProfessionName:professions.text];
+        user.hourlyRate = [[rate.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", rate.text.length-4])] doubleValue];
+        [Database updateProfile:self.user];
     } else {
-        [Database setUser:user];
+        self.user = [[[Profile alloc] init] autorelease];
+        user.firstName = first.text;
+        user.lastName = last.text;
+        user.professionID = [Database idForProfessionName:professions.text];
+        user.hourlyRate = [[rate.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", rate.text.length-4])] doubleValue];
+        [Database addProfile:user];
     }
     [EditProfileViewController hideModally];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.CHANGED" object:nil];
@@ -329,8 +334,7 @@ CGRect myFrame;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [first release];
     [last release];
     [professions release];
@@ -343,6 +347,7 @@ CGRect myFrame;
     [createButton release];
     [helpCallout release];
     [helpCalloutWebview release];
+    [user release];
     [super dealloc];
 }
 @end

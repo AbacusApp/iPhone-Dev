@@ -37,7 +37,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    //self.hoursWorked.text = [NSString stringWithFormat:@"%f.0f", self.project.hoursTaken];
+    self.hoursWorked.text = [NSString stringWithFormat:@"%f.0f", self.project.hoursTaken];
     [self formatBudgetField];
     [self formatHoursField];
 }
@@ -58,12 +58,14 @@
 
 - (IBAction)close:(id)sender {
     [CompleteProjectViewController hideModally];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UNDO.PROJECT.COMPLETE" object:self.project];
 }
 
 - (IBAction)complete:(id)sender {
     [CompleteProjectViewController hideModally];
     self.project.status = ProjectStatusCompleted;
     [Database updateProject:self.project];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.COMPLETED" object:self.project];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

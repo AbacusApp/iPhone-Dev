@@ -106,7 +106,8 @@ static  NSDictionary    *states = nil;
     NSString *sqlString = [NSString stringWithFormat:
                            @"CREATE TABLE \"Meta\" (\
                            \"DBVersion\" TEXT DEFAULT NULL,\
-                           \"AppVersion\" TEXT DEFAULT NULL\
+                           \"AppVersion\" TEXT DEFAULT NULL,\
+                           \"Other\" TEXT DEFAULT NULL\
                            )"];
 	const char *sql = [sqlString UTF8String];
 	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -116,7 +117,8 @@ static  NSDictionary    *states = nil;
 
     // User TABLE
     sqlString = [NSString stringWithFormat:
-                           @"CREATE TABLE \"User\" (\
+                           @"CREATE TABLE \"Profiles\" (\
+                           \"GUID\" TEXT DEFAULT NULL,\
                            \"FirstName\" TEXT DEFAULT NULL,\
                            \"LastName\" TEXT DEFAULT NULL,\
                            \"Profession\" INTEGER DEFAULT 0,\
@@ -148,7 +150,9 @@ static  NSDictionary    *states = nil;
                            \"Status\" INTEGER DEFAULT 0,\
                            \"HoursTaken\" REAL DEFAULT 0,\
                            \"AdditionalExpenses\" REAL DEFAULT 0,\
-                           \"Profitability\" INTEGER DEFAULT 0\
+                           \"Profitability\" INTEGER DEFAULT 0,\
+                           \"ProfileGUID\" TEXT DEFAULT NULL,\
+                           \"HourlyRate\" REAL DEFAULT 0\
                            )"];
 	sql = [sqlString UTF8String];
 	if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -158,7 +162,7 @@ static  NSDictionary    *states = nil;
     sqlite3_close(db);
     [self open];
     // Set the version strings into the Meta table
-    sqlString = [NSString stringWithFormat:@"INSERT INTO \"Meta\" (DBVersion,AppVersion) VALUES(\"%@\",\"%@\")", DB_VERSION, [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]];
+    sqlString = [NSString stringWithFormat:@"INSERT INTO \"Meta\" (DBVersion,AppVersion,Other) VALUES(\"%@\",\"%@\",\"0\")", DB_VERSION, [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]];
 	sql = [sqlString UTF8String];
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
 		while (sqlite3_step(statement) != SQLITE_DONE) {}
@@ -257,11 +261,11 @@ static  NSDictionary    *states = nil;
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ Write the user values into the db
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
-+ (void)setUser:(User *)user {
++ (void)addProfile:(Profile *)user {
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"User\" (FirstName,LastName,Profession,HourlyRate) VALUES(\"%@\",\"%@\",\"%d\",\"%.02f\")", user.firstName, user.lastName, user.professionID, user.hourlyRate];
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Profiles\" (GUID,FirstName,LastName,Profession,HourlyRate) VALUES(\"%@\",\"%@\",\"%@\",\"%d\",\"%.02f\")", user.guid, user.firstName, user.lastName, user.professionID, user.hourlyRate];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -273,11 +277,11 @@ static  NSDictionary    *states = nil;
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ Update the user's values (profile) using the supplied values
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
-+ (void)updateUser:(User *)user {
++ (void)updateProfile:(Profile *)user {
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"User\" SET FirstName='%@',LastName='%@',Profession='%d',HourlyRate='%.02f'", user.firstName, user.lastName, user.professionID, user.hourlyRate];
+    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"Profiles\" SET FirstName='%@',LastName='%@',Profession='%d',HourlyRate='%.02f' WHERE GUID='%@'", user.firstName, user.lastName, user.professionID, user.hourlyRate, user.guid];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -289,21 +293,22 @@ static  NSDictionary    *states = nil;
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ return the user values (profile) from the db
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
-+ (User *)user {
++ (Profile *)profile {
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"SELECT FirstName,LastName,Profession,HourlyRate FROM user"];
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT FirstName,LastName,Profession,HourlyRate,GUID FROM Profiles"];
     const char *sql = [sqlString UTF8String];
     sqlite3_stmt *statement;
-    User *user = nil;
+    Profile *user = nil;
     if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
         if (sqlite3_step(statement) == SQLITE_ROW) {
-            user = [[[User alloc] init] autorelease];
+            user = [[[Profile alloc] init] autorelease];
             user.firstName = [self stringForColumn:0 inStatement:statement];
             user.lastName = [self stringForColumn:1 inStatement:statement];
             user.professionID = sqlite3_column_int(statement, 2);
             user.hourlyRate = sqlite3_column_double(statement, 3);
+            user.guid = [self stringForColumn:4 inStatement:statement];
         }
     }
     sqlite3_finalize(statement);
@@ -317,7 +322,7 @@ static  NSDictionary    *states = nil;
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Projects\" (GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses,Profitability) VALUES(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%f\",\"%d\",\"%f\",\"%f\",\"%d\")", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses, project.profitability];
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Projects\" (GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses,Profitability,ProfileGUID,HourlyRate) VALUES(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%f\",\"%d\",\"%f\",\"%f\",\"%d\",\"%@\",\"%f\")", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses, project.profitability, project.profileGUID, project.hourlyRate];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -327,13 +332,13 @@ static  NSDictionary    *states = nil;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
-// │ Update the user's values (profile) using the supplied values
+// │ Update a project
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)updateProject:(Project *)project {
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"Projects\" SET GUID='%@',Name='%@',Description='%@',StartingDate='%@',EndingDate='%@',InitialQuote='%f',Status='%d',HoursTaken='%f',AdditionalExpenses='%f',Profitability='%d' WHERE GUID='%@'", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses, project.profitability, project.guid];
+    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"Projects\" SET GUID='%@',Name='%@',Description='%@',StartingDate='%@',EndingDate='%@',InitialQuote='%f',Status='%d',HoursTaken='%f',AdditionalExpenses='%f',Profitability='%d',ProfileGUID='%@',HourlyRate='%f' WHERE GUID='%@'", project.guid, project.name, project.description, [project.startingDate asDatabaseString], [project.endingDate asDatabaseString], project.initialQuote, project.status, project.hoursTaken, project.additionalExpenses, project.profitability, project.profileGUID, project.hourlyRate, project.guid];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -363,7 +368,7 @@ static  NSDictionary    *states = nil;
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses,Profitability FROM Projects WHERE GUID='%@'", guid];
+    NSString *sqlString = [NSString stringWithFormat:@"SELECT GUID,Name,Description,StartingDate,EndingDate,InitialQuote,Status,HoursTaken,AdditionalExpenses,Profitability,ProfileGUID,HourlyRate FROM Projects WHERE GUID='%@'", guid];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
     Project *project = nil;
@@ -380,6 +385,8 @@ static  NSDictionary    *states = nil;
             project.hoursTaken = sqlite3_column_double(statement, 7);
             project.additionalExpenses = sqlite3_column_double(statement, 8);
             project.profitability = sqlite3_column_int(statement, 9);
+            project.profileGUID = [self stringForColumn:10 inStatement:statement];
+            project.hourlyRate = sqlite3_column_double(statement, 11);
         }
     }
 	sqlite3_finalize(statement);
@@ -409,12 +416,13 @@ static  NSDictionary    *states = nil;
 @end
 
 
-@implementation User
-@synthesize address1, address2, cell, city, country, firstName, hourlyRate, lastName, professionID, stateID, zip;
+@implementation Profile
+@synthesize address1, address2, cell, city, country, firstName, hourlyRate, lastName, professionID, stateID, zip, guid;
 
 - (id)init {
     self = [super init];
     if (self) {
+        self.guid = [Database GUID];
         self.professionID = ProfessionIDUndefined;
         self.stateID = StateIDUndefined;
     }
@@ -422,6 +430,7 @@ static  NSDictionary    *states = nil;
 }
 
 - (void)dealloc {
+    [guid release];
     [firstName release];
     [lastName release];
     [cell release];
@@ -437,7 +446,7 @@ static  NSDictionary    *states = nil;
 
 
 @implementation Project
-@synthesize name, description, guid, startingDate, endingDate, status, hoursTaken, additionalExpenses, initialQuote, profitability;
+@synthesize name, description, guid, startingDate, endingDate, status, hoursTaken, additionalExpenses, initialQuote, profitability, profileGUID, hourlyRate;
 
 - (id)init {
     self = [super init];
@@ -456,6 +465,7 @@ static  NSDictionary    *states = nil;
     [guid release];
     [startingDate release];
     [endingDate release];
+    [profileGUID release];
     [super dealloc];
 }
 

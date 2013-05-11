@@ -58,6 +58,9 @@
     [self.resultsContainer addGestureRecognizer:right];
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ User swipes to create a project
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)swipe {
     double qte = [[resultQuote.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
     double hrs = [[resultWork.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" hrs"]] doubleValue];
@@ -70,10 +73,13 @@
     }
     EditProjectViewController *ep = [EditProjectViewController showModally];
     ep.project = [[[Project alloc] init] autorelease];
+    ep.project.hourlyRate = [Database profile].hourlyRate;
     if (hoursRadio.selected) {
         ep.project.initialQuote = qte;
+        ep.project.hoursTaken = [[hours.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" hrs"]] doubleValue];
     } else {
         ep.project.initialQuote = [[budget.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        ep.project.hoursTaken = hrs;
     }
 }
 
@@ -94,7 +100,7 @@
 - (IBAction)calculate:(UIButton *)sender {
     [self.hours resignFirstResponder];
     [self.budget resignFirstResponder];
-    double rate = [Database user].hourlyRate;
+    double rate = [Database profile].hourlyRate;
     switch (sender.tag) {
         case 0: {    // by amount of hours
             double hoursSpecified = [hours.text doubleValue];

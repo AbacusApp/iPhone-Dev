@@ -43,7 +43,7 @@
     UIImage *image = [UIImage imageWithContentsOfFile:path];
     self.photo.image = image;
 
-    User *user = [Database user];
+    Profile *user = [Database profile];
     self.name.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
     self.profession.text = [Database nameForProfession:user.professionID];
     self.rate.value = user.hourlyRate;
@@ -58,9 +58,9 @@
 }
 
 - (void)swipeyLabel:(SwipeyLabel *)swipeyLabel didChange:(NSNumber *)value {
-    User *user = [Database user];
+    Profile *user = [Database profile];
     user.hourlyRate = [value doubleValue];
-    [Database updateUser:user];
+    [Database updateProfile:user];
 }
 
 - (void)dealloc {

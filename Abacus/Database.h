@@ -70,8 +70,8 @@ typedef enum {
     CalculationTypeByBudget = 2,
 } CalculationType;
 
-@interface User : NSObject
-@property   (nonatomic, retain)     NSString        *firstName, *lastName, *address1, *address2, *city, *zip, *cell, *country;
+@interface Profile : NSObject
+@property   (nonatomic, retain)     NSString        *guid, *firstName, *lastName, *address1, *address2, *city, *zip, *cell, *country;
 @property   (nonatomic, assign)     double          hourlyRate;
 @property   (nonatomic, assign)     ProfessionID    professionID;
 @property   (nonatomic, assign)     StateID         stateID;
@@ -79,8 +79,8 @@ typedef enum {
 
 
 @interface Project : NSObject
-@property   (nonatomic, retain)     NSString                *guid, *name, *description;
-@property   (nonatomic, assign)     double                  initialQuote, hoursTaken, additionalExpenses;
+@property   (nonatomic, retain)     NSString                *guid, *name, *description, *profileGUID;
+@property   (nonatomic, assign)     double                  initialQuote, hoursTaken, additionalExpenses, hourlyRate;
 @property   (nonatomic, assign)     ProjectStatus           status;
 @property   (nonatomic, retain)     NSDate                  *startingDate, *endingDate;
 @property   (nonatomic, assign)     ProjectProfitability    profitability;
@@ -99,11 +99,11 @@ typedef enum {
 + (NSArray *)professions;
 + (NSString *)nameForProfession:(ProfessionID)professionID;
 + (ProfessionID)idForProfessionName:(NSString *)name;
-+ (void)setUser:(User *)user;
-+ (void)updateUser:(User *)user;
++ (void)addProfile:(Profile *)user;
++ (void)updateProfile:(Profile *)user;
 + (void)addProject:(Project *)project;
 + (void)updateProject:(Project *)project;
 + (NSArray *)projectsWithStatus:(ProjectStatus)status profitability:(ProjectProfitability)profitability;
 + (Project *)projectForGUID:(NSString *)guid;
-+ (User *)user;
++ (Profile *)profile;
 @end

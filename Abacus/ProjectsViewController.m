@@ -32,10 +32,32 @@
     [super viewDidLoad];
     [self refreshList];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(projectCreated) name:@"PROJECT.CREATED" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(projectCompleted:) name:@"PROJECT.COMPLETED" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(undoProjectComplete:) name:@"UNDO.PROJECT.COMPLETE" object:nil];
 }
 
 - (void)projectCreated {
     [self refreshList];
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ User taps the COMPLETE PROJECT button on the Complete project view
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
+- (void)projectCompleted:(NSNotification *)note {
+    //Project *project = note.object;
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ If the user taps the close button on the Complete Project view
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
+- (void)undoProjectComplete:(NSNotification *)note {
+    //Project *project = note.object;
+    NSIndexPath *index = [table indexPathForSelectedRow];
+    UITableViewCell *cell = [table cellForRowAtIndexPath:index];
+    [UIView animateWithDuration:.20 animations:^{
+        [cell viewWithTag:10].frame = CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height);
+    } completion:^(BOOL finished) {
+    }];
 }
 
 - (void)refreshList {
@@ -112,7 +134,7 @@
     } completion:^(BOOL finished) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         [table selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        [Alerts showQuestionWithTitle:@"Complete Project" message:[NSString stringWithFormat:@"Are you sure you want to mark\n\"%@\"\nas completed?", self.selectedProject.name] cancel:@"Cancel" ok:@"Yes" delegate:self tag:1];
+        [Alerts showQuestionWithTitle:@"Complete Project" message:[NSString stringWithFormat:@"Is this project:\n\"%@\"\n complete?", self.selectedProject.name] cancel:@"No" ok:@"Yes" delegate:self tag:1];
     }];
 }
 
