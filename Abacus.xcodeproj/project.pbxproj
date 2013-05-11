@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BFB90BDF173E7AF100C19D0D /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB90BDD173E7AF100C19D0D /* EULAViewController.m */; };
+		BFB90BE0173E7AF100C19D0D /* EULAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */; };
 		BFBA8EF6173AACF300563117 /* ProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBA8EF4173AACF300563117 /* ProjectsViewController.m */; };
 		BFBA8EF7173AACF300563117 /* ProjectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8EF5173AACF300563117 /* ProjectsViewController.xib */; };
 		BFBA8EFA173AAED100563117 /* tabStrip.project.active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8EF8173AAED100563117 /* tabStrip.project.active@2x.png */; };
@@ -166,6 +168,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BFB90BDC173E7AF100C19D0D /* EULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAViewController.h; sourceTree = "<group>"; };
+		BFB90BDD173E7AF100C19D0D /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
+		BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
 		BFBA8EF3173AACF300563117 /* ProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsViewController.h; sourceTree = "<group>"; };
 		BFBA8EF4173AACF300563117 /* ProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsViewController.m; sourceTree = "<group>"; };
 		BFBA8EF5173AACF300563117 /* ProjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsViewController.xib; sourceTree = "<group>"; };
@@ -426,6 +431,9 @@
 				BFBA8F24173AEE2200563117 /* EditProjectViewController.h */,
 				BFBA8F25173AEE2200563117 /* EditProjectViewController.m */,
 				BFBA8F26173AEE2200563117 /* EditProjectViewController.xib */,
+				BFB90BDC173E7AF100C19D0D /* EULAViewController.h */,
+				BFB90BDD173E7AF100C19D0D /* EULAViewController.m */,
+				BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */,
 				BFF5C81C173C0B6F00D558C5 /* Keyboard.Toolbar.xib */,
 				BFE391B1173414B500749966 /* MenuCell.xib */,
 				BFF1D3281733E06300B02D46 /* MenuViewController.h */,
@@ -763,6 +771,7 @@
 				BFF5C824173D2B4200D558C5 /* project.field.calendar.button@2x.png in Resources */,
 				BFF5C825173D2B4200D558C5 /* purple.button.doubleWide.png in Resources */,
 				BFF5C82A173D585D00D558C5 /* CompleteProjectViewController.xib in Resources */,
+				BFB90BE0173E7AF100C19D0D /* EULAViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,6 +805,7 @@
 				BFBA8F2E173BCDA100563117 /* UITextView+Customizations.m in Sources */,
 				BFF5C813173BEB6200D558C5 /* NSDate+Customizations.m in Sources */,
 				BFF5C829173D585D00D558C5 /* CompleteProjectViewController.m in Sources */,
+				BFB90BDF173E7AF100C19D0D /* EULAViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
