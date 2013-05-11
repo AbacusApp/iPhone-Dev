@@ -64,16 +64,13 @@
 - (IBAction)complete:(id)sender {
     [CompleteProjectViewController hideModally];
     self.project.status = ProjectStatusCompleted;
+    self.project.profitability = ProjectProfitabilityProfitable;
     [Database updateProject:self.project];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.COMPLETED" object:self.project];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == self.hoursWorked) {
-        [self.additionalExpenses becomeFirstResponder];
-    } else if (textField == additionalExpenses) {
-        [additionalExpenses resignFirstResponder];
-    }
+    [textField resignFirstResponder];
     return YES;
 }
 

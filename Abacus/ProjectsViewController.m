@@ -44,7 +44,18 @@
 // │ User taps the COMPLETE PROJECT button on the Complete project view
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)projectCompleted:(NSNotification *)note {
+    [self performSelector:@selector(a) withObject:nil afterDelay:.4];
+}
+
+- (void)a {
     //Project *project = note.object;
+    NSIndexPath *index = [table indexPathForSelectedRow];
+    UITableViewCell *cell = [table cellForRowAtIndexPath:index];
+    [UIView animateWithDuration:.20 animations:^{
+        [cell viewWithTag:10].frame = CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height);
+    } completion:^(BOOL finished) {
+    }];
+    [self refreshList];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -68,7 +79,8 @@
     } else if (unprofitableRadio.selected) {
         self.projects = [Database projectsWithStatus:ProjectStatusCompleted profitability:ProjectProfitabilityUnProfitable];
     }
-    [table reloadData];
+//    [table reloadData];
+    [table reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (IBAction)changeList:(id)sender {
