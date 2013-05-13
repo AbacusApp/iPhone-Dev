@@ -73,13 +73,24 @@
     }
     EditProjectViewController *ep = [EditProjectViewController showModally];
     ep.project = [[[Project alloc] init] autorelease];
-    ep.project.hourlyRate = [Database profile].hourlyRate;
+    Calculation *calculation = [[[Calculation alloc] init] autorelease];
+    calculation.hourlyRate = [Database profile].hourlyRate;
+    ep.project.calculationGUID = calculation.guid;
+    ep.calculation = calculation;
     if (hoursRadio.selected) {
-        ep.project.initialQuote = qte;
-        ep.project.hoursTaken = [[hours.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" hrs"]] doubleValue];
+        calculation.type = CalculationTypeByHours;
+        calculation.hoursIn = [[hours.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" hrs"]] doubleValue];
+        calculation.companyOut = [[resultCompany1.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        calculation.operationsOut = [[resultOperations1.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        calculation.salaryOut = [[resultSalary1.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        calculation.quoteOut = qte;
     } else {
-        ep.project.initialQuote = [[budget.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
-        ep.project.hoursTaken = hrs;
+        calculation.type = CalculationTypeByBudget;
+        calculation.budgetIn = [[budget.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        calculation.companyOut = [[resultCompany2.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        calculation.operationsOut = [[resultOperations2.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        calculation.salaryOut = [[resultSalary2.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+        calculation.hoursOut = hrs;
     }
 }
 

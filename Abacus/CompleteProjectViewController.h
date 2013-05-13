@@ -11,5 +11,4 @@
 
 @interface CompleteProjectViewController : UIViewController
 @property   (nonatomic, retain)     Project     *project;
-@property   (nonatomic, retain)     Calculation *calculation;
 @end

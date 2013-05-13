@@ -10,6 +10,7 @@
 #import "UITextField+Customizations.h"
 #import "UIViewController+Customizations.h"
 #import "NSDate+Customizations.h"
+#import "Alerts.h"
 
 #define MAX_HOURS_LENGTH        4
 #define MAX_EXPENSES_LENGTH     6
@@ -25,7 +26,7 @@
 @end
 
 @implementation CompleteProjectViewController
-@synthesize hoursWorked, additionalExpenses, scroller, lastTextWidget, project, name, priceQuoted, dates, calculation;
+@synthesize hoursWorked, additionalExpenses, scroller, lastTextWidget, project, name, priceQuoted, dates;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,7 +38,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.hoursWorked.text = [NSString stringWithFormat:@"%f.0f", self.project.hoursTaken];
+    Calculation *calculation = [Database calculationForGUID:project.calculationGUID];
+    self.hoursWorked.text = [NSString stringWithFormat:@"%f.0f", calculation.hoursIn?calculation.hoursIn:calculation.hoursOut];
     [self formatBudgetField];
     [self formatHoursField];
 }
@@ -48,7 +50,8 @@
     }
     project = [p retain];
     self.name.text = project.name;
-    self.priceQuoted.text = [NSString stringWithFormat:@"Price quoted: $%.02f", project.initialQuote];
+    Calculation *calculation = [Database calculationForGUID:project.calculationGUID];
+    self.priceQuoted.text = [NSString stringWithFormat:@"Price quoted: $%.02f", calculation.quoteOut?calculation.quoteOut:calculation.budgetIn];
     self.dates.text = [NSString stringWithFormat:@"%@", [project.startingDate asDisplayString]];
 }
 
@@ -64,7 +67,22 @@
 - (IBAction)complete:(id)sender {
     [CompleteProjectViewController hideModally];
     self.project.status = ProjectStatusCompleted;
-    self.project.profitability = ProjectProfitabilityProfitable;
+    
+    Calculation *calculation = [Database calculationForGUID:project.calculationGUID];
+    if ([hoursWorked.text intValue] <= calculation.hoursIn && [additionalExpenses.text doubleValue] <= calculation.operationsOut) {
+        self.project.profitability = ProjectProfitabilityProfitable;
+        [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"Congratulations!\nYour quote for this project was successful." delegate:self tag:1];
+    } else {
+        self.project.profitability = ProjectProfitabilityProfitable;
+        if ([hoursWorked.text intValue] > calculation.hoursIn) {
+            [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"You went over the amount of hours quoted. Visit the FAQ section for more information about how to estimate your hours for future reference." delegate:self tag:2];
+        } else if ([additionalExpenses.text doubleValue] > calculation.operationsOut) {
+            [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"Your additional expenses went over the quoted operations amount. Visit the FAQ section for more information about how establish your hourly rate to cover for operations expenses and how to deal with a situation in real time when you see that it won't be enough." delegate:self tag:3];
+        } else if ([hoursWorked.text intValue] > calculation.hoursIn && [additionalExpenses.text doubleValue] > calculation.operationsOut) {
+            [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"You went over the amount of hours quoted and your additional expenses went over the quoted operations amount. Visit the FAQ section for help and information on how to restructure your hourly prices to protect yourself and secure a profit in future projects." delegate:self tag:4];
+        }
+    }
+    
     [Database updateProject:self.project];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.COMPLETED" object:self.project];
 }
@@ -165,7 +183,6 @@ CGRect myFrame;
     [name release];
     [priceQuoted release];
     [dates release];
-    [calculation release];
     [super dealloc];
 }
 @end

@@ -14,6 +14,7 @@
 #import "Alerts.h"
 #import "Database.h"
 #import "NSDate+Customizations.h"
+#import "Persist.h"
 
 @interface EditProjectViewController ()
 @property   (nonatomic, retain)     IBOutlet    UITextField     *name, *startDate;
@@ -28,7 +29,7 @@
 @end
 
 @implementation EditProjectViewController
-@synthesize name, startDate, description, scroller, lastTextWidget, closeButton, createButton, datePicker, project;
+@synthesize name, startDate, description, scroller, lastTextWidget, closeButton, createButton, datePicker, project, calculation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,9 +134,16 @@ CGRect myFrame;
     project.name = name.text;
     project.description = description.text;
     project.startingDate = [NSDate dateForDisplayString:startDate.text];
+    NSString *activeProfileGUID = [Persist valueFor:@"Active.Profile" secure:NO];
+    if (activeProfileGUID) {
+        project.profileGUID = [Database profileForGUID:activeProfileGUID].guid;
+    } else {
+        project.profileGUID = [Database profile].guid;
+    }
     [Database addProject:project];
+    [Database addCalculation:calculation];
     [EditProjectViewController hideModally];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.CREATED" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PROJECT.CREATED" object:project.guid];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -167,6 +175,7 @@ CGRect myFrame;
     [createButton release];
     [datePicker release];
     [project release];
+    [calculation release];
     [super dealloc];
 }
 @end

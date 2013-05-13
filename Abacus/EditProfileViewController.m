@@ -15,6 +15,7 @@
 #import "PullDown.h"
 #import "WebViewController.h"
 #import "UIViewController+Customizations.h"
+#import "Persist.h"
 
 #define MAX_FIRSTNAME_LENGTH        50
 #define MAX_LASTNAME_LENGTH         50
@@ -215,6 +216,7 @@
         user.professionID = [Database idForProfessionName:professions.text];
         user.hourlyRate = [[rate.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", rate.text.length-4])] doubleValue];
         [Database addProfile:user];
+        [Persist setValue:user.guid forKey:@"Active.Profile" secure:NO];
     }
     [EditProfileViewController hideModally];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PROFILE.CHANGED" object:nil];

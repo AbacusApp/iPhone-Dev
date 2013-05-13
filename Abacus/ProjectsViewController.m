@@ -127,18 +127,22 @@
     UILabel *name = (UILabel *)[cell viewWithTag:1];
     name.text = project.name;
     UILabel *quote = (UILabel *)[cell viewWithTag:2];
-    quote.text = [NSString stringWithFormat:@"Price quoted: $%.02f", project.initialQuote];
+    Calculation *calculation = [Database calculationForGUID:project.calculationGUID];
+    quote.text = [NSString stringWithFormat:@"Price quoted: $%.02f", calculation.quoteOut?calculation.quoteOut:calculation.budgetIn];
     UILabel *dates = (UILabel *)[cell viewWithTag:3];
     dates.text = [project.startingDate asDisplayString];
     return cell;
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ Initiate the process to complete a project
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
 - (void)swipe:(UISwipeGestureRecognizer *)gestureRecognizer {
     if (projects.count == 0) {
-        return;
+        return;     // cannot swipe the 'no projects' cell
     }
     if (!allRadio.selected) {
-        return;
+        return;     // cannot swipe a complete project
     }
     UITableViewCell *cell = (UITableViewCell *)gestureRecognizer.view;
     NSIndexPath *indexPath = [table indexPathForCell:cell];
@@ -165,6 +169,7 @@
                 }];
             } else if (buttonIndex == 1) {
                 CompleteProjectViewController *cp = [CompleteProjectViewController showModally];
+
                 cp.project = selectedProject;
             }
             break;

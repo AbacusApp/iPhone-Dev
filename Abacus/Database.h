@@ -126,18 +126,19 @@ typedef enum {
 @property   (nonatomic, assign)     StateID         stateID;
 @end
 
+@interface Calculation : NSObject
+@property   (nonatomic, retain)     NSString                *guid;
+@property   (nonatomic, assign)     CalculationType         type;
+@property   (nonatomic, assign)     double                  hoursIn, quoteOut, budgetIn, hoursOut, companyOut, operationsOut, salaryOut, hourlyRate;
+@end
 
 @interface Project : NSObject
 @property   (nonatomic, retain)     NSString                *guid, *name, *description, *profileGUID;
-@property   (nonatomic, assign)     double                  initialQuote, hoursTaken, additionalExpenses, hourlyRate;
+@property   (nonatomic, assign)     double                  hoursTaken, additionalExpenses;
 @property   (nonatomic, assign)     ProjectStatus           status;
 @property   (nonatomic, retain)     NSDate                  *startingDate, *endingDate;
 @property   (nonatomic, assign)     ProjectProfitability    profitability;
-@end
-
-@interface Calculation : NSObject
-@property   (nonatomic, assign)     CalculationType         type;
-@property   (nonatomic, assign)     double                  hoursIn, quoteOut, budgetIn, hoursOut;
+@property   (nonatomic, retain)     NSString                *calculationGUID;
 @end
 
 @interface Database : NSObject
@@ -155,7 +156,10 @@ typedef enum {
 + (void)updateProfile:(Profile *)user;
 + (void)addProject:(Project *)project;
 + (void)updateProject:(Project *)project;
++ (void)addCalculation:(Calculation *)calculation;
++ (Calculation *)calculationForGUID:(NSString *)guid;
 + (NSArray *)projectsWithStatus:(ProjectStatus)status profitability:(ProjectProfitability)profitability;
 + (Project *)projectForGUID:(NSString *)guid;
 + (Profile *)profile;
++ (Profile *)profileForGUID:(NSString *)guid;
 @end
