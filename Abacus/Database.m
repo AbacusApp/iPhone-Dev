@@ -63,8 +63,57 @@ static  NSDictionary    *states = nil;
                    nil] retain];
     
     states = [[NSDictionary dictionaryWithObjectsAndKeys:
-              @"Alabama", [NSNumber numberWithInt:StateIDAlabama],
-              @"Alaska", [NSNumber numberWithInt:StateIDAlaska],
+               @"Alabama", [NSNumber numberWithInt:StateIDAlabama],
+               @"Alaska", [NSNumber numberWithInt:StateIDAlaska],
+               @"Arizona", [NSNumber numberWithInt:StateIDArizona],
+               @"Arkansas", [NSNumber numberWithInt:StateIDArkansas],
+               @"California", [NSNumber numberWithInt:StateIDCalifornia],
+               @"Colorado", [NSNumber numberWithInt:StateIDColorado],
+               @"Connecticut", [NSNumber numberWithInt:StateIDConnecticut],
+               @"Delaware", [NSNumber numberWithInt:StateIDDelaware],
+               @"District of Columbia", [NSNumber numberWithInt:StateIDDistrictofColumbia],
+               @"Florida", [NSNumber numberWithInt:StateIDFlorida],
+               @"Georgia", [NSNumber numberWithInt:StateIDGeorgia],
+               @"Hawaii", [NSNumber numberWithInt:StateIDHawaii],
+               @"Idaho", [NSNumber numberWithInt:StateIDIdaho],
+               @"Illinois", [NSNumber numberWithInt:StateIDIllinois],
+               @"Indiana", [NSNumber numberWithInt:StateIDIndiana],
+               @"Iowa", [NSNumber numberWithInt:StateIDIowa],
+               @"Kansas", [NSNumber numberWithInt:StateIDKansas],
+               @"Kentucky", [NSNumber numberWithInt:StateIDKentucky],
+               @"Louisiana", [NSNumber numberWithInt:StateIDLouisiana],
+               @"Maine", [NSNumber numberWithInt:StateIDMaine],
+               @"Maryland", [NSNumber numberWithInt:StateIDMaryland],
+               @"Massachusetts", [NSNumber numberWithInt:StateIDMassachusetts],
+               @"Michigan", [NSNumber numberWithInt:StateIDMichigan],
+               @"Minnesota", [NSNumber numberWithInt:StateIDMinnesota],
+               @"Mississippi", [NSNumber numberWithInt:StateIDMississippi],
+               @"Missouri", [NSNumber numberWithInt:StateIDMissouri],
+               @"Montana", [NSNumber numberWithInt:StateIDMontana],
+               @"Nebraska", [NSNumber numberWithInt:StateIDNebraska],
+               @"Nevada", [NSNumber numberWithInt:StateIDNevada],
+               @"New Hampshire", [NSNumber numberWithInt:StateIDNewHampshire],
+               @"New Jersey", [NSNumber numberWithInt:StateIDNewJersey],
+               @"New Mexico", [NSNumber numberWithInt:StateIDNewMexico],
+               @"New York", [NSNumber numberWithInt:StateIDNewYork],
+               @"North Carolina", [NSNumber numberWithInt:StateIDNorthCarolina],
+               @"North Dakota", [NSNumber numberWithInt:StateIDNorthDakota],
+               @"Ohio", [NSNumber numberWithInt:StateIDOhio],
+               @"Oklahoma", [NSNumber numberWithInt:StateIDOklahoma],
+               @"Oregon", [NSNumber numberWithInt:StateIDOregon],
+               @"Pennsylvania", [NSNumber numberWithInt:StateIDPennsylvania],
+               @"Rhode Island", [NSNumber numberWithInt:StateIDRhodeIsland],
+               @"South Carolina", [NSNumber numberWithInt:StateIDSouthCarolina],
+               @"South Dakota", [NSNumber numberWithInt:StateIDSouthDakota],
+               @"Tennessee", [NSNumber numberWithInt:StateIDTennessee],
+               @"Texas", [NSNumber numberWithInt:StateIDTexas],
+               @"Utah", [NSNumber numberWithInt:StateIDUtah],
+               @"Vermont", [NSNumber numberWithInt:StateIDVermont],
+               @"Virginia", [NSNumber numberWithInt:StateIDVirginia],
+               @"Washington", [NSNumber numberWithInt:StateIDWashington],
+               @"West Virginia", [NSNumber numberWithInt:StateIDWestVirginia],
+               @"Wisconsin", [NSNumber numberWithInt:StateIDWisconsin],
+               @"Wyoming", [NSNumber numberWithInt:StateIDWyoming],
               nil] retain];    
 }
 
@@ -259,13 +308,34 @@ static  NSDictionary    *states = nil;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return an array of states
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
++ (NSArray *)states {
+    return [[states allValues] sortedArrayUsingSelector:@selector(compare:)];
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return the text name of a state given the ID
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
++ (NSString *)nameForState:(StateID)stateID {
+    return [states objectForKey:[NSNumber numberWithInt:stateID]];
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
+// │ return the ID of a state given its text name
+// └────────────────────────────────────────────────────────────────────────────────────────────────────
++ (StateID)idForStateName:(NSString *)name {
+    return [[[states allKeysForObject:name] objectAtIndex:0] intValue];
+}
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────
 // │ Write the user values into the db
 // └────────────────────────────────────────────────────────────────────────────────────────────────────
 + (void)addProfile:(Profile *)user {
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Profiles\" (GUID,FirstName,LastName,Profession,HourlyRate) VALUES(\"%@\",\"%@\",\"%@\",\"%d\",\"%.02f\")", user.guid, user.firstName, user.lastName, user.professionID, user.hourlyRate];
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Profiles\" (GUID,FirstName,LastName,Profession,HourlyRate,Address1,Address2,City,Zip,Cell,Country,State) VALUES(\"%@\",\"%@\",\"%@\",\"%d\",\"%.02f\"\"%@\"\"%@\"\"%@\"\"%@\"\"%@\"\"%@\"\"%d\")", user.guid, user.firstName, user.lastName, user.professionID, user.hourlyRate, user.address1, user.address2, user.city, user.zip, user.cell, user.country, user.stateID];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -281,7 +351,7 @@ static  NSDictionary    *states = nil;
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"Profiles\" SET FirstName='%@',LastName='%@',Profession='%d',HourlyRate='%.02f' WHERE GUID='%@'", user.firstName, user.lastName, user.professionID, user.hourlyRate, user.guid];
+    NSString *sqlString = [NSString stringWithFormat:@"UPDATE \"Profiles\" SET FirstName='%@',LastName='%@',Profession='%d',HourlyRate='%.02f',Address1='%@',Address2='%@',City='%@',Zip='%@',Cell='%@',Country='%@',State='%d' WHERE GUID='%@'", user.firstName, user.lastName, user.professionID, user.hourlyRate, user.address1, user.address2, user.city, user.zip, user.cell, user.country, user.stateID, user.guid];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {

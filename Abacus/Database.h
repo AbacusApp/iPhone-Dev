@@ -49,6 +49,55 @@ typedef enum {
     StateIDUndefined = 0,
     StateIDAlabama = 1,
     StateIDAlaska = 2,
+    StateIDArizona = 3,
+    StateIDArkansas = 4,
+    StateIDCalifornia = 5,
+    StateIDColorado = 6,
+    StateIDConnecticut = 7,
+    StateIDDelaware = 8,
+    StateIDDistrictofColumbia = 9,
+    StateIDFlorida = 10,
+    StateIDGeorgia = 11,
+    StateIDHawaii = 12,
+    StateIDIdaho = 13,
+    StateIDIllinois = 14,
+    StateIDIndiana = 15,
+    StateIDIowa = 16,
+    StateIDKansas = 17,
+    StateIDKentucky = 18,
+    StateIDLouisiana = 19,
+    StateIDMaine = 20,
+	StateIDMaryland = 21,
+    StateIDMassachusetts = 22,
+    StateIDMichigan = 23,
+    StateIDMinnesota = 24,
+    StateIDMississippi = 25,
+    StateIDMissouri = 26,
+    StateIDMontana = 27,
+    StateIDNebraska = 28,
+    StateIDNevada = 29,
+    StateIDNewHampshire = 30,
+    StateIDNewJersey = 31,
+    StateIDNewMexico  =32,
+    StateIDNewYork = 33,
+    StateIDNorthCarolina = 34,
+    StateIDNorthDakota = 35,
+    StateIDOhio = 36,
+    StateIDOklahoma = 37,
+    StateIDOregon = 38,
+    StateIDPennsylvania = 39,
+    StateIDRhodeIsland = 40,
+	StateIDSouthCarolina = 41,
+    StateIDSouthDakota = 42,
+    StateIDTennessee = 43,
+    StateIDTexas = 44,
+    StateIDUtah = 45,
+    StateIDVermont = 46,
+    StateIDVirginia = 47,
+    StateIDWashington = 48,
+    StateIDWestVirginia = 49,
+    StateIDWisconsin = 50,
+    StateIDWyoming = 51
 } StateID;
 
 typedef enum {
@@ -97,8 +146,11 @@ typedef enum {
 + (BOOL)dbExists;
 + (void)makeDB;
 + (NSArray *)professions;
++ (NSArray *)states;
 + (NSString *)nameForProfession:(ProfessionID)professionID;
++ (NSString *)nameForState:(StateID)stateID;
 + (ProfessionID)idForProfessionName:(NSString *)name;
++ (StateID)idForStateName:(NSString *)name;
 + (void)addProfile:(Profile *)user;
 + (void)updateProfile:(Profile *)user;
 + (void)addProject:(Project *)project;

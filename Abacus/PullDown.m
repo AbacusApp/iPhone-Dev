@@ -164,7 +164,6 @@
         table.layer.cornerRadius = self.layer.cornerRadius;
         table.layer.borderWidth = self.layer.borderWidth;
         table.layer.borderColor = self.layer.borderColor;
-
         if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft) {
             CGAffineTransform t = CGAffineTransformMakeRotation(-90.0 * M_PI / 180.0);
             t = CGAffineTransformTranslate(t, -19, 19);

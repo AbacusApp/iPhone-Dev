@@ -171,6 +171,7 @@
 		BFB90BDC173E7AF100C19D0D /* EULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAViewController.h; sourceTree = "<group>"; };
 		BFB90BDD173E7AF100C19D0D /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
 		BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
+		BFB90BE1173E854600C19D0D /* Abacus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Abacus.entitlements; sourceTree = "<group>"; };
 		BFBA8EF3173AACF300563117 /* ProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsViewController.h; sourceTree = "<group>"; };
 		BFBA8EF4173AACF300563117 /* ProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsViewController.m; sourceTree = "<group>"; };
 		BFBA8EF5173AACF300563117 /* ProjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsViewController.xib; sourceTree = "<group>"; };
@@ -410,6 +411,7 @@
 		BFF1D2A31732BBCB00B02D46 /* Abacus */ = {
 			isa = PBXGroup;
 			children = (
+				BFB90BE1173E854600C19D0D /* Abacus.entitlements */,
 				BFE391C11737F50900749966 /* Alerts.h */,
 				BFE391C21737F50900749966 /* Alerts.m */,
 				BFF1D2AC1732BBCB00B02D46 /* AppDelegate.h */,
@@ -888,15 +890,15 @@
 		BFF1D2BE1732BBCB00B02D46 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Graham Savage (L4EU45RM46)";
+				CODE_SIGN_ENTITLEMENTS = Abacus/Abacus.entitlements;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Graham Savage (L4EU45RM46)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Abacus/Abacus-Prefix.pch";
 				INFOPLIST_FILE = "Abacus/Abacus-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4E95A0B9-2B87-46D7-9D26-549CD7B1EF38";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4E95A0B9-2B87-46D7-9D26-549CD7B1EF38";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B96EF313-98C9-4AF2-9E45-857DAF8F08F6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -904,15 +906,15 @@
 		BFF1D2BF1732BBCB00B02D46 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Graham Savage";
+				CODE_SIGN_ENTITLEMENTS = Abacus/Abacus.entitlements;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Graham Savage";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Abacus/Abacus-Prefix.pch";
 				INFOPLIST_FILE = "Abacus/Abacus-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78B9029A-E43E-42EB-A505-76C81AC63710";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "78B9029A-E43E-42EB-A505-76C81AC63710";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2AE43DB9-D036-47D0-85B7-DDB94E8367E9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

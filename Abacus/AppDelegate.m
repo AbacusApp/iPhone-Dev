@@ -42,6 +42,17 @@
     if (![Database profile]) {
         [EditProfileViewController showModally];
     }
+    /*
+    NSURL *url = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:@"HD6AC27BK2.com.gragsie.Abacus"];
+    url = [url URLByAppendingPathComponent:@"Documents"];
+    url = [url URLByAppendingPathComponent:@"file1.txt"];
+    //NSData *data = [@"My name is Graham" dataUsingEncoding:NSUTF8StringEncoding];
+    //BOOL success = [data writeToURL:url atomically:YES];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:url error:&error];
+    NSData *d = [NSData dataWithContentsOfURL:url];
+     */
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
