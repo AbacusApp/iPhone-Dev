@@ -16,6 +16,7 @@
 #import "UIViewController+Customizations.h"
 
 @interface ProjectsViewController ()
+@property   (nonatomic, retain)     IBOutlet    UILabel         *titleLabel;
 @property   (nonatomic, retain)     IBOutlet    UITableView     *table;
 @property   (nonatomic, retain)     IBOutlet    RadioButton     *allRadio, *profitableRadio, *unprofitableRadio;
 @property   (nonatomic, retain)     NSArray     *projects;
@@ -26,7 +27,7 @@
 @end
 
 @implementation ProjectsViewController
-@synthesize projects, table, selectedProject, allRadio, profitableRadio, unprofitableRadio;
+@synthesize projects, table, selectedProject, allRadio, profitableRadio, unprofitableRadio,titleLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,13 +74,15 @@
 
 - (void)refreshList {
     if (allRadio.selected) {
+        self.titleLabel.text = @"PROJECTS - Ongoing";
         self.projects = [Database projectsWithStatus:ProjectStatusOngoing profitability:ProjectProfitabilityUndefined];
     } else if (profitableRadio.selected) {
+        self.titleLabel.text = @"PROJECTS - Profitable";
         self.projects = [Database projectsWithStatus:ProjectStatusCompleted profitability:ProjectProfitabilityProfitable];
     } else if (unprofitableRadio.selected) {
+        self.titleLabel.text = @"PROJECTS - Unprofitable";
         self.projects = [Database projectsWithStatus:ProjectStatusCompleted profitability:ProjectProfitabilityUnProfitable];
     }
-//    [table reloadData];
     [table reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -181,6 +184,7 @@
     [allRadio release];
     [profitableRadio release];
     [unprofitableRadio release];
+    [titleLabel release];
     [super dealloc];
 }
 @end

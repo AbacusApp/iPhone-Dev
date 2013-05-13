@@ -335,7 +335,7 @@ static  NSDictionary    *states = nil;
     if (!handler.database) {
         [self open];
     }
-    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Profiles\" (GUID,FirstName,LastName,Profession,HourlyRate,Address1,Address2,City,Zip,Cell,Country,State) VALUES(\"%@\",\"%@\",\"%@\",\"%d\",\"%.02f\"\"%@\"\"%@\"\"%@\"\"%@\"\"%@\"\"%@\"\"%d\")", user.guid, user.firstName, user.lastName, user.professionID, user.hourlyRate, user.address1, user.address2, user.city, user.zip, user.cell, user.country, user.stateID];
+    NSString *sqlString = [NSString stringWithFormat:@"INSERT INTO \"Profiles\" (GUID,FirstName,LastName,Profession,HourlyRate,Address1,Address2,City,Zip,Cell,Country,State) VALUES(\"%@\",\"%@\",\"%@\",\"%d\",\"%.02f\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%d\")", user.guid, user.firstName, user.lastName, user.professionID, user.hourlyRate, user.address1, user.address2, user.city, user.zip, user.cell, user.country, user.stateID];
 	const char *sql = [sqlString UTF8String];
 	sqlite3_stmt *statement;
 	if (sqlite3_prepare_v2(handler.database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -495,6 +495,12 @@ static  NSDictionary    *states = nil;
         self.guid = [Database GUID];
         self.professionID = ProfessionIDUndefined;
         self.stateID = StateIDUndefined;
+        self.address1 = @"";
+        self.address2 = @"";
+        self.cell = @"";
+        self.zip = @"";
+        self.country = @"USA";
+        self.city = @"";
     }
     return self;
 }
