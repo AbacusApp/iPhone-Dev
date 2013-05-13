@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		BFB90BDF173E7AF100C19D0D /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB90BDD173E7AF100C19D0D /* EULAViewController.m */; };
 		BFB90BE0173E7AF100C19D0D /* EULAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */; };
+		BFB90BE317411CFB00C19D0D /* HourlyRateKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */; };
+		BFB90BEA17411D0400C19D0D /* BigKeyboardButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE417411D0400C19D0D /* BigKeyboardButton.png */; };
+		BFB90BEB17411D0400C19D0D /* BigKeyboardButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE517411D0400C19D0D /* BigKeyboardButton@2x.png */; };
+		BFB90BEC17411D0400C19D0D /* BlueDoneButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE617411D0400C19D0D /* BlueDoneButton.png */; };
+		BFB90BED17411D0400C19D0D /* BlueDoneButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE717411D0400C19D0D /* BlueDoneButton@2x.png */; };
+		BFB90BEE17411D0400C19D0D /* HourlyRateKeyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE817411D0400C19D0D /* HourlyRateKeyboard.png */; };
+		BFB90BEF17411D0400C19D0D /* HourlyRateKeyboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE917411D0400C19D0D /* HourlyRateKeyboard@2x.png */; };
 		BFBA8EF6173AACF300563117 /* ProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBA8EF4173AACF300563117 /* ProjectsViewController.m */; };
 		BFBA8EF7173AACF300563117 /* ProjectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8EF5173AACF300563117 /* ProjectsViewController.xib */; };
 		BFBA8EFA173AAED100563117 /* tabStrip.project.active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBA8EF8173AAED100563117 /* tabStrip.project.active@2x.png */; };
@@ -172,6 +179,13 @@
 		BFB90BDD173E7AF100C19D0D /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
 		BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
 		BFB90BE1173E854600C19D0D /* Abacus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Abacus.entitlements; sourceTree = "<group>"; };
+		BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HourlyRateKeyboard.xib; sourceTree = "<group>"; };
+		BFB90BE417411D0400C19D0D /* BigKeyboardButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BigKeyboardButton.png; sourceTree = "<group>"; };
+		BFB90BE517411D0400C19D0D /* BigKeyboardButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BigKeyboardButton@2x.png"; sourceTree = "<group>"; };
+		BFB90BE617411D0400C19D0D /* BlueDoneButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueDoneButton.png; sourceTree = "<group>"; };
+		BFB90BE717411D0400C19D0D /* BlueDoneButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlueDoneButton@2x.png"; sourceTree = "<group>"; };
+		BFB90BE817411D0400C19D0D /* HourlyRateKeyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HourlyRateKeyboard.png; sourceTree = "<group>"; };
+		BFB90BE917411D0400C19D0D /* HourlyRateKeyboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HourlyRateKeyboard@2x.png"; sourceTree = "<group>"; };
 		BFBA8EF3173AACF300563117 /* ProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectsViewController.h; sourceTree = "<group>"; };
 		BFBA8EF4173AACF300563117 /* ProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectsViewController.m; sourceTree = "<group>"; };
 		BFBA8EF5173AACF300563117 /* ProjectsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsViewController.xib; sourceTree = "<group>"; };
@@ -436,6 +450,7 @@
 				BFB90BDC173E7AF100C19D0D /* EULAViewController.h */,
 				BFB90BDD173E7AF100C19D0D /* EULAViewController.m */,
 				BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */,
+				BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */,
 				BFF5C81C173C0B6F00D558C5 /* Keyboard.Toolbar.xib */,
 				BFE391B1173414B500749966 /* MenuCell.xib */,
 				BFF1D3281733E06300B02D46 /* MenuViewController.h */,
@@ -480,6 +495,12 @@
 		BFF1D2A41732BBCB00B02D46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BFB90BE417411D0400C19D0D /* BigKeyboardButton.png */,
+				BFB90BE517411D0400C19D0D /* BigKeyboardButton@2x.png */,
+				BFB90BE617411D0400C19D0D /* BlueDoneButton.png */,
+				BFB90BE717411D0400C19D0D /* BlueDoneButton@2x.png */,
+				BFB90BE817411D0400C19D0D /* HourlyRateKeyboard.png */,
+				BFB90BE917411D0400C19D0D /* HourlyRateKeyboard@2x.png */,
 				BFF5C820173D2B4200D558C5 /* project.field.calendar.button.png */,
 				BFF5C821173D2B4200D558C5 /* project.field.calendar.button@2x.png */,
 				BFF5C822173D2B4200D558C5 /* purple.button.doubleWide.png */,
@@ -774,6 +795,13 @@
 				BFF5C825173D2B4200D558C5 /* purple.button.doubleWide.png in Resources */,
 				BFF5C82A173D585D00D558C5 /* CompleteProjectViewController.xib in Resources */,
 				BFB90BE0173E7AF100C19D0D /* EULAViewController.xib in Resources */,
+				BFB90BE317411CFB00C19D0D /* HourlyRateKeyboard.xib in Resources */,
+				BFB90BEA17411D0400C19D0D /* BigKeyboardButton.png in Resources */,
+				BFB90BEB17411D0400C19D0D /* BigKeyboardButton@2x.png in Resources */,
+				BFB90BEC17411D0400C19D0D /* BlueDoneButton.png in Resources */,
+				BFB90BED17411D0400C19D0D /* BlueDoneButton@2x.png in Resources */,
+				BFB90BEE17411D0400C19D0D /* HourlyRateKeyboard.png in Resources */,
+				BFB90BEF17411D0400C19D0D /* HourlyRateKeyboard@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

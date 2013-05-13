@@ -77,6 +77,30 @@
     UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideCallout)] autorelease];
     [self.helpCallout addGestureRecognizer:tap];
     [self.helpCalloutWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://faq.freelanceabacus.com/pricing-callout.html"]]];
+
+    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"HourlyRateKeyboard" owner:self options:nil];
+    self.rate.inputView = (UIView *)[array objectAtIndex:0];
+    [((UIButton *)[self.rate.inputView viewWithTag:1]) addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
+
+    [((UIButton *)[self.rate.inputView viewWithTag:50]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton *)[self.rate.inputView viewWithTag:100]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton *)[self.rate.inputView viewWithTag:150]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton *)[self.rate.inputView viewWithTag:200]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton *)[self.rate.inputView viewWithTag:5]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton *)[self.rate.inputView viewWithTag:-5]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)changeRateFromKeybaord:(UIButton *)button {
+    if (button.tag == 5 || button.tag == -5) {
+        double newValue = [rate.text doubleValue] + button.tag;
+        rate.text = [NSString stringWithFormat:@"%.0f", newValue];
+    } else {
+        rate.text = [NSString stringWithFormat:@"%d", button.tag];
+    }
+}
+
+- (void)dismissKeyboard {
+    [self.lastTextWidget resignFirstResponder];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
