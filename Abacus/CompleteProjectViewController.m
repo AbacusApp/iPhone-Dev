@@ -73,12 +73,12 @@
         self.project.profitability = ProjectProfitabilityProfitable;
         [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"Congratulations!\nYour quote for this project was successful." delegate:self tag:1];
     } else {
-        self.project.profitability = ProjectProfitabilityProfitable;
-        if ([hoursWorked.text intValue] > calculation.hoursIn) {
+        self.project.profitability = ProjectProfitabilityUnProfitable;
+        if ([hoursWorked.text intValue] > (calculation.hoursIn?calculation.hoursIn:calculation.hoursOut)) {
             [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"You went over the amount of hours quoted. Visit the FAQ section for more information about how to estimate your hours for future reference." delegate:self tag:2];
         } else if ([additionalExpenses.text doubleValue] > calculation.operationsOut) {
             [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"Your additional expenses went over the quoted operations amount. Visit the FAQ section for more information about how establish your hourly rate to cover for operations expenses and how to deal with a situation in real time when you see that it won't be enough." delegate:self tag:3];
-        } else if ([hoursWorked.text intValue] > calculation.hoursIn && [additionalExpenses.text doubleValue] > calculation.operationsOut) {
+        } else if ([hoursWorked.text intValue] > (calculation.hoursIn?calculation.hoursIn:calculation.hoursOut) && [additionalExpenses.text doubleValue] > calculation.operationsOut) {
             [Alerts showWarningWithTitle:@"COMPLETE PROJECT" message:@"You went over the amount of hours quoted and your additional expenses went over the quoted operations amount. Visit the FAQ section for help and information on how to restructure your hourly prices to protect yourself and secure a profit in future projects." delegate:self tag:4];
         }
     }

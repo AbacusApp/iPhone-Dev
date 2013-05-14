@@ -48,6 +48,11 @@
     NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"Keyboard.Toolbar" owner:self options:nil];
     self.startDate.inputAccessoryView = (UIView *)[array objectAtIndex:0];
     [((UIButton *)[self.startDate.inputAccessoryView viewWithTag:1]) addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
+
+    UIImage *cal = [UIImage imageNamed:@"project.field.calendar.button.png"];
+    UIImageView *calView = [[[UIImageView alloc] initWithImage:cal] autorelease];
+    self.startDate.rightViewMode = UITextFieldViewModeAlways;
+    self.startDate.rightView = calView;
 }
 
 - (void)dismissKeyboard {
