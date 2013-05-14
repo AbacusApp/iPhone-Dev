@@ -21,7 +21,7 @@
 #define MAX_LASTNAME_LENGTH         50
 #define MAX_HOURLY_RATE_LENGTH      4
 
-@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIActionSheetDelegate>
+@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 @property   (nonatomic, retain)     IBOutlet    UITextField     *first, *last, *rate;
 @property   (nonatomic, retain)     IBOutlet    PullDown        *professions;
 @property   (nonatomic, retain)     IBOutlet    UIImageView     *photo;
@@ -79,16 +79,65 @@
     [self.helpCallout addGestureRecognizer:tap];
     [self.helpCalloutWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://faq.freelanceabacus.com/pricing-callout.html"]]];
 
-    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"HourlyRateKeyboard" owner:self options:nil];
+    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"HourlyRateKeyboard2" owner:self options:nil];
     self.rate.inputView = (UIView *)[array objectAtIndex:0];
     [((UIButton *)[self.rate.inputView viewWithTag:1]) addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
+    UIPickerView *hourlyPicker = (UIPickerView *)[self.rate.inputView viewWithTag:2];
+    hourlyPicker.delegate = self;
+    hourlyPicker.dataSource = self;
+}
 
-    [((UIButton *)[self.rate.inputView viewWithTag:50]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton *)[self.rate.inputView viewWithTag:100]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton *)[self.rate.inputView viewWithTag:150]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton *)[self.rate.inputView viewWithTag:200]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton *)[self.rate.inputView viewWithTag:5]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton *)[self.rate.inputView viewWithTag:-5]) addTarget:self action:@selector(changeRateFromKeybaord:) forControlEvents:UIControlEventTouchUpInside];
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 3;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return 200;
+            break;
+        case 2:
+            return 1;
+            break;
+    }
+    return 0;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    if (view) {
+        ((UILabel *)view).text = [self pickerView:pickerView titleForRow:row forComponent:component];
+        return view;
+    } else {
+        UILabel *label = [[[UILabel alloc] init] autorelease];
+        label.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+        label.font = [UIFont fontWithName:@"Avenir-Light" size:22];
+        label.textAlignment = UITextAlignmentCenter;
+        label.backgroundColor = [UIColor clearColor];
+        return label;
+    }
+    return nil;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            return @"$";
+            break;
+        case 1:
+            return [NSString stringWithFormat:@"%d", 5 + row*5];
+            break;
+        case 2:
+            return @"/hr";
+            break;
+    }
+    return nil;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    rate.text = [self pickerView:pickerView titleForRow:row forComponent:component];
 }
 
 - (void)changeRateFromKeybaord:(UIButton *)button {
@@ -248,6 +297,8 @@
     [self.scroller setContentOffset:CGPointMake(0, offset>0?offset:0) animated:YES];
     if (textField == self.rate && textField.text.length) {
         textField.text = [textField.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", textField.text.length-4])];
+        UIPickerView *hourlyPicker = (UIPickerView *)[self.rate.inputView viewWithTag:2];
+        [hourlyPicker selectRow:([textField.text intValue]-5)/5 inComponent:1 animated:NO];
     }
 }
 

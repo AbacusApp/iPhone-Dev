@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF88DD75174283CD00E56100 /* HourlyRateKeyboard2.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */; };
 		BFB90BDF173E7AF100C19D0D /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB90BDD173E7AF100C19D0D /* EULAViewController.m */; };
 		BFB90BE0173E7AF100C19D0D /* EULAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */; };
 		BFB90BE317411CFB00C19D0D /* HourlyRateKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */; };
@@ -175,6 +176,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HourlyRateKeyboard2.xib; sourceTree = "<group>"; };
 		BFB90BDC173E7AF100C19D0D /* EULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAViewController.h; sourceTree = "<group>"; };
 		BFB90BDD173E7AF100C19D0D /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
 		BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				BFB90BDD173E7AF100C19D0D /* EULAViewController.m */,
 				BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */,
 				BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */,
+				BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */,
 				BFF5C81C173C0B6F00D558C5 /* Keyboard.Toolbar.xib */,
 				BFE391B1173414B500749966 /* MenuCell.xib */,
 				BFF1D3281733E06300B02D46 /* MenuViewController.h */,
@@ -802,6 +805,7 @@
 				BFB90BED17411D0400C19D0D /* BlueDoneButton@2x.png in Resources */,
 				BFB90BEE17411D0400C19D0D /* HourlyRateKeyboard.png in Resources */,
 				BFB90BEF17411D0400C19D0D /* HourlyRateKeyboard@2x.png in Resources */,
+				BF88DD75174283CD00E56100 /* HourlyRateKeyboard2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
