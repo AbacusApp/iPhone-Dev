@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BF88DD75174283CD00E56100 /* HourlyRateKeyboard2.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */; };
 		BF88DD771743BA6200E56100 /* StartingDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF88DD761743BA6200E56100 /* StartingDateView.xib */; };
+		BF88DD79174413AD00E56100 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF88DD78174413AD00E56100 /* StoreKit.framework */; };
 		BFB90BDF173E7AF100C19D0D /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB90BDD173E7AF100C19D0D /* EULAViewController.m */; };
 		BFB90BE0173E7AF100C19D0D /* EULAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */; };
 		BFB90BE317411CFB00C19D0D /* HourlyRateKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */; };
@@ -179,6 +180,7 @@
 /* Begin PBXFileReference section */
 		BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HourlyRateKeyboard2.xib; sourceTree = "<group>"; };
 		BF88DD761743BA6200E56100 /* StartingDateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartingDateView.xib; sourceTree = "<group>"; };
+		BF88DD78174413AD00E56100 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BFB90BDC173E7AF100C19D0D /* EULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAViewController.h; sourceTree = "<group>"; };
 		BFB90BDD173E7AF100C19D0D /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
 		BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF88DD79174413AD00E56100 /* StoreKit.framework in Frameworks */,
 				BFF5C81F173C1B2900D558C5 /* QuartzCore.framework in Frameworks */,
 				BFE39207173A8C1700749966 /* Twitter.framework in Frameworks */,
 				BFE39205173A8A1900749966 /* Social.framework in Frameworks */,
@@ -413,6 +416,7 @@
 		BFF1D29C1732BBCB00B02D46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF88DD78174413AD00E56100 /* StoreKit.framework */,
 				BFF5C81E173C1B2800D558C5 /* QuartzCore.framework */,
 				BFE39206173A8C1700749966 /* Twitter.framework */,
 				BFE39204173A8A1900749966 /* Social.framework */,
@@ -928,13 +932,13 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Abacus/Abacus.entitlements;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Graham Savage (L4EU45RM46)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Graham Savage";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Abacus/Abacus-Prefix.pch";
 				INFOPLIST_FILE = "Abacus/Abacus-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B96EF313-98C9-4AF2-9E45-857DAF8F08F6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89E4A266-D5C6-4D48-B55D-9CC356EA41CD";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -951,7 +955,7 @@
 				INFOPLIST_FILE = "Abacus/Abacus-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B0C2FB9-B9EA-4B95-BE33-EF9A749F6D88";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89E4A266-D5C6-4D48-B55D-9CC356EA41CD";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
