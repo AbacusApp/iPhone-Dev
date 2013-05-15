@@ -127,7 +127,7 @@
         }
             break;
         case 1: {    // by client budget
-            double budgetSpecified = [[budget.text substringWithRange:NSRangeFromString([NSString stringWithFormat:@"1 %d", budget.text.length-1])] doubleValue];
+            double budgetSpecified = [[budget.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
             if (budgetSpecified <= 1.0) {
                 [Alerts showWarningWithTitle:@"Budget" message:@"Please enter the client's budget" delegate:self];
                 [self.budget becomeFirstResponder];

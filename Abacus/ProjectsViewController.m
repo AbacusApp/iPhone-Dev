@@ -130,7 +130,7 @@
     Calculation *calculation = [Database calculationForGUID:project.calculationGUID];
     quote.text = [NSString stringWithFormat:@"Price quoted: $%.02f", calculation.quoteOut?calculation.quoteOut:calculation.budgetIn];
     UILabel *dates = (UILabel *)[cell viewWithTag:3];
-    dates.text = [project.startingDate asDisplayString];
+    dates.text = [NSString stringWithFormat:@"%@ - %@", [project.startingDate asDisplayString], project.endingDate ? [project.endingDate asDisplayString] : @"Present"];
     return cell;
 }
 

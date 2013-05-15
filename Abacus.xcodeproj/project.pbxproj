@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF88DD75174283CD00E56100 /* HourlyRateKeyboard2.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */; };
+		BF88DD771743BA6200E56100 /* StartingDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF88DD761743BA6200E56100 /* StartingDateView.xib */; };
 		BFB90BDF173E7AF100C19D0D /* EULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB90BDD173E7AF100C19D0D /* EULAViewController.m */; };
 		BFB90BE0173E7AF100C19D0D /* EULAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */; };
 		BFB90BE317411CFB00C19D0D /* HourlyRateKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */; };
@@ -177,6 +178,7 @@
 
 /* Begin PBXFileReference section */
 		BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HourlyRateKeyboard2.xib; sourceTree = "<group>"; };
+		BF88DD761743BA6200E56100 /* StartingDateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartingDateView.xib; sourceTree = "<group>"; };
 		BFB90BDC173E7AF100C19D0D /* EULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EULAViewController.h; sourceTree = "<group>"; };
 		BFB90BDD173E7AF100C19D0D /* EULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EULAViewController.m; sourceTree = "<group>"; };
 		BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				BFF1D2B51732BBCB00B02D46 /* RootViewController.h */,
 				BFF1D2B61732BBCB00B02D46 /* RootViewController.m */,
 				BFF1D2B81732BBCB00B02D46 /* RootViewController.xib */,
+				BF88DD761743BA6200E56100 /* StartingDateView.xib */,
 				BFE391BC173439AC00749966 /* SwipeyLabel.h */,
 				BFE391BD173439AC00749966 /* SwipeyLabel.m */,
 				BFF1D2C01732BECA00B02D46 /* UIImage+Retina4.h */,
@@ -806,6 +809,7 @@
 				BFB90BEE17411D0400C19D0D /* HourlyRateKeyboard.png in Resources */,
 				BFB90BEF17411D0400C19D0D /* HourlyRateKeyboard@2x.png in Resources */,
 				BF88DD75174283CD00E56100 /* HourlyRateKeyboard2.xib in Resources */,
+				BF88DD771743BA6200E56100 /* StartingDateView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -931,6 +935,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B96EF313-98C9-4AF2-9E45-857DAF8F08F6";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -946,7 +951,8 @@
 				INFOPLIST_FILE = "Abacus/Abacus-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2AE43DB9-D036-47D0-85B7-DDB94E8367E9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B0C2FB9-B9EA-4B95-BE33-EF9A749F6D88";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

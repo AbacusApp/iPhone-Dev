@@ -67,6 +67,7 @@
 - (IBAction)complete:(id)sender {
     [CompleteProjectViewController hideModally];
     self.project.status = ProjectStatusCompleted;
+    self.project.endingDate = [NSDate date];        // Set ending date to now
     
     Calculation *calculation = [Database calculationForGUID:project.calculationGUID];
     if ([hoursWorked.text intValue] <= calculation.hoursIn && [additionalExpenses.text doubleValue] <= calculation.operationsOut) {

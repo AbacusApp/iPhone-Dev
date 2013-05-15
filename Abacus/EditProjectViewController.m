@@ -22,14 +22,13 @@
 @property   (nonatomic, retain)     IBOutlet    UIScrollView    *scroller;
 @property   (nonatomic, retain)                 UIView			*lastTextWidget;
 @property   (nonatomic, retain)     IBOutlet    UIButton        *closeButton, *createButton;
-@property   (nonatomic, retain)                 UIDatePicker    *datePicker;
 
 - (IBAction)close:(id)sender;
 - (IBAction)createProject:(id)sender;
 @end
 
 @implementation EditProjectViewController
-@synthesize name, startDate, description, scroller, lastTextWidget, closeButton, createButton, datePicker, project, calculation;
+@synthesize name, startDate, description, scroller, lastTextWidget, closeButton, createButton, project, calculation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,13 +40,11 @@
     [self.description setPlaceholder:@"Project description"];
     self.scroller.contentSize = self.scroller.bounds.size;
     
-    self.datePicker = [[[UIDatePicker alloc] init] autorelease];
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"StartingDateView" owner:self options:nil];
+    self.startDate.inputView = (UIView *)[array objectAtIndex:0];
+    [((UIButton *)[self.startDate.inputView viewWithTag:1]) addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
+    UIDatePicker *datePicker = (UIDatePicker *)[self.startDate.inputView viewWithTag:2];
     [datePicker addTarget:self action:@selector(datePickerChangedDate:) forControlEvents:UIControlEventValueChanged];
-    self.startDate.inputView = self.datePicker;
-    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"Keyboard.Toolbar" owner:self options:nil];
-    self.startDate.inputAccessoryView = (UIView *)[array objectAtIndex:0];
-    [((UIButton *)[self.startDate.inputAccessoryView viewWithTag:1]) addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
 
     UIImage *cal = [UIImage imageNamed:@"project.field.calendar.button.png"];
     UIImageView *calView = [[[UIImageView alloc] initWithImage:cal] autorelease];
@@ -104,6 +101,7 @@ CGRect myFrame;
     CGFloat offset = lastTextWidget.frame.origin.y - lastTextWidget.frame.size.height;
     [self.scroller setContentOffset:CGPointMake(0, offset>0?offset:0) animated:YES];
     if (textField == startDate) {
+        UIDatePicker *datePicker = (UIDatePicker *)[self.startDate.inputView viewWithTag:2];
         startDate.text = [datePicker.date asDisplayString];
     }
 }
@@ -178,7 +176,6 @@ CGRect myFrame;
     [lastTextWidget release];
     [closeButton release];
     [createButton release];
-    [datePicker release];
     [project release];
     [calculation release];
     [super dealloc];
