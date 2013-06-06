@@ -71,7 +71,7 @@
             cell.imageView.image = [UIImage imageNamed:@"menu.icon.about.png"];
             break;
         case 5:
-            cell.textLabel.text = @"Suppport";
+            cell.textLabel.text = @"Support";
             cell.imageView.image = [UIImage imageNamed:@"menu.icon.support.png"];
             break;
     }
@@ -109,8 +109,8 @@
         case 4: {
             [self closeMenu];
             WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
-            webview.title = @"Abacus - Links & Resources";
-            webview.urlString = @"http://www.google.com";
+            webview.title = @"Abacus - About";
+            webview.urlString = @"http://about.freelanceabacus.com";
             webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
             [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
