@@ -62,6 +62,7 @@
 
 - (IBAction)close:(id)sender {
     [EditProjectViewController hideModally];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UNDO.PROJECT.EDIT" object:self.project];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

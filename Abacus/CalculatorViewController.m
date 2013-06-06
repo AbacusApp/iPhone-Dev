@@ -26,6 +26,7 @@
 @property   (nonatomic, retain)     IBOutlet    UIButton        *calculateButtonHours, *calculateButtonBudget;
 @property   (nonatomic, retain)     IBOutlet    UIView          *resultsContainer;
 @property   (nonatomic, retain)     IBOutlet    RadioButton     *hoursRadio, *budgetRadio;
+@property   (nonatomic, retain)     IBOutlet    UILabel         *purpleUnderbelly;
 
 - (IBAction)tabTapped:(UIButton *)sender;
 - (IBAction)revealMenu:(id)sender;
@@ -34,7 +35,7 @@
 
 @implementation CalculatorViewController
 @synthesize hours, budget, scroller, resultCompany1, resultOperations1, resultSalary1, resultCompany2, resultOperations2, resultSalary2, resultWork, resultQuote;
-@synthesize calculateButtonBudget, calculateButtonHours, resultsContainer, hoursRadio, budgetRadio;
+@synthesize calculateButtonBudget, calculateButtonHours, resultsContainer, hoursRadio, budgetRadio, purpleUnderbelly;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,6 +57,32 @@
     UISwipeGestureRecognizer *right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe)] autorelease];
     right.direction = UISwipeGestureRecognizerDirectionRight;
     [self.resultsContainer addGestureRecognizer:right];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(projectCreated) name:@"PROJECT.CREATED" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(undoProjectCreate) name:@"UNDO.PROJECT.EDIT" object:nil];
+}
+
+- (void)smallReveal {
+    [UIView animateWithDuration:.20 delay:.20 options:0 animations:^{
+        resultsContainer.frame = CGRectMake(10, resultsContainer.frame.origin.y, resultsContainer.frame.size.width, resultsContainer.frame.size.height);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.20 animations:^{
+            resultsContainer.frame = CGRectMake(0, resultsContainer.frame.origin.y, resultsContainer.frame.size.width, resultsContainer.frame.size.height);
+        }];
+    }];
+}
+
+- (void)projectCreated {
+    [UIView animateWithDuration:.20 animations:^{
+        resultsContainer.frame = CGRectMake(0, resultsContainer.frame.origin.y, resultsContainer.frame.size.width, resultsContainer.frame.size.height);
+    } completion:^(BOOL finished) {
+    }];
+}
+
+- (void)undoProjectCreate {
+    [UIView animateWithDuration:.20 animations:^{
+        resultsContainer.frame = CGRectMake(0, resultsContainer.frame.origin.y, resultsContainer.frame.size.width, resultsContainer.frame.size.height);
+    } completion:^(BOOL finished) {
+    }];
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -71,6 +98,17 @@
     } else if (hrs == 0){
         return;         // If the user has not yet done a calculation then do nothing
     }
+    
+    [UIView animateWithDuration:.35 animations:^{
+        resultsContainer.frame = CGRectMake(resultsContainer.frame.size.width, resultsContainer.frame.origin.y, resultsContainer.frame.size.width, resultsContainer.frame.size.height);
+    } completion:^(BOOL finished) {
+        [self editProject];
+    }];
+}
+
+- (void)editProject {
+    double qte = [[resultQuote.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"$"]] doubleValue];
+    double hrs = [[resultWork.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" hrs"]] doubleValue];
     EditProjectViewController *ep = [EditProjectViewController showModally];
     ep.project = [[[Project alloc] init] autorelease];
     Calculation *calculation = [[[Calculation alloc] init] autorelease];
@@ -140,6 +178,7 @@
         }
             break;
     }
+    [self smallReveal];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -194,6 +233,7 @@
 }
 
 - (void)dealloc {
+    [purpleUnderbelly release];
     [hours release];
     [budget release];
     [scroller release];
