@@ -10,16 +10,16 @@
 #import "RadioButton.h"
 
 @implementation RadioButton
-
+/*
 - (id)initWithFrame:(CGRect)rect {
     self = [super initWithFrame:rect];
     [self addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
     return self;
 }
-
+*/
 - (void)awakeFromNib {
 	[super awakeFromNib];
-    [self addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
+    [self addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchDown];
 }
 
 // Radio buttons return their selected state as the 'action' for logging
