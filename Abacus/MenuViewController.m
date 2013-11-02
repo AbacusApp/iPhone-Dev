@@ -89,7 +89,7 @@
             WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
             webview.title = @"Abacus - Links & Resources";
             webview.urlString = @"http://resources.freelanceabacus.com";
-            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
             break;
@@ -102,7 +102,7 @@
             WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
             webview.title = @"Abacus - FAQ";
             webview.urlString = @"http://faq.freelanceabacus.com";
-            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
             break;
@@ -111,7 +111,7 @@
             WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
             webview.title = @"Abacus - About";
             webview.urlString = @"http://about.freelanceabacus.com";
-            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
             break;
@@ -120,7 +120,7 @@
             WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
             webview.title = @"Abacus - Support";
             webview.urlString = @"http://support.freelanceabacus.com";
-            webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self.view.window.rootViewController presentModalViewController:webview animated:YES];
         }
             break;
