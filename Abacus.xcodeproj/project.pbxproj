@@ -279,6 +279,7 @@
 				BFB90BDE173E7AF100C19D0D /* EULAViewController.xib */,
 				BFB90BE217411CFB00C19D0D /* HourlyRateKeyboard.xib */,
 				BF88DD74174283CD00E56100 /* HourlyRateKeyboard2.xib */,
+				BFEFB3621825399E00793835 /* Images.xcassets */,
 				BFF5C81C173C0B6F00D558C5 /* Keyboard.Toolbar.xib */,
 				BFE391B1173414B500749966 /* MenuCell.xib */,
 				BFF1D3281733E06300B02D46 /* MenuViewController.h */,
@@ -316,7 +317,6 @@
 				BFE391CA1738119F00749966 /* WebViewController.h */,
 				BFE391CB1738119F00749966 /* WebViewController.m */,
 				BFE391CC1738119F00749966 /* WebViewController.xib */,
-				BFEFB3621825399E00793835 /* Images.xcassets */,
 				BFF1D2A41732BBCB00B02D46 /* Supporting Files */,
 			);
 			path = Abacus;
@@ -695,6 +695,7 @@
 				BFEFB37A18253A4700793835 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFF1D2951732BBCB00B02D46 /* Build configuration list for PBXProject "Abacus" */ = {
 			isa = XCConfigurationList;
