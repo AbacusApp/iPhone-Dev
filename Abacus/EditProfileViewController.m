@@ -114,7 +114,7 @@
         UILabel *label = [[[UILabel alloc] init] autorelease];
         label.text = [self pickerView:pickerView titleForRow:row forComponent:component];
         label.font = [UIFont fontWithName:@"Avenir-Light" size:22];
-        label.textAlignment = UITextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentCenter;
         label.backgroundColor = [UIColor clearColor];
         return label;
     }

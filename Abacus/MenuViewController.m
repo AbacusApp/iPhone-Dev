@@ -90,7 +90,7 @@
             webview.title = @"Abacus - Links & Resources";
             webview.urlString = @"http://resources.freelanceabacus.com";
             webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+            [self.view.window.rootViewController presentViewController:webview animated:YES completion:^{}];
         }
             break;
         case 2: {
@@ -103,7 +103,7 @@
             webview.title = @"Abacus - FAQ";
             webview.urlString = @"http://faq.freelanceabacus.com";
             webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+            [self.view.window.rootViewController presentViewController:webview animated:YES completion:^{}];
         }
             break;
         case 4: {
@@ -112,7 +112,7 @@
             webview.title = @"Abacus - About";
             webview.urlString = @"http://about.freelanceabacus.com";
             webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+            [self.view.window.rootViewController presentViewController:webview animated:YES completion:^{}];
         }
             break;
         case 5: {
@@ -121,7 +121,7 @@
             webview.title = @"Abacus - Support";
             webview.urlString = @"http://support.freelanceabacus.com";
             webview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self.view.window.rootViewController presentModalViewController:webview animated:YES];
+            [self.view.window.rootViewController presentViewController:webview animated:YES completion:^{}];
         }
             break;
     }
@@ -158,12 +158,6 @@
         [vc addURL:[NSURL URLWithString:@"http://freelanceabacus.com"]];
         [vc setInitialText:@"Check out this great app.\n"];
         [self presentViewController:vc animated:YES completion:^{}];
-    } else {
-        TWTweetComposeViewController *vc = [[[TWTweetComposeViewController alloc] init] autorelease];
-        [vc addImage:[UIImage imageNamed:@"Icon.png"]];
-        [vc addURL:[NSURL URLWithString:@"http://freelanceabacus.com"]];
-        [vc setInitialText:@"Check out this great app.\n"];
-        [self presentViewController:vc animated:YES completion:^{}];
     }
 }
 
@@ -175,13 +169,6 @@
         [vc addURL:[NSURL URLWithString:@"http://freelanceabacus.com"]];
         [vc setInitialText:@"Check out this great app.\n"];
         [self presentViewController:vc animated:YES completion:^{}];
-    } else {
-        // Just show a lame webview
-        WebViewController *webview = [[[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil] autorelease];
-        webview.urlString = @"http://facebook.com";
-        webview.title = @"Facebook";
-        webview.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self.view.window.rootViewController presentModalViewController:webview animated:YES];
     }
 }
 
